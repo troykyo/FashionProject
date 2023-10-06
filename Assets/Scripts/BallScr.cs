@@ -32,7 +32,7 @@ public class BallScr : MonoBehaviour
             resetFrames--;
             if (resetFrames < 60)
             {
-                boem.SetActive(false);
+                //boem.SetActive(false);
             }
             if (resetFrames < 0)
             {

@@ -2770,9 +2770,45 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 888252682998578249, guid: 81026325250b85a49af695dd7260d485, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1961519044877662424, guid: 81026325250b85a49af695dd7260d485, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3149311118105556342, guid: 81026325250b85a49af695dd7260d485, type: 3}
+      propertyPath: m_LeftHandMesh
+      value: 
+      objectReference: {fileID: 919132149155446097, guid: bf7151579c38e2a44be94ba8773876c1, type: 3}
+    - target: {fileID: 3149311118105556342, guid: 81026325250b85a49af695dd7260d485, type: 3}
+      propertyPath: m_RightHandMesh
+      value: 
+      objectReference: {fileID: 919132149155446097, guid: 56186ccf27ad7864681108ed88349071, type: 3}
+    - target: {fileID: 3149311118105556342, guid: 81026325250b85a49af695dd7260d485, type: 3}
+      propertyPath: m_DebugDrawJoints
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3149311118105556342, guid: 81026325250b85a49af695dd7260d485, type: 3}
+      propertyPath: m_HandMeshMaterial
+      value: 
+      objectReference: {fileID: 2100000, guid: c5f06de065bff66488edd6f3f9247dec, type: 2}
+    - target: {fileID: 4141286079132606751, guid: 81026325250b85a49af695dd7260d485, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 5930906410704644442, guid: 81026325250b85a49af695dd7260d485, type: 3}
       propertyPath: m_Name
       value: VRplayer
+      objectReference: {fileID: 0}
+    - target: {fileID: 6872001301204169729, guid: 81026325250b85a49af695dd7260d485, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8127166326044533928, guid: 81026325250b85a49af695dd7260d485, type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8576440246666805407, guid: 81026325250b85a49af695dd7260d485, type: 3}
       propertyPath: m_LocalPosition.x
@@ -2813,6 +2849,10 @@ PrefabInstance:
     - target: {fileID: 8576440246666805407, guid: 81026325250b85a49af695dd7260d485, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8975941493848275747, guid: 81026325250b85a49af695dd7260d485, type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

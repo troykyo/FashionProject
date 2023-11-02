@@ -9,9 +9,28 @@ public class JointTracking : MonoBehaviour
     // Start is called before the first frame update
     XRHandSubsystem m_HandSubsystem;
 
+    static readonly List<XRHandSubsystem> s_SubsystemsReuse = new List<XRHandSubsystem>();
+
+    public GameObject XROrigin;
+    //public GameObject handObject;
+    private XRHand rightHand;
+    private XRHand leftHand;
+    private XRHandJoint indexTip;
+    private Vector3 indexTipPosition;
+    private XRHandJoint thumbTip;
+    private Vector3 thumbTipPosition;
+    
+    public float fingerGunDistanceThreshold;
+    
+
+    private bool isFingerGun = false;
+
 
     void Start()
     {
+        
+        
+
         var handSubsystems = new List<XRHandSubsystem>();
         SubsystemManager.GetSubsystems(handSubsystems);
 
@@ -29,25 +48,64 @@ public class JointTracking : MonoBehaviour
             m_HandSubsystem.updatedHands += OnUpdatedHands;
     }
 
-    void OnUpdatedHands(XRHandSubsystem subsystem,
-        XRHandSubsystem.UpdateSuccessFlags updateSuccessFlags,
-        XRHandSubsystem.UpdateType updateType)
+
+    Pose ToWorldPose(XRHandJoint joint, Transform origin)
     {
-        switch (updateType)
+        Pose xrOriginPose = new Pose(origin.position, origin.rotation);
+        if (joint.TryGetPose(out Pose jointPose))
         {
-            case XRHandSubsystem.UpdateType.Dynamic:
-                // Update game logic that uses hand data
-                break;
-            case XRHandSubsystem.UpdateType.BeforeRender:
-                // Update visual objects that use hand data
-                break;
+            return jointPose.GetTransformedBy(xrOriginPose);
+        }
+        else
+        {
+            return Pose.identity;
         }
     }
 
-
-// Update is called once per frame
-void Update()
+    // Update is called once per frame
+    void Update()
     {
+
+        if (m_HandSubsystem != null && m_HandSubsystem.running)
+            return;
+
+        SubsystemManager.GetSubsystems(s_SubsystemsReuse);
+        var foundRunningHandSubsystem = false;
+        for (var i = 0; i < s_SubsystemsReuse.Count; ++i)
+        {
+            var handSubsystem = s_SubsystemsReuse[i];
+            if (handSubsystem.running)
+            {
+                UnsubscribeHandSubsystem();
+                m_HandSubsystem = handSubsystem;
+                foundRunningHandSubsystem = true;
+                break;
+            }
+        }
+
+        if (!foundRunningHandSubsystem)
+            return;
+
+        SubscribeHandSubsystem();
+
+        //^^^^HandVisualizer code above this^^^^
+
+        /*Debug.Log("trying to find hands...");
+        rightHand = m_HandSubsystem.rightHand;
+        Debug.Log("right hand should now be: " + rightHand);
+
+            Debug.Log("trying to get joints...");
+            indexTip = rightHand.GetJoint(XRHandJointID.IndexTip);
+            thumbTip = rightHand.GetJoint(XRHandJointID.ThumbTip);
+            Debug.Log("Index joint should be: " + indexTip + ". Thumb joint should be: " + thumbTip);
+
+        Debug.Log("locking joint positions...");
+        indexTipPosition = ToWorldPose(indexTip, XROrigin.transform).position;
+        thumbTipPosition = ToWorldPose(thumbTip, XROrigin.transform).position;
+        Debug.Log("index and thumb should be at: " + indexTipPosition + ", and " + thumbTipPosition);*/
+
+        //ChatGPT code
+        
         //Debug.Log();
 
         //for loop for the list of joints (missing hand refrence(What is "hand" in this context?!?))
@@ -64,5 +122,61 @@ void Update()
                 displayTransform.localRotation = pose.rotation;
             }
         }*/
+    }
+
+    void UnsubscribeHandSubsystem()
+    {
+        if (m_HandSubsystem == null)
+            return;
+
+        m_HandSubsystem.updatedHands -= OnUpdatedHands;
+    }
+
+    void SubscribeHandSubsystem()
+    {
+        if (m_HandSubsystem == null)
+            return;
+
+        m_HandSubsystem.updatedHands += OnUpdatedHands;
+    }
+    void OnUpdatedHands(XRHandSubsystem subsystem,
+        XRHandSubsystem.UpdateSuccessFlags updateSuccessFlags,
+        XRHandSubsystem.UpdateType updateType)
+    {
+        if (updateType == XRHandSubsystem.UpdateType.Dynamic)
+            return;
+
+        //bool leftHandTracked = subsystem.leftHand.isTracked;
+        //bool rightHandTracked = subsystem.rightHand.isTracked;
+
+        indexTipPosition = ToWorldPose(subsystem.leftHand.GetJoint(XRHandJointID.IndexTip), XROrigin.transform).position;
+        thumbTipPosition = ToWorldPose(subsystem.leftHand.GetJoint(XRHandJointID.ThumbTip), XROrigin.transform).position;
+
+        // Calculate the distance between the thumb and index tips.
+        float distance = Vector3.Distance(thumbTipPosition, indexTipPosition);
+
+        Debug.Log("The index vector3 is: " + indexTipPosition);
+        Debug.Log("The thumb vector3 is: " + thumbTipPosition);
+        Debug.Log("The distance between the thumb and the index is: " + distance);
+
+        // Check if the distance is below the threshold for a finger gun gesture.
+        if (distance > fingerGunDistanceThreshold)
+        {
+            // Finger gun gesture recognized.
+            isFingerGun = true;
+            Debug.Log("Finger Gun Gesture Recognized!");
+
+            gameObject.transform.position += new Vector3(GameObject.Find("Main Camera").transform.forward.x, 0, GameObject.Find("Main Camera").transform.forward.z)*0.1f;
+            /*if (!isFingerGun)
+            {
+                
+            }*/
+        }
+        else
+        {
+            // Finger gun gesture not recognized.
+            //isFingerGun = false;
+        }
+
     }
 }

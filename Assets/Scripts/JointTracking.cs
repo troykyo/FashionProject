@@ -12,14 +12,19 @@ public class JointTracking : MonoBehaviour
     static readonly List<XRHandSubsystem> s_SubsystemsReuse = new List<XRHandSubsystem>();
 
     public GameObject XROrigin;
+    
     //public GameObject handObject;
-    private XRHand rightHand;
+    /*private XRHand rightHand;
     private XRHand leftHand;
     private XRHandJoint indexTip;
-    private Vector3 indexTipPosition;
-    private XRHandJoint thumbTip;
-    private Vector3 thumbTipPosition;
-    
+    private XRHandJoint thumbTip;*/
+    //use these instead. makes the code more readable
+
+    private Vector3 leftIndexTipPosition;
+    private Vector3 leftThumbTipPosition;
+    private Vector3 rightIndexTipPosition;
+    private Vector3 rightThumbTipPosition;
+
     public float fingerGunDistanceThreshold;
     
 
@@ -149,24 +154,46 @@ public class JointTracking : MonoBehaviour
         //bool leftHandTracked = subsystem.leftHand.isTracked;
         //bool rightHandTracked = subsystem.rightHand.isTracked;
 
-        indexTipPosition = ToWorldPose(subsystem.leftHand.GetJoint(XRHandJointID.IndexTip), XROrigin.transform).position;
-        thumbTipPosition = ToWorldPose(subsystem.leftHand.GetJoint(XRHandJointID.ThumbTip), XROrigin.transform).position;
+        leftIndexTipPosition = ToWorldPose(subsystem.leftHand.GetJoint(XRHandJointID.IndexTip), XROrigin.transform).position;
+        leftThumbTipPosition = ToWorldPose(subsystem.leftHand.GetJoint(XRHandJointID.ThumbTip), XROrigin.transform).position;
+
+        rightIndexTipPosition = ToWorldPose(subsystem.rightHand.GetJoint(XRHandJointID.IndexTip), XROrigin.transform).position;
+        rightThumbTipPosition = ToWorldPose(subsystem.rightHand.GetJoint(XRHandJointID.ThumbTip), XROrigin.transform).position;
 
         // Calculate the distance between the thumb and index tips.
-        float distance = Vector3.Distance(thumbTipPosition, indexTipPosition);
+        float LeftDistance = Vector3.Distance(leftThumbTipPosition, leftIndexTipPosition);
+        float RightDistance = Vector3.Distance(rightThumbTipPosition, rightIndexTipPosition);
 
-        Debug.Log("The index vector3 is: " + indexTipPosition);
+        /*Debug.Log("The index vector3 is: " + indexTipPosition);
         Debug.Log("The thumb vector3 is: " + thumbTipPosition);
-        Debug.Log("The distance between the thumb and the index is: " + distance);
+        Debug.Log("The distance between the thumb and the index is: " + LeftDistance);*/
 
         // Check if the distance is below the threshold for a finger gun gesture.
-        if (distance > fingerGunDistanceThreshold)
+        if (LeftDistance > fingerGunDistanceThreshold)
         {
             // Finger gun gesture recognized.
             isFingerGun = true;
             Debug.Log("Finger Gun Gesture Recognized!");
 
-            gameObject.transform.position += new Vector3(GameObject.Find("Main Camera").transform.forward.x, 0, GameObject.Find("Main Camera").transform.forward.z)*0.1f;
+            gameObject.transform.position += new Vector3(GameObject.Find("Main Camera").transform.forward.x, 0, GameObject.Find("Main Camera").transform.forward.z)*0.05f;
+            /*if (!isFingerGun)
+            {
+                
+            }*/
+        }
+        else
+        {
+            // Finger gun gesture not recognized.
+            //isFingerGun = false;
+        }
+        if (RightDistance > fingerGunDistanceThreshold)
+        {
+            // Finger gun gesture recognized.
+            isFingerGun = true;
+            Debug.Log("Finger Gun Gesture Recognized!");
+
+            gameObject.transform.position += new Vector3(GameObject.Find("Main Camera").transform.forward.x, 0, GameObject.Find("Main Camera").transform.forward.z) * 0.05f;
+            //Turn this bit into a seperate function. to avoid more copy/pasting
             /*if (!isFingerGun)
             {
                 

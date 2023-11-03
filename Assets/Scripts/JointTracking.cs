@@ -160,12 +160,20 @@ public class JointTracking : MonoBehaviour
         rightIndexTipPosition = ToWorldPose(subsystem.rightHand.GetJoint(XRHandJointID.IndexTip), XROrigin.transform).position;
         rightThumbTipPosition = ToWorldPose(subsystem.rightHand.GetJoint(XRHandJointID.ThumbTip), XROrigin.transform).position;
 
+        Vector3 leftMiddleTipPosition = ToWorldPose(subsystem.leftHand.GetJoint(XRHandJointID.MiddleTip), XROrigin.transform).position;
+        Vector3 rightMiddleTipPosition = ToWorldPose(subsystem.rightHand.GetJoint(XRHandJointID.MiddleTip), XROrigin.transform).position;
+
+        Vector3 leftWrist = ToWorldPose(subsystem.leftHand.GetJoint(XRHandJointID.Wrist), XROrigin.transform).position;
+        Vector3 rightWrist = ToWorldPose(subsystem.rightHand.GetJoint(XRHandJointID.Wrist), XROrigin.transform).position;
+
         // Calculate the distance between the thumb and index tips.
         float LeftDistance = Vector3.Distance(leftThumbTipPosition, leftIndexTipPosition);
         float RightDistance = Vector3.Distance(rightThumbTipPosition, rightIndexTipPosition);
 
-        /*Debug.Log("The index vector3 is: " + indexTipPosition);
-        Debug.Log("The thumb vector3 is: " + thumbTipPosition);
+        //float leftWristDistance = Vector3.Distance();
+
+        /*Debug.Log("The index vector3 is: " + leftIndexTipPosition);
+        Debug.Log("The thumb vector3 is: " + leftThumbTipPosition);
         Debug.Log("The distance between the thumb and the index is: " + LeftDistance);*/
 
         // Check if the distance is below the threshold for a finger gun gesture.
@@ -175,7 +183,8 @@ public class JointTracking : MonoBehaviour
             isFingerGun = true;
             Debug.Log("Finger Gun Gesture Recognized!");
 
-            gameObject.transform.position += new Vector3(GameObject.Find("Main Camera").transform.forward.x, 0, GameObject.Find("Main Camera").transform.forward.z)*0.05f;
+            //gameObject.transform.position += new Vector3(GameObject.Find("Main Camera").transform.forward.x, 0, GameObject.Find("Main Camera").transform.forward.z)*0.05f;
+            gameObject.transform.position += new Vector3(GameObject.Find("Left Hand").transform.forward.x, 0, GameObject.Find("Left Hand").transform.forward.z).normalized * 0.05f;
             /*if (!isFingerGun)
             {
                 

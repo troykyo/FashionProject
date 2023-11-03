@@ -2791,10 +2791,14 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 888252682998578249, guid: 81026325250b85a49af695dd7260d485, type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 1961519044877662424, guid: 81026325250b85a49af695dd7260d485, type: 3}
       propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3063464830304729967, guid: 81026325250b85a49af695dd7260d485, type: 3}
+      propertyPath: m_Enabled
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 3149311118105556342, guid: 81026325250b85a49af695dd7260d485, type: 3}
@@ -2807,7 +2811,7 @@ PrefabInstance:
       objectReference: {fileID: 919132149155446097, guid: 56186ccf27ad7864681108ed88349071, type: 3}
     - target: {fileID: 3149311118105556342, guid: 81026325250b85a49af695dd7260d485, type: 3}
       propertyPath: m_DebugDrawJoints
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 3149311118105556342, guid: 81026325250b85a49af695dd7260d485, type: 3}
       propertyPath: m_HandMeshMaterial
@@ -2821,6 +2825,10 @@ PrefabInstance:
       propertyPath: m_IsActive
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 5112282762784396055, guid: 81026325250b85a49af695dd7260d485, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 5930906410704644442, guid: 81026325250b85a49af695dd7260d485, type: 3}
       propertyPath: m_Name
       value: VRplayer
@@ -2831,11 +2839,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8127166326044533928, guid: 81026325250b85a49af695dd7260d485, type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 8183929227543075925, guid: 81026325250b85a49af695dd7260d485, type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 8576440246666805407, guid: 81026325250b85a49af695dd7260d485, type: 3}
       propertyPath: m_LocalPosition.x
@@ -2875,6 +2883,10 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8576440246666805407, guid: 81026325250b85a49af695dd7260d485, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8656224849777372098, guid: 81026325250b85a49af695dd7260d485, type: 3}
+      propertyPath: m_Enabled
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8975941493848275747, guid: 81026325250b85a49af695dd7260d485, type: 3}

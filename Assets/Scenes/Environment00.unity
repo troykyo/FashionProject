@@ -2541,6 +2541,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: RugbyBall
       objectReference: {fileID: 0}
+    - target: {fileID: 5717307625820062600, guid: 50185b39e8a7a6241b54bf19b296340d, type: 3}
+      propertyPath: m_MaximumScaleRatio
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 7642554590590576754, guid: 50185b39e8a7a6241b54bf19b296340d, type: 3}
       propertyPath: m_LocalScale.x
       value: 0.37
@@ -2791,7 +2795,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 888252682998578249, guid: 81026325250b85a49af695dd7260d485, type: 3}
       propertyPath: m_IsActive
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 1961519044877662424, guid: 81026325250b85a49af695dd7260d485, type: 3}
       propertyPath: m_LocalPosition.y
@@ -2839,7 +2843,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8127166326044533928, guid: 81026325250b85a49af695dd7260d485, type: 3}
       propertyPath: m_IsActive
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8183929227543075925, guid: 81026325250b85a49af695dd7260d485, type: 3}
       propertyPath: m_IsActive

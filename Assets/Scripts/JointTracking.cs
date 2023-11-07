@@ -163,21 +163,22 @@ public class JointTracking : MonoBehaviour
         Vector3 leftMiddleTipPosition = ToWorldPose(subsystem.leftHand.GetJoint(XRHandJointID.MiddleTip), XROrigin.transform).position;
         Vector3 rightMiddleTipPosition = ToWorldPose(subsystem.rightHand.GetJoint(XRHandJointID.MiddleTip), XROrigin.transform).position;
 
-        Vector3 leftWrist = ToWorldPose(subsystem.leftHand.GetJoint(XRHandJointID.Wrist), XROrigin.transform).position;
-        Vector3 rightWrist = ToWorldPose(subsystem.rightHand.GetJoint(XRHandJointID.Wrist), XROrigin.transform).position;
+        Vector3 leftWristPosition = ToWorldPose(subsystem.leftHand.GetJoint(XRHandJointID.Wrist), XROrigin.transform).position;
+        Vector3 rightWristPosition = ToWorldPose(subsystem.rightHand.GetJoint(XRHandJointID.Wrist), XROrigin.transform).position;
 
         // Calculate the distance between the thumb and index tips.
         float LeftDistance = Vector3.Distance(leftThumbTipPosition, leftIndexTipPosition);
         float RightDistance = Vector3.Distance(rightThumbTipPosition, rightIndexTipPosition);
 
-        //float leftWristDistance = Vector3.Distance();
+        float leftWristDistance = Vector3.Distance(leftMiddleTipPosition, leftWristPosition);
+        float rightWristDistance = Vector3.Distance(leftMiddleTipPosition, leftWristPosition);
 
         /*Debug.Log("The index vector3 is: " + leftIndexTipPosition);
         Debug.Log("The thumb vector3 is: " + leftThumbTipPosition);
         Debug.Log("The distance between the thumb and the index is: " + LeftDistance);*/
 
         // Check if the distance is below the threshold for a finger gun gesture.
-        if (LeftDistance > fingerGunDistanceThreshold)
+        if ((LeftDistance > fingerGunDistanceThreshold) && (leftWristDistance < fingerGunDistanceThreshold))
         {
             // Finger gun gesture recognized.
             isFingerGun = true;
@@ -195,7 +196,7 @@ public class JointTracking : MonoBehaviour
             // Finger gun gesture not recognized.
             //isFingerGun = false;
         }
-        if (RightDistance > fingerGunDistanceThreshold)
+        if ((RightDistance > fingerGunDistanceThreshold) && (rightWristDistance < fingerGunDistanceThreshold))
         {
             // Finger gun gesture recognized.
             isFingerGun = true;

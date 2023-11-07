@@ -18,10 +18,13 @@ public class animateHand : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        
         float triggerValue = pinchAnimationAction.action.ReadValue<float>();
+        //Debug.Log(triggerValue);
         handYmator.SetFloat("Trigger", triggerValue);
 
         float gribValue = grabAnimationAction.action.ReadValue<float>();
+        //Debug.Log(triggerValue);
         handYmator.SetFloat("Grip", gribValue);
     }
 }

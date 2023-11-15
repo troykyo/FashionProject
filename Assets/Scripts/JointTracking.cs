@@ -12,7 +12,7 @@ public class JointTracking : MonoBehaviour
     static readonly List<XRHandSubsystem> s_SubsystemsReuse = new List<XRHandSubsystem>();
 
     public GameObject XROrigin;
-    
+
     //public GameObject handObject;
     /*private XRHand rightHand;
     private XRHand leftHand;
@@ -20,10 +20,10 @@ public class JointTracking : MonoBehaviour
     private XRHandJoint thumbTip;*/
     //use these instead. makes the code more readable
 
-    private Vector3 leftIndexTipPosition;
-    private Vector3 leftThumbTipPosition;
-    private Vector3 rightIndexTipPosition;
-    private Vector3 rightThumbTipPosition;
+    Vector3[] leftJointPositions;
+    Vector3[] rightJointPositions;
+    Vector3[] leftJointRotations;
+    Vector3[] rightJointRotations;
 
     public float fingerGunDistanceThreshold;
     
@@ -151,27 +151,80 @@ public class JointTracking : MonoBehaviour
         //for clarity for both myself and others using this:
         //"OnUpdatedHands" runs whenever "SubscribeHandSubsystem" runs, which on it's turn is ran every Update.
 
+        //for reference, these are the IDs assigned to each joint:
+        /*Invalid = 0,
+        BeginMarker = 1,
+        Wrist = 1,
+        Palm = 2,
+        ThumbMetacarpal = 3,
+        ThumbProximal = 4,
+        ThumbDistal = 5,
+        ThumbTip = 6,
+        IndexMetacarpal = 7,
+        IndexProximal = 8,
+        IndexIntermediate = 9,
+        IndexDistal = 10,
+        IndexTip = 11,
+        MiddleMetacarpal = 12,
+        MiddleProximal = 13,
+        MiddleIntermediate = 14,
+        MiddleDistal = 15,
+        MiddleTip = 16,
+        RingMetacarpal = 17,
+        RingProximal = 18,
+        RingIntermediate = 19,
+        RingDistal = 20,
+        RingTip = 21,
+        LittleMetacarpal = 22,
+        LittleProximal = 23,
+        LittleIntermediate = 24,
+        LittleDistal = 25,
+        LittleTip = 26,
+        EndMarker = 27
+        */
+
         if (updateType == XRHandSubsystem.UpdateType.Dynamic)
             return;
 
+        leftJointPositions = GetAllJointPositions("left");
+        rightJointPositions = GetAllJointPositions("right");
+        leftJointRotations = GetAllJointRotations("left");
+        rightJointRotations = GetAllJointRotations("right");
 
-        Vector3[] getAllJoints(string handedness) //Returns the Vectors for every joint on the requested hand. (left or right)
+        Vector3[] GetAllJointPositions(string handedness) //Returns the Vectors for every joint on the requested hand. (left or right)
         {
-            Vector3[] jointData = new Vector3[XRHandJointID.EndMarker.ToIndex()]; //amount of joints is 27. filling this in like this, in case that ever changes
+            Vector3[] jointVectorData = new Vector3[XRHandJointID.EndMarker.ToIndex()+1]; //amount of joints is 27. filling this in like this, in case that ever changes
 
             for (var i = XRHandJointID.BeginMarker.ToIndex();
                  i < XRHandJointID.EndMarker.ToIndex();
                  i++)
             {
-                jointData[i] = GetJointVector(handedness, XRHandJointIDUtility.FromIndex(i));
+                jointVectorData[i+1] = GetJointPosition(handedness, XRHandJointIDUtility.FromIndex(i));
+                //Debug.Log("Here's that data: " + jointVectorData[i]);
             }
 
-            return jointData;
+            //Debug.Log(jointVectorData[6]);
+            return jointVectorData;
 
         }
 
-        Vector3 GetJointVector(string handedness, XRHandJointID jointID)
+        Vector3[] GetAllJointRotations(string handedness)
         {
+            Vector3[] jointRotationData = new Vector3[XRHandJointID.EndMarker.ToIndex()+1]; //amount of joints is 27. filling this in like this, in case that ever changes
+
+            for (var i = XRHandJointID.BeginMarker.ToIndex();
+                 i < XRHandJointID.EndMarker.ToIndex();
+                 i++)
+            {
+                jointRotationData[i+1] = GetJointRotation(handedness, XRHandJointIDUtility.FromIndex(i));
+            }
+
+            return jointRotationData;
+        }
+
+        Vector3 GetJointPosition(string handedness, XRHandJointID jointID)
+        {
+            //Debug.Log("Currently trying to get the position from joint number " + jointID.ToIndex() + " from the " + handedness + " hand.");
             if (handedness == "left")
             {
                 return ToWorldPose(subsystem.leftHand.GetJoint(jointID), XROrigin.transform).position;
@@ -185,36 +238,46 @@ public class JointTracking : MonoBehaviour
                 Debug.LogError("Handedness incorrectly identified! Joint can't be found if your hand is neither left nor right!");
                 return new Vector3();
             }
-        }
+        } //returns the postion of the joint in a vector3
+
+        Vector3 GetJointRotation(string handedness, XRHandJointID jointID)
+        {
+            if (handedness == "left")
+            {
+                return ToWorldPose(subsystem.leftHand.GetJoint(jointID), XROrigin.transform).rotation.eulerAngles;
+            }
+            else if (handedness == "right")
+            {
+                return ToWorldPose(subsystem.rightHand.GetJoint(jointID), XROrigin.transform).rotation.eulerAngles;
+            }
+            else
+            {
+                Debug.LogError("Handedness incorrectly identified! Joint can't be found if your hand is neither left nor right!");
+                return new Quaternion().eulerAngles;
+            }
+        } //returns the rotation of the joint, as a quaternion converted to an euler angle
 
         //bool leftHandTracked = subsystem.leftHand.isTracked;
         //bool rightHandTracked = subsystem.rightHand.isTracked;
 
-        leftIndexTipPosition = GetJointVector("left", XRHandJointID.IndexTip);
-        leftThumbTipPosition = GetJointVector("left", XRHandJointID.ThumbTip);
-
-        rightIndexTipPosition = ToWorldPose(subsystem.rightHand.GetJoint(XRHandJointID.IndexTip), XROrigin.transform).position;
-        rightThumbTipPosition = ToWorldPose(subsystem.rightHand.GetJoint(XRHandJointID.ThumbTip), XROrigin.transform).position;
-
-        Vector3 leftMiddleTipPosition = ToWorldPose(subsystem.leftHand.GetJoint(XRHandJointID.MiddleTip), XROrigin.transform).position;
-        Vector3 rightMiddleTipPosition = ToWorldPose(subsystem.rightHand.GetJoint(XRHandJointID.MiddleTip), XROrigin.transform).position;
-
-        Vector3 leftWristPosition = ToWorldPose(subsystem.leftHand.GetJoint(XRHandJointID.Wrist), XROrigin.transform).position;
-        Vector3 rightWristPosition = ToWorldPose(subsystem.rightHand.GetJoint(XRHandJointID.Wrist), XROrigin.transform).position;
+        //Debug.Log("LeftThumbtip is at: " + leftJointPositions[6]);
 
         // Calculate the distance between the thumb and index tips.
-        float LeftDistance = Vector3.Distance(leftThumbTipPosition, leftIndexTipPosition);
-        float RightDistance = Vector3.Distance(rightThumbTipPosition, rightIndexTipPosition);
 
-        float leftWristDistance = Vector3.Distance(leftMiddleTipPosition, leftWristPosition);
-        float rightWristDistance = Vector3.Distance(leftMiddleTipPosition, leftWristPosition);
+        //Debug.Log(leftJointPositions[6]);
+
+        float LeftDistance = Vector3.Distance(leftJointPositions[6], leftJointPositions[11]);
+        float RightDistance = Vector3.Distance(rightJointPositions[6], rightJointPositions[11]);
+
+        //float leftWristDistance = Vector3.Distance(leftMiddleTipPosition, leftWristPosition);
+        //float rightWristDistance = Vector3.Distance(leftMiddleTipPosition, leftWristPosition);
 
         /*Debug.Log("The index vector3 is: " + leftIndexTipPosition);
         Debug.Log("The thumb vector3 is: " + leftThumbTipPosition);
         Debug.Log("The distance between the thumb and the index is: " + LeftDistance);*/
 
         // Check if the distance is below the threshold for a finger gun gesture.
-        if ((LeftDistance > fingerGunDistanceThreshold) && (leftWristDistance < fingerGunDistanceThreshold))
+        if ((LeftDistance > fingerGunDistanceThreshold) /*&& (leftWristDistance < fingerGunDistanceThreshold)*/)
         {
             // Finger gun gesture recognized.
             isFingerGun = true;
@@ -232,7 +295,7 @@ public class JointTracking : MonoBehaviour
             // Finger gun gesture not recognized.
             //isFingerGun = false;
         }
-        if ((RightDistance > fingerGunDistanceThreshold) && (rightWristDistance < fingerGunDistanceThreshold))
+        if ((RightDistance > fingerGunDistanceThreshold) /*&& (rightWristDistance < fingerGunDistanceThreshold)*/)
         {
             // Finger gun gesture recognized.
             isFingerGun = true;

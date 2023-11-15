@@ -70,7 +70,7 @@ public class JointTracking : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-
+        //HandVisualizer code below
         if (m_HandSubsystem != null && m_HandSubsystem.running)
             return;
 
@@ -92,8 +92,7 @@ public class JointTracking : MonoBehaviour
             return;
 
         SubscribeHandSubsystem();
-
-        //^^^^HandVisualizer code above this^^^^
+        //HandVisualizer code above
 
         /*Debug.Log("trying to find hands...");
         rightHand = m_HandSubsystem.rightHand;
@@ -144,18 +143,55 @@ public class JointTracking : MonoBehaviour
 
         m_HandSubsystem.updatedHands += OnUpdatedHands;
     }
+
     void OnUpdatedHands(XRHandSubsystem subsystem,
         XRHandSubsystem.UpdateSuccessFlags updateSuccessFlags,
         XRHandSubsystem.UpdateType updateType)
     {
+        //for clarity for both myself and others using this:
+        //"OnUpdatedHands" runs whenever "SubscribeHandSubsystem" runs, which on it's turn is ran every Update.
+
         if (updateType == XRHandSubsystem.UpdateType.Dynamic)
             return;
+
+
+        Vector3[] getAllJoints(string handedness) //Returns the Vectors for every joint on the requested hand. (left or right)
+        {
+            Vector3[] jointData = new Vector3[XRHandJointID.EndMarker.ToIndex()]; //amount of joints is 27. filling this in like this, in case that ever changes
+
+            for (var i = XRHandJointID.BeginMarker.ToIndex();
+                 i < XRHandJointID.EndMarker.ToIndex();
+                 i++)
+            {
+                jointData[i] = GetJointVector(handedness, XRHandJointIDUtility.FromIndex(i));
+            }
+
+            return jointData;
+
+        }
+
+        Vector3 GetJointVector(string handedness, XRHandJointID jointID)
+        {
+            if (handedness == "left")
+            {
+                return ToWorldPose(subsystem.leftHand.GetJoint(jointID), XROrigin.transform).position;
+            }
+            else if (handedness == "right")
+            {
+                return ToWorldPose(subsystem.rightHand.GetJoint(jointID), XROrigin.transform).position;
+            }
+            else
+            {
+                Debug.LogError("Handedness incorrectly identified! Joint can't be found if your hand is neither left nor right!");
+                return new Vector3();
+            }
+        }
 
         //bool leftHandTracked = subsystem.leftHand.isTracked;
         //bool rightHandTracked = subsystem.rightHand.isTracked;
 
-        leftIndexTipPosition = ToWorldPose(subsystem.leftHand.GetJoint(XRHandJointID.IndexTip), XROrigin.transform).position;
-        leftThumbTipPosition = ToWorldPose(subsystem.leftHand.GetJoint(XRHandJointID.ThumbTip), XROrigin.transform).position;
+        leftIndexTipPosition = GetJointVector("left", XRHandJointID.IndexTip);
+        leftThumbTipPosition = GetJointVector("left", XRHandJointID.ThumbTip);
 
         rightIndexTipPosition = ToWorldPose(subsystem.rightHand.GetJoint(XRHandJointID.IndexTip), XROrigin.transform).position;
         rightThumbTipPosition = ToWorldPose(subsystem.rightHand.GetJoint(XRHandJointID.ThumbTip), XROrigin.transform).position;

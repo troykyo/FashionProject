@@ -13,12 +13,14 @@ public class JointTracking : MonoBehaviour
 
     public GameObject XROrigin;
 
-    Vector3[] leftJointPositions;
-    Vector3[] rightJointPositions;
-    Vector3[] leftJointRotations;
-    Vector3[] rightJointRotations;
+    public Vector3[] leftJointPositions;
+    public Vector3[] rightJointPositions;
+    public Vector3[] leftJointRotations;
+    public Vector3[] rightJointRotations;
 
     public float fingerGunDistanceThreshold;
+
+    public bool holdRotationConfirmed;
 
     private bool soloGesture;
 
@@ -186,8 +188,13 @@ public class JointTracking : MonoBehaviour
             }
         } //returns the rotation of the joint, as a quaternion converted to an euler angle
 
-        FingergunCheck();
+        //FingergunCheck();
+        GrabRotateCheck();
+
+        //Debug.Log("Palm rotation is: " + leftJointRotations[2]);
     }
+
+    //note: in rotation for the hands, Z at 0 is the palm pointing down.
 
     //for reference, these are the IDs assigned to each joint:
     /*Invalid = 0
@@ -222,6 +229,7 @@ public class JointTracking : MonoBehaviour
     */
     
     //This checks if the hands are currently in a "fingergun" position, which would then move the player
+    //NOTE TO SELF: PUT IN JOINTS USED INTO THE METHOD AS A PARAMETER, TO MORE EASILY WORK WITH THEM IN THE METHOD ITSELF.
     void FingergunCheck()
     {
         // Calculate the distance between the thumb and index tips.
@@ -237,7 +245,7 @@ public class JointTracking : MonoBehaviour
         {
             // Finger gun gesture recognized.
             isFingerGun = true;
-            Debug.Log("Finger Gun Gesture Recognized!");
+            //Debug.Log("Finger Gun Gesture Recognized!");
             MovePlayer(false, true);
 
         }
@@ -251,7 +259,7 @@ public class JointTracking : MonoBehaviour
         {
             // Finger gun gesture recognized.
             isFingerGun = true;
-            Debug.Log("Finger Gun Gesture Recognized!");
+            //Debug.Log("Finger Gun Gesture Recognized!");
             MovePlayer(false, false);
 
         }
@@ -262,7 +270,25 @@ public class JointTracking : MonoBehaviour
         }
     }
 
-    void MovePlayer(bool cameraMove, bool leftHanded)
+    void GrabRotateCheck()
+    {
+        if (((leftJointRotations[2].z <= 10) || (leftJointRotations[2].z >= 350)) && ((leftJointRotations[2].x <= 10) || (leftJointRotations[2].x >= 350)))
+        {
+            Debug.Log("Hand points down enough!");
+            //if your palm is facing generally down, it's good enough
+
+            holdRotationConfirmed = true;
+
+        }
+        else
+        {
+            holdRotationConfirmed = false;
+        }
+        //In this function we will be trying to check for a "jar opening" gesture, which will allow a user to rotate an object.
+
+    }
+
+    void MovePlayer(bool cameraMove, bool leftHanded) //note: movement pointing only works with left currently. fix this.
     {
         if (cameraMove)
         {

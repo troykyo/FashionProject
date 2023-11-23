@@ -186,7 +186,10 @@ PrefabInstance:
     - {fileID: -4714817154256824709, guid: 26db345762fb448e3bc7da592d48db70, type: 3}
     - {fileID: -8700617353114198275, guid: 26db345762fb448e3bc7da592d48db70, type: 3}
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 26db345762fb448e3bc7da592d48db70, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1300717664}
   m_SourcePrefab: {fileID: 100100000, guid: 26db345762fb448e3bc7da592d48db70, type: 3}
 --- !u!4 &40964380 stripped
 Transform:
@@ -581,6 +584,9 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 4ecb1bd2f02a2dd4cac5073a7bf35836, type: 3}
       insertIndex: -1
       addedObject: {fileID: 1896271231}
+    - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 4ecb1bd2f02a2dd4cac5073a7bf35836, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1896271234}
   m_SourcePrefab: {fileID: 100100000, guid: 4ecb1bd2f02a2dd4cac5073a7bf35836, type: 3}
 --- !u!4 &273062206 stripped
 Transform:
@@ -7595,6 +7601,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   XROrigin: {fileID: 1468820693}
+  leftJointPositions: []
+  rightJointPositions: []
+  leftJointRotations: []
+  rightJointRotations: []
   fingerGunDistanceThreshold: 0.11
 --- !u!1001 &1473350015
 PrefabInstance:

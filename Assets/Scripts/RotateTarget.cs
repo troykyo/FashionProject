@@ -28,11 +28,11 @@ public class RotateTarget : MonoBehaviour
         }
 
         //swipe turn
-        if (Vector3.Distance(jointScript.rightJointPositions[11], currentPosition) < 10)
+        /*if (Vector3.Distance(jointScript.rightJointPositions[11], currentPosition) < 10)
         {
             //if within range, track position to turn object
 
-        }
+        }*/
 
         //pinch scale
         if (true)

@@ -21,9 +21,14 @@ public class JointTracking : MonoBehaviour
 
     public float fingerGunDistanceThreshold;
 
-    public bool holdRotationConfirmed;
+    public float grabRotationHoldThreshold;
+    public float grabRotationHoldThresholdBase;
+    public float grabRotationHoldThresholdExtended;
 
-    private bool soloGesture;
+    public bool holdRotationConfirmed;
+    //this bool to signal to other script to do rotating
+
+    private bool confirmGesture;
 
     private bool isFingerGun = false;
 
@@ -189,9 +194,15 @@ public class JointTracking : MonoBehaviour
             }
         } //returns the rotation of the joint, as a quaternion converted to an euler angle
 
-        //ChangePoseCheck();
-        //FingergunCheck();
-        GrabRotateCheck();
+        Debug.Log("Confirmation is: " + confirmGesture);
+        confirmGesture = false;
+        ChangePoseCheck();
+        if (confirmGesture)
+        {
+            FingergunCheck();
+            GrabRotateCheck();
+        }
+        
 
         Debug.Log("Palm rotation is: " + leftJointRotations[2]);
     }
@@ -235,19 +246,18 @@ public class JointTracking : MonoBehaviour
     //this checks if a hand is making the designated pose to change the function you want to use
     void ChangePoseCheck()
     {
-        //palm rotation should be about (270, 0, 180)
-        if ((leftJointRotations[2].x <= 280) || (leftJointRotations[2].x >= 260))
+        //palm rotation should be about (270, 0, 180) for face facing
+        if ((rightJointRotations[2].x <= 280) || (rightJointRotations[2].x >= 260))
         {
-            if ((leftJointRotations[2].y <= 10) || (leftJointRotations[2].y >= 350))
+            if ((rightJointRotations[2].y <= 10) || (rightJointRotations[2].y >= 350))
             {
-                if ((leftJointRotations[2].z <= 190) || (leftJointRotations[2].z >= 170))
+                if ((rightJointRotations[2].z <= 190) || (rightJointRotations[2].z >= 170))
                 {
                     Debug.Log("Palm is facing face!");
-
+                    confirmGesture = true;
 
                 }
             }
-
         }
     }
 
@@ -294,12 +304,14 @@ public class JointTracking : MonoBehaviour
 
     void GrabRotateCheck()
     {
-        if (((leftJointRotations[2].z <= 10) || (leftJointRotations[2].z >= 350)) && ((leftJointRotations[2].x <= 10) || (leftJointRotations[2].x >= 350)))
+        if (((leftJointRotations[2].z <= 0 + grabRotationHoldThreshold) || (leftJointRotations[2].z >= 360 - grabRotationHoldThreshold)) && ((leftJointRotations[2].x <= 0 + grabRotationHoldThreshold) || (leftJointRotations[2].x >= 360 - grabRotationHoldThreshold)))
         {
             //Debug.Log("Hand points down enough!");
             //if your palm is facing generally down, it's good enough
 
             holdRotationConfirmed = true;
+
+            grabRotationHoldThreshold = grabRotationHoldThresholdExtended;
 
             //activate arrow model
             GameObject.Find("Pointer").gameObject.GetComponent<MeshRenderer>().enabled = true;
@@ -310,6 +322,7 @@ public class JointTracking : MonoBehaviour
         }
         else
         {
+            grabRotationHoldThreshold = grabRotationHoldThresholdBase;
             GameObject.Find("Pointer").gameObject.GetComponent<MeshRenderer>().enabled = false;
             GameObject.Find("hand visualizer").GetComponent<HandVisualizer>().drawMeshes = true;
             holdRotationConfirmed = false;

@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.XR.Management;
 using UnityEngine.XR.Hands;
+using UnityEngine.XR.Hands.Samples.VisualizerSample;
 
 public class JointTracking : MonoBehaviour
 {
@@ -188,10 +189,11 @@ public class JointTracking : MonoBehaviour
             }
         } //returns the rotation of the joint, as a quaternion converted to an euler angle
 
+        //ChangePoseCheck();
         //FingergunCheck();
         GrabRotateCheck();
 
-        //Debug.Log("Palm rotation is: " + leftJointRotations[2]);
+        Debug.Log("Palm rotation is: " + leftJointRotations[2]);
     }
 
     //note: in rotation for the hands, Z at 0 is the palm pointing down.
@@ -227,9 +229,29 @@ public class JointTracking : MonoBehaviour
     LittleTip = 26
     EndMarker = 27
     */
-    
-    //This checks if the hands are currently in a "fingergun" position, which would then move the player
+
     //NOTE TO SELF: PUT IN JOINTS USED INTO THE METHOD AS A PARAMETER, TO MORE EASILY WORK WITH THEM IN THE METHOD ITSELF.
+
+    //this checks if a hand is making the designated pose to change the function you want to use
+    void ChangePoseCheck()
+    {
+        //palm rotation should be about (270, 0, 180)
+        if ((leftJointRotations[2].x <= 280) || (leftJointRotations[2].x >= 260))
+        {
+            if ((leftJointRotations[2].y <= 10) || (leftJointRotations[2].y >= 350))
+            {
+                if ((leftJointRotations[2].z <= 190) || (leftJointRotations[2].z >= 170))
+                {
+                    Debug.Log("Palm is facing face!");
+
+
+                }
+            }
+
+        }
+    }
+
+    //This checks if the hands are currently in a "fingergun" position, which would then move the player
     void FingergunCheck()
     {
         // Calculate the distance between the thumb and index tips.
@@ -274,14 +296,22 @@ public class JointTracking : MonoBehaviour
     {
         if (((leftJointRotations[2].z <= 10) || (leftJointRotations[2].z >= 350)) && ((leftJointRotations[2].x <= 10) || (leftJointRotations[2].x >= 350)))
         {
-            Debug.Log("Hand points down enough!");
+            //Debug.Log("Hand points down enough!");
             //if your palm is facing generally down, it's good enough
 
             holdRotationConfirmed = true;
 
+            //activate arrow model
+            GameObject.Find("Pointer").gameObject.GetComponent<MeshRenderer>().enabled = true;
+            GameObject.Find("hand visualizer").GetComponent<HandVisualizer>().drawMeshes = false;
+            GameObject.Find("Pointer").transform.position = leftJointPositions[2];
+            GameObject.Find("Pointer").transform.rotation = Quaternion.Euler(-90,0,leftJointRotations[2].y);
+
         }
         else
         {
+            GameObject.Find("Pointer").gameObject.GetComponent<MeshRenderer>().enabled = false;
+            GameObject.Find("hand visualizer").GetComponent<HandVisualizer>().drawMeshes = true;
             holdRotationConfirmed = false;
         }
         //In this function we will be trying to check for a "jar opening" gesture, which will allow a user to rotate an object.

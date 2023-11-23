@@ -195,14 +195,15 @@ public class JointTracking : MonoBehaviour
         } //returns the rotation of the joint, as a quaternion converted to an euler angle
 
         Debug.Log("Confirmation is: " + confirmGesture);
-        confirmGesture = false;
-        ChangePoseCheck();
+        //confirmGesture = false;
+        //ChangePoseCheck();
         if (confirmGesture)
         {
-            FingergunCheck();
-            GrabRotateCheck();
+            //FingergunCheck();
+            
         }
-        
+        GrabRotateCheck();
+
 
         Debug.Log("Palm rotation is: " + leftJointRotations[2]);
     }

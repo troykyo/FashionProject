@@ -11,8 +11,16 @@ public class environmontScr : MonoBehaviour
 
     [SerializeField] bool mode;
 
+    public GameObject directionalLightObject;
+    private Light directionalLight;
+
+    public Material happySkyBox;
+    public Material evilSkyBox;
+
+
     void Start()
     {
+        directionalLight = directionalLightObject.GetComponent<Light>();
         foreach (Transform child in parent.transform)
         {
             if (child.tag == "parent")
@@ -81,6 +89,8 @@ public class environmontScr : MonoBehaviour
             {
                 happy.SetActive(true);
             }
+            directionalLight.intensity = 1f;
+            RenderSettings.skybox = happySkyBox;
         }
         else
         {
@@ -92,6 +102,8 @@ public class environmontScr : MonoBehaviour
             {
                 happy.SetActive(false);
             }
+            directionalLight.intensity = 0.6f;
+            RenderSettings.skybox = evilSkyBox;
         }
     }
 }

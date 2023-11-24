@@ -23,7 +23,7 @@ public class RotateTarget : MonoBehaviour
         {
             //Debug.Log("Rotation should be set!");
             Debug.Log("Y rotation of palm is: " + jointScript.leftJointRotations[2].y);
-            currentRotation = new Vector3(0, jointScript.leftJointRotations[2].y, 0);
+            currentRotation = new Vector3(0, jointScript.leftJointRotations[2].y + 180, 0);
             //GameObject.Find("XR Origin (XR Rig)").GetComponent<JointTracking>().leftJointRotations
         }
 

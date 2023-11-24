@@ -6548,6 +6548,63 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: c63b9e0f6421ef84491b199c3ecb847b, type: 3}
+--- !u!1001 &789124884
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: -8679921383154817045, guid: 986f01d99daa88441b7a66913229c10c, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -1.4338436
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 986f01d99daa88441b7a66913229c10c, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0.00000047683716
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 986f01d99daa88441b7a66913229c10c, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 7.963481
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 986f01d99daa88441b7a66913229c10c, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 0.7071067
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 986f01d99daa88441b7a66913229c10c, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: -0.7071068
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 986f01d99daa88441b7a66913229c10c, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 986f01d99daa88441b7a66913229c10c, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 986f01d99daa88441b7a66913229c10c, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 986f01d99daa88441b7a66913229c10c, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 986f01d99daa88441b7a66913229c10c, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 986f01d99daa88441b7a66913229c10c, type: 3}
+      propertyPath: m_Name
+      value: Pointer
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 986f01d99daa88441b7a66913229c10c, type: 3}
 --- !u!4 &802987598 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 1481028044923990732, guid: c63b9e0f6421ef84491b199c3ecb847b, type: 3}
@@ -7263,6 +7320,18 @@ GameObject:
   m_CorrespondingSourceObject: {fileID: 5254056194692907044, guid: 324063b69034016489bf0547ae622623, type: 3}
   m_PrefabInstance: {fileID: 1216524927}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &1194283346
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1194283337}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d2ff565993190a24887db7487f7f997d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!4 &1210305385 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 7978146737094428464, guid: c8e50776963d0c84e8a04bd6901ce45d, type: 3}
@@ -7407,7 +7476,10 @@ PrefabInstance:
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 5254056194692907044, guid: 324063b69034016489bf0547ae622623, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1194283346}
   m_SourcePrefab: {fileID: 100100000, guid: 324063b69034016489bf0547ae622623, type: 3}
 --- !u!1001 &1228068465
 PrefabInstance:
@@ -8066,8 +8138,8 @@ MonoBehaviour:
   rightJointRotations: []
   fingerGunDistanceThreshold: 0.11
   grabRotationHoldThreshold: 0
-  grabRotationHoldThresholdBase: 0
-  grabRotationHoldThresholdExtended: 0
+  grabRotationHoldThresholdBase: 10
+  grabRotationHoldThresholdExtended: 50
   holdRotationConfirmed: 0
 --- !u!1001 &1470100456
 PrefabInstance:
@@ -14937,3 +15009,4 @@ SceneRoots:
   - {fileID: 191305945}
   - {fileID: 1216524927}
   - {fileID: 1312711019}
+  - {fileID: 789124884}

@@ -37,6 +37,20 @@ namespace VRM
             }
         }
 
+        public void Update()
+        {
+            foreach (BlendShapeClip key in BlendShapeAvatar.Clips)
+            {
+                Debug.Log(key.BlendShapeName);
+                Debug.Log(key.Key);
+                foreach (BlendShapeBinding binding in key.Values)
+                {
+                    Debug.Log(binding.Weight);
+                }
+            }
+            Debug.Log(BlendShapeAvatar.Clips);
+        }
+
         /// <summary>
         /// Immediately SetValue
         /// </summary>

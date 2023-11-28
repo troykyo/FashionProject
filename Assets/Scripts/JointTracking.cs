@@ -197,15 +197,27 @@ public class JointTracking : MonoBehaviour
         Debug.Log("Confirmation is: " + confirmGesture);
         //confirmGesture = false;
         //ChangePoseCheck();
+
+        if (Input.GetKey(KeyCode.A))
+        {
+            Debug.Log("true");
+            confirmGesture = true;
+        }
+
+        if (Input.GetKey(KeyCode.B))
+        {
+            Debug.Log("false");
+            confirmGesture = false;
+        }
+
         if (confirmGesture)
         {
-            //FingergunCheck();
-            
+            FingergunCheck();
         }
+
         GrabRotateCheck();
 
-
-        Debug.Log("Palm rotation is: " + leftJointRotations[2]);
+        //Debug.Log("Palm rotation is: " + leftJointRotations[2]);
     }
 
     //note: in rotation for the hands, Z at 0 is the palm pointing down.
@@ -317,8 +329,8 @@ public class JointTracking : MonoBehaviour
             //activate arrow model
             GameObject.Find("Pointer").gameObject.GetComponent<MeshRenderer>().enabled = true;
             GameObject.Find("hand visualizer").GetComponent<HandVisualizer>().drawMeshes = false;
-            GameObject.Find("Pointer").transform.position = leftJointPositions[2];
-            GameObject.Find("Pointer").transform.rotation = Quaternion.Euler(-90,0,leftJointRotations[2].y);
+            GameObject.Find("Pointer").transform.position = new Vector3(leftJointPositions[2].x, leftJointPositions[2].y, leftJointPositions[2].z +1) ;
+            GameObject.Find("Pointer").transform.rotation = Quaternion.Euler(-90,0,leftJointRotations[2].y +180);
 
         }
         else

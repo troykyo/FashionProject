@@ -9,14 +9,20 @@ public class environmontScr : MonoBehaviour
     [SerializeField] List<GameObject> evils = new List<GameObject>();
     [SerializeField] List<GameObject> happys = new List<GameObject>();
 
-    [SerializeField] bool mode;
+    public bool mode;
 
     public GameObject directionalLightObject;
     private Light directionalLight;
 
     public Material happySkyBox;
     public Material evilSkyBox;
+    [SerializeField] Material skybox;
 
+
+    [SerializeField] int currentItem;
+
+    public float timeRemaining = 1;
+    public float timeNext = 0.15f;
 
     void Start()
     {
@@ -65,6 +71,7 @@ public class environmontScr : MonoBehaviour
                 }
             }
         }
+        currentItem = evils.Count;
     }
 
     // Update is called once per frame
@@ -72,38 +79,53 @@ public class environmontScr : MonoBehaviour
     {
         if (Input.GetKeyUp("space"))
         {
+            mode = !mode;
             swap();
         }
+        Mathf.Clamp(skybox.GetFloat("Weight_"), 0, 1);
     }
 
-    private void swap()
+    public void swap()
     {
-        mode = !mode;
         if (mode)
         {
-            foreach (GameObject evil in evils)
+            if (timeRemaining > 0)
             {
-                evil.SetActive(false);
+                timeRemaining -= Time.deltaTime;
             }
-            foreach (GameObject happy in happys)
+            else if ((currentItem + 1) < evils.Count && currentItem >= 0)
             {
-                happy.SetActive(true);
+                evils[currentItem].SetActive(false);
+                happys[currentItem].SetActive(true);
+                currentItem++;
+                timeRemaining = timeNext;
             }
-            directionalLight.intensity = 1f;
-            RenderSettings.skybox = happySkyBox;
+            if (currentItem > (evils.Count * 0.5))
+            {
+                directionalLight.intensity = 1f;
+            }
+            skybox.SetFloat("Weight_", Mathf.Lerp(skybox.GetFloat("Weight_"), 1, 0.2f * Time.deltaTime));
         }
         else
         {
-            foreach (GameObject evil in evils)
+            if (timeRemaining > 0)
             {
-                evil.SetActive(true);
+                timeRemaining -= Time.deltaTime;
             }
-            foreach (GameObject happy in happys)
+            else if (currentItem <= evils.Count && currentItem > 0)
             {
-                happy.SetActive(false);
+                currentItem--;
+                evils[currentItem].SetActive(true);
+                happys[currentItem].SetActive(false);
+                timeRemaining = timeNext;
             }
-            directionalLight.intensity = 0.6f;
-            RenderSettings.skybox = evilSkyBox;
+            if (currentItem < (evils.Count * 0.5))
+            {
+                directionalLight.intensity = 0.6f;
+            }
+            skybox.SetFloat("Weight_", Mathf.Lerp(skybox.GetFloat("Weight_"), 0, 1f * Time.deltaTime));
         }
+        Debug.Log(currentItem);
+        //RenderSettings.skybox = newSkybox;
     }
 }

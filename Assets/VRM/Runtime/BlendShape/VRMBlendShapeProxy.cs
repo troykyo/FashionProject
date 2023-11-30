@@ -16,7 +16,7 @@ namespace VRM
             throw new NotImplementedException();
         }
 
-        BlendShapeMerger m_merger;
+        public BlendShapeMerger m_merger;
 
         private void OnDestroy()
         {
@@ -35,20 +35,6 @@ namespace VRM
                     m_merger = new BlendShapeMerger(BlendShapeAvatar.Clips, transform);
                 }
             }
-        }
-
-        public void Update()
-        {
-            foreach (BlendShapeClip key in BlendShapeAvatar.Clips)
-            {
-                Debug.Log(key.BlendShapeName);
-                Debug.Log(key.Key);
-                foreach (BlendShapeBinding binding in key.Values)
-                {
-                    Debug.Log(binding.Weight);
-                }
-            }
-            Debug.Log(BlendShapeAvatar.Clips);
         }
 
         /// <summary>
@@ -74,6 +60,7 @@ namespace VRM
             if (m_merger != null)
             {
                 m_merger.AccumulateValue(key, value);
+                Debug.Log("Accumulate Value " + value + " for " + key);
             }
         }
 

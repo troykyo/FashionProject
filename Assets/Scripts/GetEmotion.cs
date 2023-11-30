@@ -1,10 +1,11 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using VRM;
 
 public class GetEmotion : MonoBehaviour
 {
-    [SerializeField] VRM.VRMBlendShapeProxy vRMBlendShapeProxy;
+    [SerializeField] VRMBlendShapeProxy vRMBlendShapeProxy;
     [SerializeField] GameObject enviorment;
     environmontScr environmontScr;
 
@@ -15,14 +16,19 @@ public class GetEmotion : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        foreach (VRM.BlendShapeClip key in vRMBlendShapeProxy.BlendShapeAvatar.Clips)
+        foreach (BlendShapeClip key in vRMBlendShapeProxy.BlendShapeAvatar.Clips)
         {
-            if (key.BlendShapeName == "Angry" && vRMBlendShapeProxy.m_merger.GetValue(key.Key) > 0.95f)
+            if (key.BlendShapeName == "Angry" && vRMBlendShapeProxy.m_merger.GetValue(key.Key) > 0.85f)
             {
                 environmontScr.mode = false;
                 environmontScr.swap();
             }
-            if (key.BlendShapeName == "Fun" && vRMBlendShapeProxy.m_merger.GetValue(key.Key) > 0.95f)
+            else if (key.BlendShapeName == "Sorrow" && vRMBlendShapeProxy.m_merger.GetValue(key.Key) > 0.95f)
+            {
+                environmontScr.mode = false;
+                environmontScr.swap();
+            }
+            if (key.BlendShapeName == "Fun" && vRMBlendShapeProxy.m_merger.GetValue(key.Key) > 0.60f)
             {
                 environmontScr.mode = true;
                 environmontScr.swap();

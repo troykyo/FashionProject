@@ -12,6 +12,8 @@ public class environmontScr : MonoBehaviour
     public bool mode;
 
     public GameObject directionalLightObject;
+    public GameObject bloons;
+    public GameObject fog;
     private Light directionalLight;
 
     public Material happySkyBox;
@@ -77,10 +79,13 @@ public class environmontScr : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        if (Input.GetKey("space"))
+        {
+            swap();
+        }
         if (Input.GetKeyUp("space"))
         {
             mode = !mode;
-            swap();
         }
         Mathf.Clamp(skybox.GetFloat("Weight_"), 0, 1);
     }
@@ -102,8 +107,10 @@ public class environmontScr : MonoBehaviour
             }
             if (currentItem > (evils.Count * 0.5))
             {
-                directionalLight.intensity = 1f;
+                bloons.GetComponent<ParticleSystem>().enableEmission = true;
+                fog.GetComponent<ParticleSystem>().enableEmission = false;
             }
+            directionalLight.intensity = Mathf.Lerp(directionalLight.intensity, 1f, 0.5f * Time.deltaTime);
             skybox.SetFloat("Weight_", Mathf.Lerp(skybox.GetFloat("Weight_"), 1, 0.2f * Time.deltaTime));
         }
         else
@@ -121,11 +128,11 @@ public class environmontScr : MonoBehaviour
             }
             if (currentItem < (evils.Count * 0.5))
             {
-                directionalLight.intensity = 0.6f;
+                bloons.GetComponent<ParticleSystem>().enableEmission = false;
+                fog.GetComponent<ParticleSystem>().enableEmission = true;
             }
+            directionalLight.intensity = Mathf.Lerp(directionalLight.intensity, 0.1f, 0.5f * Time.deltaTime);
             skybox.SetFloat("Weight_", Mathf.Lerp(skybox.GetFloat("Weight_"), 0, 1f * Time.deltaTime));
         }
-        Debug.Log(currentItem);
-        //RenderSettings.skybox = newSkybox;
     }
 }

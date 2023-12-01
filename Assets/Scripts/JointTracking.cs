@@ -291,6 +291,7 @@ public class JointTracking : MonoBehaviour
     }
 
     //This checks if the hands are currently in a "fingergun" position, which would then move the player
+    //note: this was used as a first test to see if gesture recognition worked. it did. we don't need moving anymore, but the fingergun gesture could still be used for something else.
     void FingergunCheck()
     {
         // Calculate the distance between the thumb and index tips.

@@ -5,11 +5,15 @@ using UnityEngine;
 public class RotateTarget : MonoBehaviour
 {
     // this script makes this a rotatable target for the player
-    // Start is called before the first frame update
+
+    public bool isRotatable;
+    public bool isMovable;
     void Start()
     {
 
     }
+
+
 
     // every gameobject.find can be replaced with a prefilled variable. do that.
     void Update()
@@ -19,7 +23,7 @@ public class RotateTarget : MonoBehaviour
 
         JointTracking jointScript = GameObject.Find("XR Origin (XR Rig)").GetComponent<JointTracking>();
 
-        if (jointScript.holdRotationConfirmed)
+        if (jointScript.holdRotationConfirmed && isRotatable)
         {
             //Debug.Log("Rotation should be set!");
             //Debug.Log("Y rotation of palm is: " + jointScript.leftJointRotations[2].y);
@@ -27,7 +31,7 @@ public class RotateTarget : MonoBehaviour
             //GameObject.Find("XR Origin (XR Rig)").GetComponent<JointTracking>().leftJointRotations
         }
 
-        if (jointScript.headPatConfirmed)
+        if (jointScript.headPatConfirmed && isMovable)
         {
             //Debug.Log("It's gonna be adorable if this works!");
             currentPosition.x = jointScript.rightJointPositions[2].x;

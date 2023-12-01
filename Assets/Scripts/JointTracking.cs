@@ -26,7 +26,12 @@ public class JointTracking : MonoBehaviour
     public float grabRotationHoldThresholdExtended;
 
     public bool holdRotationConfirmed;
-    //this bool to signal to other script to do rotating
+
+    public float headPatThreshold;
+    public float headPatThresholdBase;
+    public float headPatThresholdExtended;
+
+    public bool headPatConfirmed;
 
     private bool confirmGesture;
 
@@ -130,13 +135,13 @@ public class JointTracking : MonoBehaviour
 
         Vector3[] GetAllJointPositions(string handedness) //Returns the Vectors for every joint on the requested hand. (left or right)
         {
-            Vector3[] jointVectorData = new Vector3[XRHandJointID.EndMarker.ToIndex()+1];
+            Vector3[] jointVectorData = new Vector3[XRHandJointID.EndMarker.ToIndex() + 1];
 
             for (var i = XRHandJointID.BeginMarker.ToIndex();
                  i < XRHandJointID.EndMarker.ToIndex();
                  i++)
             {
-                jointVectorData[i+1] = GetJointPosition(handedness, XRHandJointIDUtility.FromIndex(i));
+                jointVectorData[i + 1] = GetJointPosition(handedness, XRHandJointIDUtility.FromIndex(i));
                 //Debug.Log("Here's that data: " + jointVectorData[i]);
             }
 
@@ -147,13 +152,13 @@ public class JointTracking : MonoBehaviour
 
         Vector3[] GetAllJointRotations(string handedness)
         {
-            Vector3[] jointRotationData = new Vector3[XRHandJointID.EndMarker.ToIndex()+1];
+            Vector3[] jointRotationData = new Vector3[XRHandJointID.EndMarker.ToIndex() + 1];
 
             for (var i = XRHandJointID.BeginMarker.ToIndex();
                  i < XRHandJointID.EndMarker.ToIndex();
                  i++)
             {
-                jointRotationData[i+1] = GetJointRotation(handedness, XRHandJointIDUtility.FromIndex(i));
+                jointRotationData[i + 1] = GetJointRotation(handedness, XRHandJointIDUtility.FromIndex(i));
             }
 
             return jointRotationData;
@@ -216,6 +221,7 @@ public class JointTracking : MonoBehaviour
         }
 
         GrabRotateCheck();
+        ModelMoveCheck();
 
         //Debug.Log("Palm rotation is: " + leftJointRotations[2]);
     }
@@ -329,8 +335,8 @@ public class JointTracking : MonoBehaviour
             //activate arrow model
             GameObject.Find("Pointer").gameObject.GetComponent<MeshRenderer>().enabled = true;
             GameObject.Find("hand visualizer").GetComponent<HandVisualizer>().drawMeshes = false;
-            GameObject.Find("Pointer").transform.position = new Vector3(leftJointPositions[2].x, leftJointPositions[2].y, leftJointPositions[2].z +1) ;
-            GameObject.Find("Pointer").transform.rotation = Quaternion.Euler(-90,0,leftJointRotations[2].y +180);
+            GameObject.Find("Pointer").transform.position = new Vector3(leftJointPositions[2].x, leftJointPositions[2].y, leftJointPositions[2].z + 1);
+            GameObject.Find("Pointer").transform.rotation = Quaternion.Euler(-90, 0, leftJointRotations[2].y + 180);
 
         }
         else
@@ -341,6 +347,29 @@ public class JointTracking : MonoBehaviour
             holdRotationConfirmed = false;
         }
         //In this function we will be trying to check for a "jar opening" gesture, which will allow a user to rotate an object.
+
+    }
+
+    void ModelMoveCheck()
+    {
+        if (((rightJointRotations[2].z <= 0 + headPatThreshold) || (rightJointRotations[2].z >= 360 - headPatThreshold)) && ((rightJointRotations[2].x <= 0 + headPatThreshold) || (rightJointRotations[2].x >= 360 - headPatThreshold)))
+        {
+            //Debug.Log("Hand points down enough!");
+            //if your palm is facing generally down, it's good enough
+
+            Debug.Log("palm is pointing: " + rightJointRotations[2]);
+
+            headPatConfirmed = true;
+            headPatThreshold = headPatThresholdExtended;
+
+        }
+        else
+        {
+            //Debug.Log("bruh");
+            headPatThreshold = headPatThresholdBase;
+            headPatConfirmed = false;
+            //Debug.Log("Moment" + holdRotationConfirmed);
+        }
 
     }
 

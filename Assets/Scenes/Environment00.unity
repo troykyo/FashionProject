@@ -8052,7 +8052,27 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 513012067652810750, guid: b6bd27f8e0cc15a478cd2a6070180f06, type: 3}
   m_PrefabInstance: {fileID: 62145917}
   m_PrefabAsset: {fileID: 0}
---- !u!1001 &1393828239
+  m_GameObject: {fileID: 1468820693}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f75a58c08dd6e41448d0278f6a8aa49b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  XROrigin: {fileID: 1468820693}
+  leftJointPositions: []
+  rightJointPositions: []
+  leftJointRotations: []
+  rightJointRotations: []
+  fingerGunDistanceThreshold: 0.11
+  grabRotationHoldThreshold: 0
+  grabRotationHoldThresholdBase: 10
+  grabRotationHoldThresholdExtended: 50
+  holdRotationConfirmed: 0
+  headPatThreshold: 0
+  headPatThresholdBase: 10
+  headPatThresholdExtended: 50
+  headPatConfirmed: 0
+--- !u!1001 &1502066395
 PrefabInstance:
   m_ObjectHideFlags: 0
   serializedVersion: 2

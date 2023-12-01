@@ -5,6 +5,9 @@ TagManager:
   serializedVersion: 2
   tags:
   - Hand
+  - evil
+  - happy
+  - parent
   layers:
   - Default
   - TransparentFX

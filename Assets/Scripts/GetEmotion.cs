@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using VRM;
 
@@ -18,26 +16,24 @@ public class GetEmotion : MonoBehaviour
     {
         foreach (BlendShapeClip key in vRMBlendShapeProxy.BlendShapeAvatar.Clips)
         {
-            if (key.BlendShapeName == "Angry" && vRMBlendShapeProxy.m_merger.GetValue(key.Key) > 0.85f)
+            float value = vRMBlendShapeProxy.m_merger.GetValue(key.Key);
+
+            if (key.BlendShapeName == "Angry" && value > 0.85f ||
+                key.BlendShapeName == "Sorrow" && value > 0.95f)
             {
-                environmontScr.mode = false;
-                environmontScr.swap();
+                SetEnvironmentMode(false);
             }
-            else if (key.BlendShapeName == "Sorrow" && vRMBlendShapeProxy.m_merger.GetValue(key.Key) > 0.95f)
+            else if (key.BlendShapeName == "Fun" && value > 0.60f ||
+                     key.BlendShapeName == "Joy" && value > 0.95f)
             {
-                environmontScr.mode = false;
-                environmontScr.swap();
-            }
-            if (key.BlendShapeName == "Fun" && vRMBlendShapeProxy.m_merger.GetValue(key.Key) > 0.60f)
-            {
-                environmontScr.mode = true;
-                environmontScr.swap();
-            }
-            else if (key.BlendShapeName == "Joy" && vRMBlendShapeProxy.m_merger.GetValue(key.Key) > 0.95f)
-            {
-                environmontScr.mode = true;
-                environmontScr.swap();
+                SetEnvironmentMode(true);
             }
         }
+    }
+    // Methode om de omgevingsmodus in te stellen en te wisselen
+    private void SetEnvironmentMode(bool newMode)
+    {
+        environmontScr.mode = newMode;
+        environmontScr.Swap();
     }
 }

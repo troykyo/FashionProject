@@ -89,7 +89,7 @@ Material:
         m_Offset: {x: 0, y: 0}
     m_Ints: []
     m_Floats:
-    - Weight_: 1.3359851e-13
+    - Weight_: 0.7529232
     - _AlphaClip: 0
     - _AlphaToMask: 0
     - _Blend: 0

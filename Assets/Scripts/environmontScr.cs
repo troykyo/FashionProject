@@ -3,11 +3,11 @@ using UnityEngine;
 
 public class environmontScr : MonoBehaviour
 {
-    // Start is called before the first frame update
+    // Referenties naar game-objecten en materialen
     public GameObject parent;
-    [SerializeField] List<GameObject> parents = new List<GameObject>();
-    [SerializeField] List<GameObject> evils = new List<GameObject>();
-    [SerializeField] List<GameObject> happys = new List<GameObject>();
+    [SerializeField] private List<GameObject> parents = new List<GameObject>();
+    [SerializeField] private List<GameObject> evils = new List<GameObject>();
+    [SerializeField] private List<GameObject> happys = new List<GameObject>();
 
     public bool mode;
 
@@ -18,58 +18,32 @@ public class environmontScr : MonoBehaviour
 
     public Material happySkyBox;
     public Material evilSkyBox;
-    [SerializeField] Material skybox;
+    [SerializeField] private Material skybox;
 
+    [SerializeField] private int currentItem;
 
-    [SerializeField] int currentItem;
-
+    // Timers voor soepele overgangen
     public float timeRemaining = 1;
     public float timeNext = 0.15f;
 
     void Start()
     {
         directionalLight = directionalLightObject.GetComponent<Light>();
-        foreach (Transform child in parent.transform)
+
+        // Loop door alle 'parent'-objecten en hun kinderen
+        foreach (Transform child in parent.GetComponentsInChildren<Transform>())
         {
             if (child.tag == "parent")
             {
                 parents.Add(child.gameObject);
-                foreach (Transform kid in child.transform)
+
+                // Loop door alle kinderen van het 'parent'-object
+                foreach (Transform kid in child)
                 {
                     if (kid.tag == "evil")
                         evils.Add(kid.gameObject);
-                }
-
-                foreach (Transform kid in child.transform)
-                {
-                    if (kid.tag == "happy")
+                    else if (kid.tag == "happy")
                         happys.Add(kid.gameObject);
-                }
-            }
-        }
-
-        foreach (Transform child in parent.transform)
-        {
-            if (child.tag == "parent")
-            {
-                parents.Add(child.gameObject);
-                foreach (Transform middeChild in child.transform)
-                {
-                    if (middeChild.tag == "parent")
-                    {
-                        parents.Add(middeChild.gameObject);
-                        foreach (Transform kid in middeChild.transform)
-                        {
-                            if (kid.tag == "evil")
-                                evils.Add(kid.gameObject);
-                        }
-
-                        foreach (Transform kid in middeChild.transform)
-                        {
-                            if (kid.tag == "happy")
-                                happys.Add(kid.gameObject);
-                        }
-                    }
                 }
             }
         }
@@ -81,7 +55,7 @@ public class environmontScr : MonoBehaviour
     {
         if (Input.GetKey("space"))
         {
-            swap();
+            Swap();
         }
         if (Input.GetKeyUp("space"))
         {
@@ -90,48 +64,69 @@ public class environmontScr : MonoBehaviour
         Mathf.Clamp(skybox.GetFloat("Weight_"), 0, 1);
     }
 
-    public void swap()
+    public void Swap()
     {
+        // Controleer of de 'mode' is ingeschakeld
         if (mode)
         {
+            // Verminder de resterende tijd als deze groter is dan 0
             if (timeRemaining > 0)
             {
                 timeRemaining -= Time.deltaTime;
             }
+            // Als er nog items in de lijst zijn en currentItem binnen de grenzen is
             else if ((currentItem + 1) < evils.Count && currentItem >= 0)
             {
+                // Zet de huidige 'evil' uit en de bijbehorende 'happy' aan
                 evils[currentItem].SetActive(false);
                 happys[currentItem].SetActive(true);
                 currentItem++;
+                // Reset de timer naar de ingestelde tijd voor de volgende wissel
                 timeRemaining = timeNext;
             }
+
+            // Als het huidige item de helft van de 'evils' overschrijdt, pas effecten aan
             if (currentItem > (evils.Count * 0.5))
             {
                 bloons.GetComponent<ParticleSystem>().enableEmission = true;
                 fog.GetComponent<ParticleSystem>().enableEmission = false;
             }
+
+            // Pas de intensiteit van het directionele licht aan met een vloeiende overgang
             directionalLight.intensity = Mathf.Lerp(directionalLight.intensity, 1f, 0.5f * Time.deltaTime);
+
+            // Pas de 'Weight_' parameter van de skybox aan met een vloeiende overgang
             skybox.SetFloat("Weight_", Mathf.Lerp(skybox.GetFloat("Weight_"), 1, 0.2f * Time.deltaTime));
         }
         else
         {
+            // Verminder de resterende tijd als deze groter is dan 0
             if (timeRemaining > 0)
             {
                 timeRemaining -= Time.deltaTime;
             }
+            // Als currentItem binnen de grenzen is
             else if (currentItem <= evils.Count && currentItem > 0)
             {
+                // Verminder currentItem en zet de bijbehorende 'evil' aan en 'happy' uit
                 currentItem--;
                 evils[currentItem].SetActive(true);
                 happys[currentItem].SetActive(false);
+                // Reset de timer naar de ingestelde tijd voor de volgende wissel
                 timeRemaining = timeNext;
             }
+
+            // Als het huidige item minder is dan de helft van de 'evils', pas effecten aan
             if (currentItem < (evils.Count * 0.5))
             {
                 bloons.GetComponent<ParticleSystem>().enableEmission = false;
                 fog.GetComponent<ParticleSystem>().enableEmission = true;
             }
+
+            // Pas de intensiteit van het directionele licht aan met een vloeiende overgang
             directionalLight.intensity = Mathf.Lerp(directionalLight.intensity, 0.1f, 0.5f * Time.deltaTime);
+
+            // Pas de 'Weight_' parameter van de skybox aan met een vloeiende overgang
             skybox.SetFloat("Weight_", Mathf.Lerp(skybox.GetFloat("Weight_"), 0, 1f * Time.deltaTime));
         }
     }

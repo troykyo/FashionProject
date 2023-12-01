@@ -7,6 +7,16 @@ using UnityEngine.XR.Hands.Samples.VisualizerSample;
 
 public class JointTracking : MonoBehaviour
 {
+    /*
+     set of actions for gestures:
+    - moving model (functional)
+    - turning model (funcional)
+    - grabbing "cloth" (whatever that might be)
+    - sticking cloth to model
+    - cutting cloth
+    - sticking cloth together
+    - selecting action(set)
+     */
     // Start is called before the first frame update
     XRHandSubsystem m_HandSubsystem;
 
@@ -217,7 +227,7 @@ public class JointTracking : MonoBehaviour
 
         if (confirmGesture)
         {
-            FingergunCheck();
+            //FingergunCheck();
         }
 
         GrabRotateCheck();

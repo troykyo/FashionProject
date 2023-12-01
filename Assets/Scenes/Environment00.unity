@@ -955,6 +955,10 @@ MonoBehaviour:
   grabRotationHoldThresholdBase: 10
   grabRotationHoldThresholdExtended: 50
   holdRotationConfirmed: 0
+  headPatThreshold: 0
+  headPatThresholdBase: 10
+  headPatThresholdExtended: 50
+  headPatConfirmed: 0
 --- !u!1001 &1502066395
 PrefabInstance:
   m_ObjectHideFlags: 0

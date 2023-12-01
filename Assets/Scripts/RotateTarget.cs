@@ -8,7 +8,7 @@ public class RotateTarget : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        
+
     }
 
     // every gameobject.find can be replaced with a prefilled variable. do that.
@@ -22,9 +22,18 @@ public class RotateTarget : MonoBehaviour
         if (jointScript.holdRotationConfirmed)
         {
             //Debug.Log("Rotation should be set!");
-            Debug.Log("Y rotation of palm is: " + jointScript.leftJointRotations[2].y);
-            currentRotation = new Vector3(0, jointScript.leftJointRotations[2].y, 0);
+            //Debug.Log("Y rotation of palm is: " + jointScript.leftJointRotations[2].y);
+            currentRotation = new Vector3(0, jointScript.leftJointRotations[2].y + 180, 0);
             //GameObject.Find("XR Origin (XR Rig)").GetComponent<JointTracking>().leftJointRotations
+        }
+
+        if (jointScript.headPatConfirmed)
+        {
+            //Debug.Log("It's gonna be adorable if this works!");
+            currentPosition.x = jointScript.rightJointPositions[2].x;
+            currentPosition.z = jointScript.rightJointPositions[2].z;
+            currentPosition.y = gameObject.transform.position.y; //we want to keep the target at the same elevation as they were
+
         }
 
         //swipe turn
@@ -42,5 +51,6 @@ public class RotateTarget : MonoBehaviour
 
 
         gameObject.transform.rotation = Quaternion.Euler(currentRotation.x, currentRotation.y, currentRotation.z);
+        gameObject.transform.position = currentPosition;
     }
 }

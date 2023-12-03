@@ -17,7 +17,7 @@ public class JointTracking : MonoBehaviour
     - cutting cloth | | will be a scizzorsword so: flat straight sideways hand (chopping gesture)
     - sticking cloth together (Not a gesture? could just move two cloths together)
     - coloring | |
-    - tool safeguard | | possibily rocker sign? (just do that for now)
+    - tool safeguard: rock symbol: extend index and little while closing middle and ring. thumb is up for debate. can be performed with both hands (DONE) subject to change
     - translation safeguard: face right palm forward, fingers straight (DONE)
      */
 
@@ -25,9 +25,8 @@ public class JointTracking : MonoBehaviour
     /*
     - Above undifined gestures
     - position holding functionality (DONE)
-    - determine gestures that need this functionality (translation safeguard CHECK)
+    - determine gestures that need this functionality (translation and tool safeguards CHECK)
     - visual confirmation that a gesture is being recognized (smol green sphere) (DONE)
-    - 
     */
 
     XRHandSubsystem m_HandSubsystem;
@@ -37,7 +36,7 @@ public class JointTracking : MonoBehaviour
     public GameObject XROrigin;
 
 
-    [Tooltip("Put in any object. Used to signify things like booleans being active, by making the thing active (or inactive)")]
+    [Tooltip("for debugging. Put in any object. Used to signify things like booleans being active, by making the thing active (or inactive)")]
     public GameObject DebugCube1;
     public GameObject DebugCube2;
     public GameObject DebugCube3;
@@ -80,7 +79,8 @@ public class JointTracking : MonoBehaviour
 
     private bool translateConfirmed;
 
-    public bool fistConfirmed;
+    public bool leftFistConfirmed;
+    public bool rightFistConfirmed;
     public bool chopConfirmed;
     public bool colorConfirmed;
 
@@ -284,11 +284,11 @@ public class JointTracking : MonoBehaviour
         if (translateTimer <= 0 || toolConfirmed)
         {
             translateConfirmed = false;
-            DebugCube1.SetActive(false);
+            //DebugCube1.SetActive(false);
         }
         else
         {
-            DebugCube1.SetActive(true);
+            //DebugCube1.SetActive(true);
             translateTimer--;
         }
 
@@ -306,18 +306,18 @@ public class JointTracking : MonoBehaviour
         if (toolTimer <= 0 || translateConfirmed)
         {
             toolConfirmed = false;
-            DebugCube2.SetActive(false);
+            //DebugCube2.SetActive(false);
         }
         else
         {
-            DebugCube2.SetActive(true);
+            //DebugCube2.SetActive(true);
             toolTimer--;
         }
 
         if (toolConfirmed && !translateConfirmed)
         {
             //this is where other tool gesture confirmations go
-            if (fistConfirmed || chopConfirmed || colorConfirmed)
+            if (leftFistConfirmed || rightFistConfirmed || chopConfirmed || colorConfirmed)
             {
                 toolTimer = toolTimerMax;
             }
@@ -537,7 +537,7 @@ public class JointTracking : MonoBehaviour
     }
 
     //note: this one needs to be lenient as we don't want people to have to bother, every time they want to use one of these gestures
-    //there's likely something better to do. for now, we'll try the rocker symbol
+    //there's likely something better to do. for now, we'll use the rock symbol
     void ToolCheck()
     {
         float rightIndexDistance = Vector3.Distance(rightJointPositions[11], rightJointPositions[2]);
@@ -561,7 +561,7 @@ public class JointTracking : MonoBehaviour
             && (leftRingDistance < straightFingerThreshold)
             && (leftLittleDistance > straightFingerThreshold)))
         {
-            DebugCube3.SetActive(true);
+            //DebugCube3.SetActive(true);
             if (gestureHoldTimer > gestureHoldMax)
             {
                 toolTimer = toolTimerMax;
@@ -575,16 +575,47 @@ public class JointTracking : MonoBehaviour
                 return;
             }
         }
-        else
-        {
-            DebugCube3.SetActive(false);
-        }
     }
 
     //We want all fingers to be NOT straight for this one
     void FistCheck()
     {
+        float rightIndexDistance = Vector3.Distance(rightJointPositions[11], rightJointPositions[2]);
+        float rightMiddleDistance = Vector3.Distance(rightJointPositions[16], rightJointPositions[2]);
+        float rightRingDistance = Vector3.Distance(rightJointPositions[21], rightJointPositions[2]);
+        float rightLittleDistance = Vector3.Distance(rightJointPositions[26], rightJointPositions[2]);
 
+        float leftIndexDistance = Vector3.Distance(leftJointPositions[11], leftJointPositions[2]);
+        float leftMiddleDistance = Vector3.Distance(leftJointPositions[16], leftJointPositions[2]);
+        float leftRingDistance = Vector3.Distance(leftJointPositions[21], leftJointPositions[2]);
+        float leftLittleDistance = Vector3.Distance(leftJointPositions[26], leftJointPositions[2]);
+
+        if (
+               (rightIndexDistance < straightFingerThreshold)
+            && (rightMiddleDistance < straightFingerThreshold)
+            && (rightRingDistance < straightFingerThreshold)
+            && (rightLittleDistance < straightFingerThreshold)
+            )
+        {
+            rightFistConfirmed = true;
+        }
+        else
+        {
+            rightFistConfirmed = false;
+        }
+
+        //no elseif. we want both hands to be able to do this at the same time
+        if ((leftIndexDistance < straightFingerThreshold)
+            && (leftMiddleDistance < straightFingerThreshold)
+            && (leftRingDistance < straightFingerThreshold)
+            && (leftLittleDistance < straightFingerThreshold))
+        {
+            leftFistConfirmed = true;
+        }
+        else
+        {
+            leftFistConfirmed = false;
+        }
     }
 
     //We want all fingers to be straight for this one. make a seperate thing for deselecting cutting tool.

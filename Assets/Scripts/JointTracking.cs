@@ -35,20 +35,24 @@ public class JointTracking : MonoBehaviour
     static readonly List<XRHandSubsystem> s_SubsystemsReuse = new List<XRHandSubsystem>();
 
     public GameObject XROrigin;
+
+
+    [Tooltip("Put in any object. Used to signify things like booleans being active, by making the thing active (or inactive)")]
     public GameObject DebugCube1;
     public GameObject DebugCube2;
     public GameObject DebugCube3;
 
+    [Tooltip("Used for debugging. generally for checking runtime values. put in text object, script will visualize the debug text")]
     public TextMeshProUGUI HandRotationText;
 
-    //these hold all the different joints and their data. the array ID corresponds to those found in the XRHands documentation.
+    [Tooltip("These hold all the different joints and their data. the array ID corresponds to those found in the XRHands documentation.")]
     public Vector3[] leftJointPositions;
     public Vector3[] rightJointPositions;
     public Vector3[] leftJointRotations;
     public Vector3[] rightJointRotations;
 
-    //these thresholds are here to, for example, determine the rough orientation you hand needs to be in to recognize a gesture.
-    //When active, theshold becomes bigger to make it easier to stay in the gesture.
+    
+    [Tooltip("these thresholds are here to, for example, determine the rough orientation your hand needs to be in to recognize a gesture. When active, theshold becomes bigger to make it easier to stay in the gesture.")]
     public float grabRotationHoldThreshold;
     public float grabRotationHoldThresholdBase;
     public float grabRotationHoldThresholdExtended;
@@ -61,20 +65,32 @@ public class JointTracking : MonoBehaviour
     public float translateSafeguardThresholdBase;
     public float translateSafeguardThresholdExtended;
 
+    public float toolSafeguardThreshold;
+    public float toolSafeguardThresholdBase;
+    public float toolSafeguardThresholdExtended;
+
+    [Tooltip("this one basically asks if a finger is over halfway stretched or not. should be about 0.1f. maybe a little less")]
     public float straightFingerThreshold;
 
     public float fingerGunDistanceThreshold;
 
-    //these bools to signal to another script to perform certain funtions.
+    [Tooltip("these bools are here to signal to another script to perform certain funtions")]
     public bool headPatConfirmed;
     public bool holdRotationConfirmed;
+
     private bool translateConfirmed;
+
+    public bool fistConfirmed;
+    public bool chopConfirmed;
+    public bool colorConfirmed;
+
+    private bool toolConfirmed;
 
     private bool gestureconfirmed;
 
-    //these timers to grant grace periods and make accidents harder.
-
     private int translateTimer;
+
+    [Tooltip("these timers are to grant grace periods and make accidents harder.")]
     public int translateTimerMax;
 
     private int toolTimer;
@@ -82,6 +98,7 @@ public class JointTracking : MonoBehaviour
 
     private int gestureHoldTimer;
     public int gestureHoldMax;
+
     //this bool to make the timer not go down while a gesture is still being recognized
     private bool holdup;
 
@@ -253,9 +270,18 @@ public class JointTracking : MonoBehaviour
             }
         } //returns the rotation of the joint, as a quaternion converted to an euler angle
 
-        TranslatePoseCheck();
+        if (!toolConfirmed)
+        {
+            TranslatePoseCheck();
+        }
 
-        if (translateTimer <= 0)
+        if (!translateConfirmed)
+        {
+            ToolCheck();
+        }
+
+        //These are for giving the user a grace period after activating translate gestures
+        if (translateTimer <= 0 || toolConfirmed)
         {
             translateConfirmed = false;
             DebugCube1.SetActive(false);
@@ -266,10 +292,7 @@ public class JointTracking : MonoBehaviour
             translateTimer--;
         }
 
-        //Debug.Log(translateConfirmed);
-        //Debug.Log(gestureHoldTimer);
-
-        if (translateConfirmed)
+        if (translateConfirmed && !toolConfirmed)
         {
             if (headPatConfirmed || holdRotationConfirmed)
             {
@@ -277,6 +300,30 @@ public class JointTracking : MonoBehaviour
             }
             GrabRotateCheck();
             ModelMoveCheck();
+        }
+
+        //These are for giving the user a grace period after activating tool gestures
+        if (toolTimer <= 0 || translateConfirmed)
+        {
+            toolConfirmed = false;
+            DebugCube2.SetActive(false);
+        }
+        else
+        {
+            DebugCube2.SetActive(true);
+            toolTimer--;
+        }
+
+        if (toolConfirmed && !translateConfirmed)
+        {
+            //this is where other tool gesture confirmations go
+            if (fistConfirmed || chopConfirmed || colorConfirmed)
+            {
+                toolTimer = toolTimerMax;
+            }
+            FistCheck();
+            ChopCheck();
+            ColorPoseCheck();
         }
 
         if (holdRotationConfirmed || translateConfirmed || headPatConfirmed)
@@ -294,17 +341,13 @@ public class JointTracking : MonoBehaviour
         }
         holdup = false;
         SetDebugText();
-        //Debug.Log("Confirmation is: " + confirmGesture);
-
-        //Debug.Log("Right palm rotation is: " + rightJointRotations[2]);
-        //Debug.Log("Left palm rotation is: " + leftJointRotations[2]);
     }
 
     void SetDebugText()
     {
         //only one a at time pls
         //HandRotationText.text = "Right palm rotation in quaternions: " + Quaternion.Euler(rightJointRotations[2]).ToString();
-        HandRotationText.text = "Right palm rotation: " + rightJointRotations[2].ToString();
+        HandRotationText.text = "Tooltimer: " + toolTimer;
     }
 
     //Notes for gesture recognition:
@@ -384,7 +427,6 @@ public class JointTracking : MonoBehaviour
         }
     }
 
-    
     //Note: this was used as a first test to see if gesture recognition worked. it did. we don't need moving anymore, but the fingergun gesture could still be used for something else.
     /*void FingergunCheck() //This checks if the hands are currently in a "fingergun" position, which would then move the player
     {
@@ -498,7 +540,45 @@ public class JointTracking : MonoBehaviour
     //there's likely something better to do. for now, we'll try the rocker symbol
     void ToolCheck()
     {
+        float rightIndexDistance = Vector3.Distance(rightJointPositions[11], rightJointPositions[2]);
+        float rightMiddleDistance = Vector3.Distance(rightJointPositions[16], rightJointPositions[2]);
+        float rightRingDistance = Vector3.Distance(rightJointPositions[21], rightJointPositions[2]);
+        float rightLittleDistance = Vector3.Distance(rightJointPositions[26], rightJointPositions[2]);
 
+        float leftIndexDistance = Vector3.Distance(leftJointPositions[11], leftJointPositions[2]);
+        float leftMiddleDistance = Vector3.Distance(leftJointPositions[16], leftJointPositions[2]);
+        float leftRingDistance = Vector3.Distance(leftJointPositions[21], leftJointPositions[2]);
+        float leftLittleDistance = Vector3.Distance(leftJointPositions[26], leftJointPositions[2]);
+
+        if (
+               ((rightIndexDistance > straightFingerThreshold)
+            && (rightMiddleDistance < straightFingerThreshold)
+            && (rightRingDistance < straightFingerThreshold)
+            && (rightLittleDistance > straightFingerThreshold))
+
+            ||((leftIndexDistance > straightFingerThreshold)
+            && (leftMiddleDistance < straightFingerThreshold)
+            && (leftRingDistance < straightFingerThreshold)
+            && (leftLittleDistance > straightFingerThreshold)))
+        {
+            DebugCube3.SetActive(true);
+            if (gestureHoldTimer > gestureHoldMax)
+            {
+                toolTimer = toolTimerMax;
+                toolConfirmed = true;
+            }
+            else
+            {
+                //Debug.Log("timer++ yoo");
+                holdup = true;
+                gestureHoldTimer++;
+                return;
+            }
+        }
+        else
+        {
+            DebugCube3.SetActive(false);
+        }
     }
 
     //We want all fingers to be NOT straight for this one

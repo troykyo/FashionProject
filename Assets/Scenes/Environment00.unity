@@ -8830,12 +8830,22 @@ MonoBehaviour:
   headPatThreshold: 0
   headPatThresholdBase: 10
   headPatThresholdExtended: 50
-  straightFingerThreshold: 0.13
+  translateSafeguardThreshold: 0
+  translateSafeguardThresholdBase: 0
+  translateSafeguardThresholdExtended: 0
+  toolSafeguardThreshold: 0
+  toolSafeguardThresholdBase: 0
+  toolSafeguardThresholdExtended: 0
+  straightFingerThreshold: 0.1
   fingerGunDistanceThreshold: 0.11
   headPatConfirmed: 0
   holdRotationConfirmed: 0
-  translateTimer: 0
-  translateTimerMax: 200
+  fistConfirmed: 0
+  chopConfirmed: 0
+  colorConfirmed: 0
+  translateTimerMax: 100
+  toolTimerMax: 100
+  gestureHoldMax: 40
 --- !u!1001 &1470100456
 PrefabInstance:
   m_ObjectHideFlags: 0

@@ -9015,7 +9015,7 @@ MonoBehaviour:
   colorConfirmed: 0
   translateTimerMax: 30
   toolTimerMax: 30
-  gestureHoldMax: 40
+  gestureHoldMax: 20
 --- !u!1001 &1470100456
 PrefabInstance:
   m_ObjectHideFlags: 0

@@ -607,6 +607,9 @@ public class JointTracking : MonoBehaviour
             )
         {
             rightFistConfirmed = true;
+            DebugCube1.SetActive(true);
+            DebugCube1.transform.position = rightJointPositions[2];
+            DebugCube1.transform.rotation = Quaternion.Euler(rightJointRotations[2].x, rightJointRotations[2].y, rightJointRotations[2].z);
         }
         else
         {
@@ -620,6 +623,9 @@ public class JointTracking : MonoBehaviour
             && (leftLittleDistance < straightFingerThreshold))
         {
             leftFistConfirmed = true;
+            DebugCube2.SetActive(true);
+            DebugCube2.transform.position = leftJointPositions[2];
+            DebugCube2.transform.rotation = Quaternion.Euler(leftJointRotations[2].x, leftJointRotations[2].y, leftJointRotations[2].z);
         }
         else
         {

@@ -8837,14 +8837,18 @@ MonoBehaviour:
   toolSafeguardThresholdBase: 0
   toolSafeguardThresholdExtended: 0
   straightFingerThreshold: 0.1
+  simpleThumbthreshold: 0.05
+  straightThumbDistance: 0.1
   fingerGunDistanceThreshold: 0.11
   headPatConfirmed: 0
   holdRotationConfirmed: 0
-  fistConfirmed: 0
-  chopConfirmed: 0
+  leftFistConfirmed: 0
+  rightFistConfirmed: 0
+  leftChopConfirmed: 0
+  rightChopConfirmed: 0
   colorConfirmed: 0
-  translateTimerMax: 100
-  toolTimerMax: 100
+  translateTimerMax: 30
+  toolTimerMax: 30
   gestureHoldMax: 40
 --- !u!1001 &1470100456
 PrefabInstance:

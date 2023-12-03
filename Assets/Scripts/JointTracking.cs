@@ -71,6 +71,11 @@ public class JointTracking : MonoBehaviour
     [Tooltip("this one basically asks if a finger is over halfway stretched or not. should be about 0.1f. maybe a little less")]
     public float straightFingerThreshold;
 
+    [Tooltip("the distance before the thumbtip should be considered 'away' from the index knuckle")]
+    public float simpleThumbthreshold;
+    [Tooltip("the distance before the thumbtip should be considered 'away' from the palm")]
+    public float straightThumbDistance;
+
     public float fingerGunDistanceThreshold;
 
     [Tooltip("these bools are here to signal to another script to perform certain funtions")]
@@ -81,7 +86,8 @@ public class JointTracking : MonoBehaviour
 
     public bool leftFistConfirmed;
     public bool rightFistConfirmed;
-    public bool chopConfirmed;
+    public bool leftChopConfirmed;
+    public bool rightChopConfirmed;
     public bool colorConfirmed;
 
     private bool toolConfirmed;
@@ -317,7 +323,7 @@ public class JointTracking : MonoBehaviour
         if (toolConfirmed && !translateConfirmed)
         {
             //this is where other tool gesture confirmations go
-            if (leftFistConfirmed || rightFistConfirmed || chopConfirmed || colorConfirmed)
+            if (leftFistConfirmed || rightFistConfirmed || leftChopConfirmed || rightChopConfirmed || colorConfirmed)
             {
                 toolTimer = toolTimerMax;
             }
@@ -621,7 +627,47 @@ public class JointTracking : MonoBehaviour
     //We want all fingers to be straight for this one. make a seperate thing for deselecting cutting tool.
     void ChopCheck()
     {
+        float rightIndexDistance = Vector3.Distance(rightJointPositions[11], rightJointPositions[2]);
+        float rightMiddleDistance = Vector3.Distance(rightJointPositions[16], rightJointPositions[2]);
+        float rightRingDistance = Vector3.Distance(rightJointPositions[21], rightJointPositions[2]);
+        float rightLittleDistance = Vector3.Distance(rightJointPositions[26], rightJointPositions[2]);
+        float rightThumbDistance = Vector3.Distance(rightJointPositions[6], rightJointPositions[8]); //distance between thumbtip and the index knuckle
 
+        float leftIndexDistance = Vector3.Distance(leftJointPositions[11], leftJointPositions[2]);
+        float leftMiddleDistance = Vector3.Distance(leftJointPositions[16], leftJointPositions[2]);
+        float leftRingDistance = Vector3.Distance(leftJointPositions[21], leftJointPositions[2]);
+        float leftLittleDistance = Vector3.Distance(leftJointPositions[26], leftJointPositions[2]);
+        float leftThumbDistance = Vector3.Distance(leftJointPositions[6], leftJointPositions[8]); //distance between thumbtip and the index knuckle
+
+        if (
+               (rightIndexDistance > straightFingerThreshold)
+            && (rightMiddleDistance > straightFingerThreshold)
+            && (rightRingDistance > straightFingerThreshold)
+            && (rightLittleDistance > straightFingerThreshold)
+            && (rightThumbDistance < simpleThumbthreshold)
+            )
+        {
+            rightChopConfirmed = true;
+        }
+        else
+        {
+            rightChopConfirmed = false;
+        }
+
+        //no elseif. we want both hands to be able to do this at the same time
+        if ((leftIndexDistance > straightFingerThreshold)
+            && (leftMiddleDistance > straightFingerThreshold)
+            && (leftRingDistance > straightFingerThreshold)
+            && (leftLittleDistance > straightFingerThreshold)
+            && (leftThumbDistance < simpleThumbthreshold)
+            )
+        {
+            leftChopConfirmed = true;
+        }
+        else
+        {
+            leftChopConfirmed = false;
+        }
     }
 
     //for this one, one palm facing face, and other hand pointing at target. keep active while at least one of these gestures is recognized

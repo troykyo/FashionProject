@@ -10,15 +10,15 @@ public class JointTracking : MonoBehaviour
 {
     //set of actions and their gestures:
     /*
-    - moving model (functional)| current gesture: flat right hand todo: enforce fingers away from hand (no fists)
-    - turning model (funcional)| current gesture: flat left hand todo: enforce fingers away from hand (no fists)
-    - grabbing "cloth" (whatever that might be)| current gesture: could be working with usual pinching grab (no cloth yet) |
+    - moving model: hold right palm down, fingers straight (DONE)
+    - turning model: hold left palm down, fingers straight (DONE)
+    - grabbing "cloth" (whatever that might be): just pinch
     - sticking cloth to model | none | it's gonna be a hammer so: gesture should be fist (to grab hammer)
     - cutting cloth | | will be a scizzorsword so: flat straight sideways hand (chopping gesture)
-    - sticking cloth together | |
+    - sticking cloth together (Not a gesture? could just move two cloths together)
     - coloring | |
-    - tool safeguard | | possibily rocker sign?
-    - translation safeguard CHECK
+    - tool safeguard | | possibily rocker sign? (just do that for now)
+    - translation safeguard: face right palm forward, fingers straight (DONE)
      */
 
     //todo list:
@@ -57,6 +57,10 @@ public class JointTracking : MonoBehaviour
     public float headPatThresholdBase;
     public float headPatThresholdExtended;
 
+    public float translateSafeguardThreshold;
+    public float translateSafeguardThresholdBase;
+    public float translateSafeguardThresholdExtended;
+
     public float straightFingerThreshold;
 
     public float fingerGunDistanceThreshold;
@@ -68,10 +72,16 @@ public class JointTracking : MonoBehaviour
 
     private bool gestureconfirmed;
 
-    public int translateTimer;
+    //these timers to grant grace periods and make accidents harder.
+
+    private int translateTimer;
     public int translateTimerMax;
 
+    private int toolTimer;
+    public int toolTimerMax;
+
     private int gestureHoldTimer;
+    public int gestureHoldMax;
     //this bool to make the timer not go down while a gesture is still being recognized
     private bool holdup;
 
@@ -243,34 +253,16 @@ public class JointTracking : MonoBehaviour
             }
         } //returns the rotation of the joint, as a quaternion converted to an euler angle
 
-        //Debug.Log("Confirmation is: " + confirmGesture);
-        //confirmGesture = false;
-        //ChangePoseCheck();
-
-        /*if (Input.GetKey(KeyCode.A))
-        {
-            Debug.Log("true");
-            confirmGesture = true;
-        }
-
-        if (Input.GetKey(KeyCode.B))
-        {
-            Debug.Log("false");
-            confirmGesture = false;
-        }*/
-
-        //Debug.Log("Right palm rotation: " + rightJointRotations[2]);
-
         TranslatePoseCheck();
 
         if (translateTimer <= 0)
         {
             translateConfirmed = false;
-            //DebugCube.SetActive(false);
+            DebugCube1.SetActive(false);
         }
         else
         {
-            //DebugCube.SetActive(true);
+            DebugCube1.SetActive(true);
             translateTimer--;
         }
 
@@ -302,7 +294,10 @@ public class JointTracking : MonoBehaviour
         }
         holdup = false;
         SetDebugText();
-        //Debug.Log("Palm rotation is: " + leftJointRotations[2]);
+        //Debug.Log("Confirmation is: " + confirmGesture);
+
+        //Debug.Log("Right palm rotation is: " + rightJointRotations[2]);
+        //Debug.Log("Left palm rotation is: " + leftJointRotations[2]);
     }
 
     void SetDebugText()
@@ -354,8 +349,6 @@ public class JointTracking : MonoBehaviour
     //From here, methods for checking various orientations. if statements.
     //NOTE TO SELF: PUT IN JOINTS USED INTO THE METHOD AS A PARAMETER, TO MORE EASILY WORK WITH THEM IN THE METHOD ITSELF.
 
-
-
     //this checks if a hand is making the designated pose to allow moving around
     void TranslatePoseCheck()
     {
@@ -366,43 +359,34 @@ public class JointTracking : MonoBehaviour
         float middleDistance = Vector3.Distance(rightJointPositions[16], rightJointPositions[2]);
         float ringDistance = Vector3.Distance(rightJointPositions[21], rightJointPositions[2]);
 
-        /*if (indexDistance > straightFingerThreshold)
-        {
-            DebugCube1.SetActive(true);
-        }
-        if (middleDistance > straightFingerThreshold)
-        {
-            DebugCube2.SetActive(true);
-        }
-        if (ringDistance > straightFingerThreshold)
-        {
-            DebugCube3.SetActive(true);
-        }*/
 
-
-        if (((rightJointRotations[2].x <= 300) && (rightJointRotations[2].x >= 260)) && ((rightJointRotations[2].z <= 10) || (rightJointRotations[2].z >= 350)))
+        //Sorry for the magic numbers here. can't be bothered making variables right now. these numbers work well.
+        if (
+               (rightJointRotations[2].x <= 300)
+            && (rightJointRotations[2].x >= 260)
+            && ((rightJointRotations[2].z <= 20) || (rightJointRotations[2].z >= 340))
+            && (indexDistance > straightFingerThreshold)
+            && (middleDistance > straightFingerThreshold)
+            && (ringDistance > straightFingerThreshold))
         {
-            if ((indexDistance > straightFingerThreshold) && (middleDistance > straightFingerThreshold) && (ringDistance > straightFingerThreshold))
+            if (gestureHoldTimer > gestureHoldMax)
             {
-                if (gestureHoldTimer > 60)
-                {
-                    translateTimer = translateTimerMax;
-                    translateConfirmed = true;
-                }
-                else
-                {
-                    //Debug.Log("timer++ yoo");
-                    holdup = true;
-                    gestureHoldTimer++;
-                    return;
-                }
+                translateTimer = translateTimerMax;
+                translateConfirmed = true;
+            }
+            else
+            {
+                //Debug.Log("timer++ yoo");
+                holdup = true;
+                gestureHoldTimer++;
+                return;
             }
         }
     }
 
     
     //Note: this was used as a first test to see if gesture recognition worked. it did. we don't need moving anymore, but the fingergun gesture could still be used for something else.
-    void FingergunCheck() //This checks if the hands are currently in a "fingergun" position, which would then move the player
+    /*void FingergunCheck() //This checks if the hands are currently in a "fingergun" position, which would then move the player
     {
         //Fingergun recognition currently only exists as "Are the index and thumb far enough away from each other?"
 
@@ -413,7 +397,7 @@ public class JointTracking : MonoBehaviour
         //float rightWristDistance = Vector3.Distance(leftMiddleTipPosition, leftWristPosition);
 
         // Check if the distance is below the threshold for a finger gun gesture.
-        if ((LeftDistance > fingerGunDistanceThreshold) /*&& (leftWristDistance < fingerGunDistanceThreshold)*/)
+        if ((LeftDistance > fingerGunDistanceThreshold) *//*&& (leftWristDistance < fingerGunDistanceThreshold)*//*)
         {
             // Finger gun gesture recognized.
             isFingerGun = true;
@@ -427,7 +411,7 @@ public class JointTracking : MonoBehaviour
             //isFingerGun = false;
         }
 
-        if ((RightDistance > fingerGunDistanceThreshold) /*&& (rightWristDistance < fingerGunDistanceThreshold)*/)
+        if ((RightDistance > fingerGunDistanceThreshold) *//*&& (rightWristDistance < fingerGunDistanceThreshold)*//*)
         {
             // Finger gun gesture recognized.
             isFingerGun = true;
@@ -440,7 +424,7 @@ public class JointTracking : MonoBehaviour
             // Finger gun gesture not recognized.
             //isFingerGun = false;
         }
-    }
+    }*/
 
     void GrabRotateCheck()
     {
@@ -510,8 +494,39 @@ public class JointTracking : MonoBehaviour
 
     }
 
+    //note: this one needs to be lenient as we don't want people to have to bother, every time they want to use one of these gestures
+    //there's likely something better to do. for now, we'll try the rocker symbol
+    void ToolCheck()
+    {
+
+    }
+
+    //We want all fingers to be NOT straight for this one
+    void FistCheck()
+    {
+
+    }
+
+    //We want all fingers to be straight for this one. make a seperate thing for deselecting cutting tool.
+    void ChopCheck()
+    {
+
+    }
+
+    //for this one, one palm facing face, and other hand pointing at target. keep active while at least one of these gestures is recognized
+    void ColorPoseCheck()
+    {
+
+    }
+
+    //Very simple complete open hand gesture. similar to the chop. so this shouldn't affect chop
+    void ToolResetPose()
+    {
+
+    }
+
     //Note: currently goes unused as we don't need to move the user at any time. Only used once for testing gesture recognition.
-    void MovePlayer(bool cameraMove, bool leftHanded) //Note: movement pointing only works with left currently. fix this.
+    /*void MovePlayer(bool cameraMove, bool leftHanded) //Note: movement pointing only works with left currently. fix this.
     {
         if (cameraMove)
         {
@@ -529,6 +544,6 @@ public class JointTracking : MonoBehaviour
                 gameObject.transform.position += new Vector3(GameObject.Find("Left Hand").transform.forward.x, 0, GameObject.Find("Left Hand").transform.forward.z).normalized * 0.05f;
             }
         }
-    }
+    }*/
 
 }

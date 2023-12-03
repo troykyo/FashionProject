@@ -4,28 +4,29 @@ using UnityEngine;
 using UnityEngine.XR.Management;
 using UnityEngine.XR.Hands;
 using UnityEngine.XR.Hands.Samples.VisualizerSample;
+using TMPro;
 
 public class JointTracking : MonoBehaviour
 {
     //set of actions and their gestures:
     /*
-    - moving model (functional)| current gesture: flat right hand |
-    - turning model (funcional)| current gesture: flat left hand |
+    - moving model (functional)| current gesture: flat right hand todo: enforce fingers away from hand (no fists)
+    - turning model (funcional)| current gesture: flat left hand todo: enforce fingers away from hand (no fists)
     - grabbing "cloth" (whatever that might be)| current gesture: could be working with usual pinching grab (no cloth yet) |
     - sticking cloth to model | none | it's gonna be a hammer so: gesture should be fist (to grab hammer)
     - cutting cloth | | will be a scizzorsword so: flat straight sideways hand (chopping gesture)
     - sticking cloth together | |
     - coloring | |
     - tool safeguard | | possibily rocker sign?
-    - translation safeguard
+    - translation safeguard CHECK
      */
 
     //todo list:
     /*
     - Above undifined gestures
-    - position holding functionality
-    - determine gestures that need this functionality (translation safeguard)
-    - visual confirmation that a gesture is being recognized (smol green sphere)
+    - position holding functionality (DONE)
+    - determine gestures that need this functionality (translation safeguard CHECK)
+    - visual confirmation that a gesture is being recognized (smol green sphere) (DONE)
     - 
     */
 
@@ -34,6 +35,11 @@ public class JointTracking : MonoBehaviour
     static readonly List<XRHandSubsystem> s_SubsystemsReuse = new List<XRHandSubsystem>();
 
     public GameObject XROrigin;
+    public GameObject DebugCube1;
+    public GameObject DebugCube2;
+    public GameObject DebugCube3;
+
+    public TextMeshProUGUI HandRotationText;
 
     //these hold all the different joints and their data. the array ID corresponds to those found in the XRHands documentation.
     public Vector3[] leftJointPositions;
@@ -41,9 +47,8 @@ public class JointTracking : MonoBehaviour
     public Vector3[] leftJointRotations;
     public Vector3[] rightJointRotations;
 
-    public float fingerGunDistanceThreshold;
-
-    //this threshold to make the gesture easier to perform. when active, theshold becomes bigger to make it easier to stay in the gesture.
+    //these thresholds are here to, for example, determine the rough orientation you hand needs to be in to recognize a gesture.
+    //When active, theshold becomes bigger to make it easier to stay in the gesture.
     public float grabRotationHoldThreshold;
     public float grabRotationHoldThresholdBase;
     public float grabRotationHoldThresholdExtended;
@@ -52,10 +57,23 @@ public class JointTracking : MonoBehaviour
     public float headPatThresholdBase;
     public float headPatThresholdExtended;
 
+    public float straightFingerThreshold;
+
+    public float fingerGunDistanceThreshold;
+
     //these bools to signal to another script to perform certain funtions.
     public bool headPatConfirmed;
     public bool holdRotationConfirmed;
-    private bool confirmGesture;
+    private bool translateConfirmed;
+
+    private bool gestureconfirmed;
+
+    public int translateTimer;
+    public int translateTimerMax;
+
+    private int gestureHoldTimer;
+    //this bool to make the timer not go down while a gesture is still being recognized
+    private bool holdup;
 
     private bool isFingerGun = false;
 
@@ -148,7 +166,9 @@ public class JointTracking : MonoBehaviour
         XRHandSubsystem.UpdateSuccessFlags updateSuccessFlags,
         XRHandSubsystem.UpdateType updateType)
     {
-
+        DebugCube1.SetActive(false);
+        DebugCube2.SetActive(false);
+        DebugCube3.SetActive(false);
         if (updateType == XRHandSubsystem.UpdateType.Dynamic)
             return;
 
@@ -223,7 +243,7 @@ public class JointTracking : MonoBehaviour
             }
         } //returns the rotation of the joint, as a quaternion converted to an euler angle
 
-        Debug.Log("Confirmation is: " + confirmGesture);
+        //Debug.Log("Confirmation is: " + confirmGesture);
         //confirmGesture = false;
         //ChangePoseCheck();
 
@@ -239,18 +259,65 @@ public class JointTracking : MonoBehaviour
             confirmGesture = false;
         }*/
 
-        if (confirmGesture)
+        //Debug.Log("Right palm rotation: " + rightJointRotations[2]);
+
+        TranslatePoseCheck();
+
+        if (translateTimer <= 0)
         {
-            //FingergunCheck();
+            translateConfirmed = false;
+            //DebugCube.SetActive(false);
+        }
+        else
+        {
+            //DebugCube.SetActive(true);
+            translateTimer--;
         }
 
-        GrabRotateCheck();
-        ModelMoveCheck();
+        //Debug.Log(translateConfirmed);
+        //Debug.Log(gestureHoldTimer);
 
+        if (translateConfirmed)
+        {
+            if (headPatConfirmed || holdRotationConfirmed)
+            {
+                translateTimer = translateTimerMax;
+            }
+            GrabRotateCheck();
+            ModelMoveCheck();
+        }
+
+        if (holdRotationConfirmed || translateConfirmed || headPatConfirmed)
+        {
+            gestureconfirmed = true;
+        }
+        else
+        {
+            gestureconfirmed = false;
+        }
+
+        if (!gestureconfirmed && gestureHoldTimer>0 && !holdup)
+        {
+            gestureHoldTimer--;
+        }
+        holdup = false;
+        SetDebugText();
         //Debug.Log("Palm rotation is: " + leftJointRotations[2]);
     }
 
-    //note: in rotation for the hands, Z at 0 is the palm pointing down.
+    void SetDebugText()
+    {
+        //only one a at time pls
+        //HandRotationText.text = "Right palm rotation in quaternions: " + Quaternion.Euler(rightJointRotations[2]).ToString();
+        HandRotationText.text = "Right palm rotation: " + rightJointRotations[2].ToString();
+    }
+
+    //Notes for gesture recognition:
+    /*
+     * palm down: X&Z at 0
+     * fingers point up: X at 270. increase to tilt fingers away from face, decrease to tilt towards. Y blank, Z at either 360/0 when fingers tilted away from face, or 180 when fingers tilted towards face. gimbal lock prevention is being a bitch with this one
+     * Distance from tips to palm is about 0.13f when straight. (slightly more)
+     */
 
     //for reference, these are the IDs assigned to each joint:
     /*Invalid = 0
@@ -284,21 +351,50 @@ public class JointTracking : MonoBehaviour
     EndMarker = 27
     */
 
+    //From here, methods for checking various orientations. if statements.
     //NOTE TO SELF: PUT IN JOINTS USED INTO THE METHOD AS A PARAMETER, TO MORE EASILY WORK WITH THEM IN THE METHOD ITSELF.
 
-    //this checks if a hand is making the designated pose to change the function you want to use
-    void ChangePoseCheck()
-    {
-        //palm rotation should be about (270, 0, 180) for face facing
-        if ((rightJointRotations[2].x <= 280) || (rightJointRotations[2].x >= 260))
-        {
-            if ((rightJointRotations[2].y <= 10) || (rightJointRotations[2].y >= 350))
-            {
-                if ((rightJointRotations[2].z <= 190) || (rightJointRotations[2].z >= 170))
-                {
-                    Debug.Log("Palm is facing face!");
-                    confirmGesture = true;
 
+
+    //this checks if a hand is making the designated pose to allow moving around
+    void TranslatePoseCheck()
+    {
+        //be more lenient with higher X values. most people will have their hand palm aimed slightly downwards.
+        //don't forget: if fingers are pointing more towards face, Z won't work.
+
+        float indexDistance = Vector3.Distance(rightJointPositions[11], rightJointPositions[2]);
+        float middleDistance = Vector3.Distance(rightJointPositions[16], rightJointPositions[2]);
+        float ringDistance = Vector3.Distance(rightJointPositions[21], rightJointPositions[2]);
+
+        /*if (indexDistance > straightFingerThreshold)
+        {
+            DebugCube1.SetActive(true);
+        }
+        if (middleDistance > straightFingerThreshold)
+        {
+            DebugCube2.SetActive(true);
+        }
+        if (ringDistance > straightFingerThreshold)
+        {
+            DebugCube3.SetActive(true);
+        }*/
+
+
+        if (((rightJointRotations[2].x <= 300) && (rightJointRotations[2].x >= 260)) && ((rightJointRotations[2].z <= 10) || (rightJointRotations[2].z >= 350)))
+        {
+            if ((indexDistance > straightFingerThreshold) && (middleDistance > straightFingerThreshold) && (ringDistance > straightFingerThreshold))
+            {
+                if (gestureHoldTimer > 60)
+                {
+                    translateTimer = translateTimerMax;
+                    translateConfirmed = true;
+                }
+                else
+                {
+                    //Debug.Log("timer++ yoo");
+                    holdup = true;
+                    gestureHoldTimer++;
+                    return;
                 }
             }
         }
@@ -348,7 +444,16 @@ public class JointTracking : MonoBehaviour
 
     void GrabRotateCheck()
     {
-        if (((leftJointRotations[2].z <= 0 + grabRotationHoldThreshold) || (leftJointRotations[2].z >= 360 - grabRotationHoldThreshold)) && ((leftJointRotations[2].x <= 0 + grabRotationHoldThreshold) || (leftJointRotations[2].x >= 360 - grabRotationHoldThreshold)))
+        float indexDistance = Vector3.Distance(leftJointPositions[11], leftJointPositions[2]);
+        float middleDistance = Vector3.Distance(leftJointPositions[16], leftJointPositions[2]);
+        float ringDistance = Vector3.Distance(leftJointPositions[21], leftJointPositions[2]);
+
+        if (
+               ((leftJointRotations[2].z <= 0 + grabRotationHoldThreshold) || (leftJointRotations[2].z >= 360 - grabRotationHoldThreshold))
+            && ((leftJointRotations[2].x <= 0 + grabRotationHoldThreshold) || (leftJointRotations[2].x >= 360 - grabRotationHoldThreshold))
+            && (indexDistance > straightFingerThreshold)
+            && (middleDistance > straightFingerThreshold)
+            && (ringDistance > straightFingerThreshold))
         {
             //Debug.Log("Hand points down enough!");
             //if your palm is facing generally down, it's good enough
@@ -377,12 +482,19 @@ public class JointTracking : MonoBehaviour
 
     void ModelMoveCheck()
     {
-        if (((rightJointRotations[2].z <= 0 + headPatThreshold) || (rightJointRotations[2].z >= 360 - headPatThreshold)) && ((rightJointRotations[2].x <= 0 + headPatThreshold) || (rightJointRotations[2].x >= 360 - headPatThreshold)))
+        float indexDistance = Vector3.Distance(rightJointPositions[11], rightJointPositions[2]);
+        float middleDistance = Vector3.Distance(rightJointPositions[16], rightJointPositions[2]);
+        float ringDistance = Vector3.Distance(rightJointPositions[21], rightJointPositions[2]);
+
+        if (
+               ((rightJointRotations[2].z <= 0 + headPatThreshold) || (rightJointRotations[2].z >= 360 - headPatThreshold)) 
+            && ((rightJointRotations[2].x <= 0 + headPatThreshold) || (rightJointRotations[2].x >= 360 - headPatThreshold))
+            && (indexDistance > straightFingerThreshold)
+            && (middleDistance > straightFingerThreshold)
+            && (ringDistance > straightFingerThreshold))
         {
             //Debug.Log("Hand points down enough!");
             //if your palm is facing generally down, it's good enough
-
-            Debug.Log("palm is pointing: " + rightJointRotations[2]);
 
             headPatConfirmed = true;
             headPatThreshold = headPatThresholdExtended;

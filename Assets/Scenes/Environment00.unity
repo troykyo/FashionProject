@@ -185,6 +185,11 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: c8e50776963d0c84e8a04bd6901ce45d, type: 3}
+--- !u!1 &31447772 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 4095211935016544520, guid: ca6bd3aee076f4f888edcb4a6b2a6d00, type: 3}
+  m_PrefabInstance: {fileID: 344515595}
+  m_PrefabAsset: {fileID: 0}
 --- !u!4 &40964380 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 2029679486123750648, guid: 5e293ad34679c3e49a429dd09a07d8f1, type: 3}
@@ -255,6 +260,11 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: b6bd27f8e0cc15a478cd2a6070180f06, type: 3}
+--- !u!1 &62738612 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 4095211935016544520, guid: ca6bd3aee076f4f888edcb4a6b2a6d00, type: 3}
+  m_PrefabInstance: {fileID: 347040199}
+  m_PrefabAsset: {fileID: 0}
 --- !u!4 &62881452 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 513012067652810750, guid: b6bd27f8e0cc15a478cd2a6070180f06, type: 3}
@@ -1436,6 +1446,160 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: c8e50776963d0c84e8a04bd6901ce45d, type: 3}
+--- !u!1001 &344515595
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 3719635888706794418, guid: ca6bd3aee076f4f888edcb4a6b2a6d00, type: 3}
+      propertyPath: m_LocalScale.x
+      value: 0.4
+      objectReference: {fileID: 0}
+    - target: {fileID: 3719635888706794418, guid: ca6bd3aee076f4f888edcb4a6b2a6d00, type: 3}
+      propertyPath: m_LocalScale.y
+      value: 0.4
+      objectReference: {fileID: 0}
+    - target: {fileID: 3719635888706794418, guid: ca6bd3aee076f4f888edcb4a6b2a6d00, type: 3}
+      propertyPath: m_LocalScale.z
+      value: 0.4
+      objectReference: {fileID: 0}
+    - target: {fileID: 3719635888706794418, guid: ca6bd3aee076f4f888edcb4a6b2a6d00, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 4.1166754
+      objectReference: {fileID: 0}
+    - target: {fileID: 3719635888706794418, guid: ca6bd3aee076f4f888edcb4a6b2a6d00, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0.00000047683716
+      objectReference: {fileID: 0}
+    - target: {fileID: 3719635888706794418, guid: ca6bd3aee076f4f888edcb4a6b2a6d00, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 1.8512027
+      objectReference: {fileID: 0}
+    - target: {fileID: 3719635888706794418, guid: ca6bd3aee076f4f888edcb4a6b2a6d00, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3719635888706794418, guid: ca6bd3aee076f4f888edcb4a6b2a6d00, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3719635888706794418, guid: ca6bd3aee076f4f888edcb4a6b2a6d00, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3719635888706794418, guid: ca6bd3aee076f4f888edcb4a6b2a6d00, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3719635888706794418, guid: ca6bd3aee076f4f888edcb4a6b2a6d00, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3719635888706794418, guid: ca6bd3aee076f4f888edcb4a6b2a6d00, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3719635888706794418, guid: ca6bd3aee076f4f888edcb4a6b2a6d00, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3719635888706794418, guid: ca6bd3aee076f4f888edcb4a6b2a6d00, type: 3}
+      propertyPath: m_ConstrainProportionsScale
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4095211935016544520, guid: ca6bd3aee076f4f888edcb4a6b2a6d00, type: 3}
+      propertyPath: m_Name
+      value: Lighsaber (1)
+      objectReference: {fileID: 0}
+    - target: {fileID: 4095211935016544520, guid: ca6bd3aee076f4f888edcb4a6b2a6d00, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: ca6bd3aee076f4f888edcb4a6b2a6d00, type: 3}
+--- !u!1001 &347040199
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 3719635888706794418, guid: ca6bd3aee076f4f888edcb4a6b2a6d00, type: 3}
+      propertyPath: m_LocalScale.x
+      value: 0.4
+      objectReference: {fileID: 0}
+    - target: {fileID: 3719635888706794418, guid: ca6bd3aee076f4f888edcb4a6b2a6d00, type: 3}
+      propertyPath: m_LocalScale.y
+      value: 0.4
+      objectReference: {fileID: 0}
+    - target: {fileID: 3719635888706794418, guid: ca6bd3aee076f4f888edcb4a6b2a6d00, type: 3}
+      propertyPath: m_LocalScale.z
+      value: 0.4
+      objectReference: {fileID: 0}
+    - target: {fileID: 3719635888706794418, guid: ca6bd3aee076f4f888edcb4a6b2a6d00, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 4.1166754
+      objectReference: {fileID: 0}
+    - target: {fileID: 3719635888706794418, guid: ca6bd3aee076f4f888edcb4a6b2a6d00, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0.00000047683716
+      objectReference: {fileID: 0}
+    - target: {fileID: 3719635888706794418, guid: ca6bd3aee076f4f888edcb4a6b2a6d00, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 1.8512027
+      objectReference: {fileID: 0}
+    - target: {fileID: 3719635888706794418, guid: ca6bd3aee076f4f888edcb4a6b2a6d00, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3719635888706794418, guid: ca6bd3aee076f4f888edcb4a6b2a6d00, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3719635888706794418, guid: ca6bd3aee076f4f888edcb4a6b2a6d00, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3719635888706794418, guid: ca6bd3aee076f4f888edcb4a6b2a6d00, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3719635888706794418, guid: ca6bd3aee076f4f888edcb4a6b2a6d00, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3719635888706794418, guid: ca6bd3aee076f4f888edcb4a6b2a6d00, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3719635888706794418, guid: ca6bd3aee076f4f888edcb4a6b2a6d00, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3719635888706794418, guid: ca6bd3aee076f4f888edcb4a6b2a6d00, type: 3}
+      propertyPath: m_ConstrainProportionsScale
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4095211935016544520, guid: ca6bd3aee076f4f888edcb4a6b2a6d00, type: 3}
+      propertyPath: m_Name
+      value: Lighsaber
+      objectReference: {fileID: 0}
+    - target: {fileID: 4095211935016544520, guid: ca6bd3aee076f4f888edcb4a6b2a6d00, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: ca6bd3aee076f4f888edcb4a6b2a6d00, type: 3}
 --- !u!1 &354543761
 GameObject:
   m_ObjectHideFlags: 0
@@ -8819,6 +8983,8 @@ MonoBehaviour:
   DebugCube1: {fileID: 1010376573}
   DebugCube2: {fileID: 135477841}
   DebugCube3: {fileID: 1176212217}
+  leftLightsaber: {fileID: 62738612}
+  rightLightsaber: {fileID: 31447772}
   HandRotationText: {fileID: 698276005}
   leftJointPositions: []
   rightJointPositions: []
@@ -15791,3 +15957,5 @@ SceneRoots:
   - {fileID: 1010376577}
   - {fileID: 135477845}
   - {fileID: 1176212221}
+  - {fileID: 347040199}
+  - {fileID: 344515595}

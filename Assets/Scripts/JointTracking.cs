@@ -13,8 +13,8 @@ public class JointTracking : MonoBehaviour
     - moving model: hold right palm down, fingers straight (DONE)
     - turning model: hold left palm down, fingers straight (DONE)
     - grabbing "cloth" (whatever that might be): just pinch
-    - sticking cloth to model | none | it's gonna be a hammer so: gesture should be fist (to grab hammer)
-    - cutting cloth | | will be a scizzorsword so: flat straight sideways hand (chopping gesture)
+    - sticking cloth to model: make a fist. works with both hands seperately. doesn't have any functionality yet (DONE)
+    - cutting cloth: fully flatten hand, as to "chop" things. doesn't have any functionality yet (DONE)
     - sticking cloth together (Not a gesture? could just move two cloths together)
     - coloring | |
     - tool safeguard: rock symbol: extend index and little while closing middle and ring. thumb is up for debate. can be performed with both hands (DONE) subject to change
@@ -40,6 +40,9 @@ public class JointTracking : MonoBehaviour
     public GameObject DebugCube1;
     public GameObject DebugCube2;
     public GameObject DebugCube3;
+
+    public GameObject leftLightsaber;
+    public GameObject rightLightsaber;
 
     [Tooltip("Used for debugging. generally for checking runtime values. put in text object, script will visualize the debug text")]
     public TextMeshProUGUI HandRotationText;
@@ -648,9 +651,13 @@ public class JointTracking : MonoBehaviour
             )
         {
             rightChopConfirmed = true;
+            rightLightsaber.SetActive(true);
+            rightLightsaber.transform.position = rightJointPositions[2];
+            rightLightsaber.transform.rotation = Quaternion.Euler(rightJointRotations[2].x, rightJointRotations[2].y, rightJointRotations[2].z);
         }
         else
         {
+            rightLightsaber.SetActive(false);
             rightChopConfirmed = false;
         }
 
@@ -663,9 +670,13 @@ public class JointTracking : MonoBehaviour
             )
         {
             leftChopConfirmed = true;
+            leftLightsaber.SetActive(true);
+            leftLightsaber.transform.position = leftJointPositions[2];
+            leftLightsaber.transform.rotation = Quaternion.Euler(leftJointRotations[2].x, leftJointRotations[2].y, leftJointRotations[2].z);
         }
         else
         {
+            leftLightsaber.SetActive(false);
             leftChopConfirmed = false;
         }
     }

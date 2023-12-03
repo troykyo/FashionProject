@@ -7,23 +7,35 @@ using UnityEngine.XR.Hands.Samples.VisualizerSample;
 
 public class JointTracking : MonoBehaviour
 {
+    //set of actions and their gestures:
     /*
-     set of actions for gestures:
-    - moving model (functional)
-    - turning model (funcional)
-    - grabbing "cloth" (whatever that might be)
-    - sticking cloth to model
-    - cutting cloth
-    - sticking cloth together
-    - selecting action(set)
+    - moving model (functional)| current gesture: flat right hand |
+    - turning model (funcional)| current gesture: flat left hand |
+    - grabbing "cloth" (whatever that might be)| current gesture: could be working with usual pinching grab (no cloth yet) |
+    - sticking cloth to model | none | it's gonna be a hammer so: gesture should be fist (to grab hammer)
+    - cutting cloth | | will be a scizzorsword so: flat straight sideways hand (chopping gesture)
+    - sticking cloth together | |
+    - coloring | |
+    - tool safeguard | | possibily rocker sign?
+    - translation safeguard
      */
-    // Start is called before the first frame update
+
+    //todo list:
+    /*
+    - Above undifined gestures
+    - position holding functionality
+    - determine gestures that need this functionality (translation safeguard)
+    - visual confirmation that a gesture is being recognized (smol green sphere)
+    - 
+    */
+
     XRHandSubsystem m_HandSubsystem;
 
     static readonly List<XRHandSubsystem> s_SubsystemsReuse = new List<XRHandSubsystem>();
 
     public GameObject XROrigin;
 
+    //these hold all the different joints and their data. the array ID corresponds to those found in the XRHands documentation.
     public Vector3[] leftJointPositions;
     public Vector3[] rightJointPositions;
     public Vector3[] leftJointRotations;
@@ -31,18 +43,18 @@ public class JointTracking : MonoBehaviour
 
     public float fingerGunDistanceThreshold;
 
+    //this threshold to make the gesture easier to perform. when active, theshold becomes bigger to make it easier to stay in the gesture.
     public float grabRotationHoldThreshold;
     public float grabRotationHoldThresholdBase;
     public float grabRotationHoldThresholdExtended;
-
-    public bool holdRotationConfirmed;
 
     public float headPatThreshold;
     public float headPatThresholdBase;
     public float headPatThresholdExtended;
 
+    //these bools to signal to another script to perform certain funtions.
     public bool headPatConfirmed;
-
+    public bool holdRotationConfirmed;
     private bool confirmGesture;
 
     private bool isFingerGun = false;
@@ -81,7 +93,7 @@ public class JointTracking : MonoBehaviour
         }
     }
 
-    // Update is called once per frame
+    //do not put anything related to joints into update, but rather into "OnUpdatedHands"
     void Update()
     {
         //HandVisualizer code below
@@ -130,6 +142,8 @@ public class JointTracking : MonoBehaviour
         m_HandSubsystem.updatedHands += OnUpdatedHands;
     }
 
+    //Also triggers every update (if hands are being tracked). put any joint stuff in here.
+    //base of all this taken from HandVisualizer script
     void OnUpdatedHands(XRHandSubsystem subsystem,
         XRHandSubsystem.UpdateSuccessFlags updateSuccessFlags,
         XRHandSubsystem.UpdateType updateType)
@@ -213,7 +227,7 @@ public class JointTracking : MonoBehaviour
         //confirmGesture = false;
         //ChangePoseCheck();
 
-        if (Input.GetKey(KeyCode.A))
+        /*if (Input.GetKey(KeyCode.A))
         {
             Debug.Log("true");
             confirmGesture = true;
@@ -223,7 +237,7 @@ public class JointTracking : MonoBehaviour
         {
             Debug.Log("false");
             confirmGesture = false;
-        }
+        }*/
 
         if (confirmGesture)
         {
@@ -290,11 +304,11 @@ public class JointTracking : MonoBehaviour
         }
     }
 
-    //This checks if the hands are currently in a "fingergun" position, which would then move the player
-    //note: this was used as a first test to see if gesture recognition worked. it did. we don't need moving anymore, but the fingergun gesture could still be used for something else.
-    void FingergunCheck()
+    
+    //Note: this was used as a first test to see if gesture recognition worked. it did. we don't need moving anymore, but the fingergun gesture could still be used for something else.
+    void FingergunCheck() //This checks if the hands are currently in a "fingergun" position, which would then move the player
     {
-        // Calculate the distance between the thumb and index tips.
+        //Fingergun recognition currently only exists as "Are the index and thumb far enough away from each other?"
 
         float LeftDistance = Vector3.Distance(leftJointPositions[6], leftJointPositions[11]);
         float RightDistance = Vector3.Distance(rightJointPositions[6], rightJointPositions[11]);
@@ -384,7 +398,8 @@ public class JointTracking : MonoBehaviour
 
     }
 
-    void MovePlayer(bool cameraMove, bool leftHanded) //note: movement pointing only works with left currently. fix this.
+    //Note: currently goes unused as we don't need to move the user at any time. Only used once for testing gesture recognition.
+    void MovePlayer(bool cameraMove, bool leftHanded) //Note: movement pointing only works with left currently. fix this.
     {
         if (cameraMove)
         {

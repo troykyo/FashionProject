@@ -718,7 +718,7 @@ Transform:
   m_GameObject: {fileID: 135477841}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -0.04, y: 1.359, z: -0.37}
+  m_LocalPosition: {x: 2.3000002, y: 1.359, z: -0.37}
   m_LocalScale: {x: 0.2, y: 0.2, z: 0.2}
   m_ConstrainProportionsScale: 1
   m_Children: []
@@ -1784,6 +1784,7 @@ Transform:
   - {fileID: 1560527710}
   - {fileID: 1312711019}
   - {fileID: 2122209442}
+  - {fileID: 931298333}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &361452990
@@ -7905,12 +7906,12 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 931298329}
   serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -0.06, y: 0.6, z: -0.204}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: -0.004, y: 0.6, z: 0.394}
   m_LocalScale: {x: 0.7, y: 0.7, z: 0.7}
   m_ConstrainProportionsScale: 1
   m_Children: []
-  m_Father: {fileID: 0}
+  m_Father: {fileID: 354543763}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &931298334
 MonoBehaviour:
@@ -8126,7 +8127,7 @@ Transform:
   m_GameObject: {fileID: 1010376573}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -0.262, y: 1.359, z: -0.37}
+  m_LocalPosition: {x: 2.078, y: 1.359, z: -0.37}
   m_LocalScale: {x: 0.2, y: 0.2, z: 0.2}
   m_ConstrainProportionsScale: 1
   m_Children: []
@@ -8556,7 +8557,7 @@ Transform:
   m_GameObject: {fileID: 1176212217}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0.2081, y: 1.359, z: -0.37}
+  m_LocalPosition: {x: 2.5481002, y: 1.359, z: -0.37}
   m_LocalScale: {x: 0.2, y: 0.2, z: 0.2}
   m_ConstrainProportionsScale: 1
   m_Children: []
@@ -9433,6 +9434,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   XROrigin: {fileID: 1468820693}
+  green: {fileID: 2100000, guid: bd2937b239eb7fd4e8a7bd21649e8c36, type: 2}
+  orange: {fileID: 2100000, guid: c5f06de065bff66488edd6f3f9247dec, type: 2}
   DebugCube1: {fileID: 1010376573}
   DebugCube2: {fileID: 135477841}
   DebugCube3: {fileID: 1176212217}
@@ -17208,4 +17211,3 @@ SceneRoots:
   - {fileID: 1010376577}
   - {fileID: 135477845}
   - {fileID: 1176212221}
-  - {fileID: 931298333}

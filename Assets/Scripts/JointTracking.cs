@@ -35,6 +35,8 @@ public class JointTracking : MonoBehaviour
 
     public GameObject XROrigin;
 
+    public Material green;
+    public Material orange;
 
     [Tooltip("for debugging. Put in any object. Used to signify things like booleans being active, by making the thing active (or inactive)")]
     public GameObject DebugCube1;
@@ -421,6 +423,8 @@ public class JointTracking : MonoBehaviour
             && (middleDistance > straightFingerThreshold)
             && (ringDistance > straightFingerThreshold))
         {
+            GameObject.Find("LeftHand").GetComponent<Renderer>().material = green;
+            GameObject.Find("RightHand").GetComponent<Renderer>().material = green;
             if (gestureHoldTimer > gestureHoldMax)
             {
                 translateTimer = translateTimerMax;
@@ -433,6 +437,11 @@ public class JointTracking : MonoBehaviour
                 gestureHoldTimer++;
                 return;
             }
+        }
+        else
+        {
+            GameObject.Find("LeftHand").GetComponent<Renderer>().material = orange;
+            GameObject.Find("RightHand").GetComponent<Renderer>().material = orange;
         }
     }
 
@@ -570,6 +579,8 @@ public class JointTracking : MonoBehaviour
             && (leftRingDistance < straightFingerThreshold)
             && (leftLittleDistance > straightFingerThreshold)))
         {
+            GameObject.Find("LeftHand").GetComponent<Renderer>().material = green;
+            GameObject.Find("RightHand").GetComponent<Renderer>().material = green;
             //DebugCube3.SetActive(true);
             if (gestureHoldTimer > gestureHoldMax)
             {
@@ -583,6 +594,11 @@ public class JointTracking : MonoBehaviour
                 gestureHoldTimer++;
                 return;
             }
+        }
+        else
+        {
+            GameObject.Find("LeftHand").GetComponent<Renderer>().material = orange;
+            GameObject.Find("RightHand").GetComponent<Renderer>().material = orange;
         }
     }
 

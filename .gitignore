@@ -58,6 +58,16 @@ sysinfo.txt
 *.apk
 *.unitypackage
 
+# the mac specific DS_Store file
+.DS_Store
+
 # Crashlytics generated file
 crashlytics-build.properties
 
+
+.DS_Store
+
+
+UserSettings/Layouts/default-2022.dwlt
+
+UserSettings/Layouts/

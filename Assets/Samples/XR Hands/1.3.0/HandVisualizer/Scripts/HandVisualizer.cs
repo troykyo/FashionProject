@@ -43,7 +43,7 @@ namespace UnityEngine.XR.Hands.Samples.VisualizerSample
 
         [SerializeField]
         [Tooltip("(Optional) If this is set, the hand meshes will be assigned this material.")]
-        Material m_HandMeshMaterial;
+        public Material m_HandMeshMaterial;
 
         [SerializeField]
         [Tooltip("Tells the Hand Visualizer to draw the meshes for the hands.")]

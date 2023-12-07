@@ -35,6 +35,8 @@ public class JointTracking : MonoBehaviour
 
     public GameObject XROrigin;
 
+    public Material green;
+    public Material orange;
 
     [Tooltip("for debugging. Put in any object. Used to signify things like booleans being active, by making the thing active (or inactive)")]
     public GameObject DebugCube1;
@@ -421,6 +423,8 @@ public class JointTracking : MonoBehaviour
             && (middleDistance > straightFingerThreshold)
             && (ringDistance > straightFingerThreshold))
         {
+            GameObject.Find("LeftHand").GetComponent<Renderer>().material = green;
+            GameObject.Find("RightHand").GetComponent<Renderer>().material = green;
             if (gestureHoldTimer > gestureHoldMax)
             {
                 translateTimer = translateTimerMax;
@@ -433,6 +437,11 @@ public class JointTracking : MonoBehaviour
                 gestureHoldTimer++;
                 return;
             }
+        }
+        else
+        {
+            GameObject.Find("LeftHand").GetComponent<Renderer>().material = orange;
+            GameObject.Find("RightHand").GetComponent<Renderer>().material = orange;
         }
     }
 
@@ -570,6 +579,8 @@ public class JointTracking : MonoBehaviour
             && (leftRingDistance < straightFingerThreshold)
             && (leftLittleDistance > straightFingerThreshold)))
         {
+            GameObject.Find("LeftHand").GetComponent<Renderer>().material = green;
+            GameObject.Find("RightHand").GetComponent<Renderer>().material = green;
             //DebugCube3.SetActive(true);
             if (gestureHoldTimer > gestureHoldMax)
             {
@@ -583,6 +594,11 @@ public class JointTracking : MonoBehaviour
                 gestureHoldTimer++;
                 return;
             }
+        }
+        else
+        {
+            GameObject.Find("LeftHand").GetComponent<Renderer>().material = orange;
+            GameObject.Find("RightHand").GetComponent<Renderer>().material = orange;
         }
     }
 
@@ -658,8 +674,9 @@ public class JointTracking : MonoBehaviour
         {
             rightChopConfirmed = true;
             rightLightsaber.SetActive(true);
-            rightLightsaber.transform.position = rightJointPositions[2];
-            rightLightsaber.transform.rotation = Quaternion.Euler(rightJointRotations[2].x, rightJointRotations[2].y, rightJointRotations[2].z);
+            //rightLightsaber.transform.position = new Vector3(rightJointPositions[2].x, rightJointPositions[2].y, rightJointPositions[2].z);
+            //rightLightsaber.transform.rotation = Quaternion.Euler(rightJointRotations[2].x, rightJointRotations[2].y, rightJointRotations[2].z);
+            //rightLightsaber.transform.Rotate(90, 0,0);
         }
         else
         {
@@ -677,8 +694,9 @@ public class JointTracking : MonoBehaviour
         {
             leftChopConfirmed = true;
             leftLightsaber.SetActive(true);
-            leftLightsaber.transform.position = leftJointPositions[2];
-            leftLightsaber.transform.rotation = Quaternion.Euler(leftJointRotations[2].x, leftJointRotations[2].y, leftJointRotations[2].z);
+            //leftLightsaber.transform.position = new Vector3(leftJointPositions[2].x, leftJointPositions[2].y+0.2f, leftJointPositions[2].z);
+            //leftLightsaber.transform.rotation = Quaternion.Euler(leftJointRotations[2].x, leftJointRotations[2].y, leftJointRotations[2].z);
+            //leftLightsaber.transform.Rotate(90, 0, 0);
         }
         else
         {

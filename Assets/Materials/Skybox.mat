@@ -67,8 +67,40 @@ Material:
         m_Texture: {fileID: 8900000, guid: 3b5d67736d7b8ad4f8da4d58eaef0b98, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
+    - _SampleReflectedCubemap_6d19a31405d3442ba03b0caff116fe13_Cube_1_Cubemap:
+        m_Texture: {fileID: 8900000, guid: 083be85ea2872164483626523907fad3, type: 2}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _SampleReflectedCubemap_71b083aa0e844755bdb602e3816dae8f_Cube_1_Cubemap:
+        m_Texture: {fileID: 8900000, guid: 3b5d67736d7b8ad4f8da4d58eaef0b98, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _SampleReflectedCubemap_8d15d0e4cd9e496b8639286974a64ab6_Cube_1_Cubemap:
+        m_Texture: {fileID: 8900000, guid: 7c16950b4084b2b43baa5e956c726f81, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
     - _SampleReflectedCubemap_a786125aca8747d39f84ffbbaf8c2c18_Cube_1_Cubemap:
         m_Texture: {fileID: 8900000, guid: 354036e57ae357148aed267204ce73a7, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _SampleReflectedCubemap_d601393843ec43e1ab04aa368575e150_Cube_1_Cubemap:
+        m_Texture: {fileID: 8900000, guid: 4ad7bc719bb39464c97cce534246325b, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _SampleReflectedCubemap_e3eaee5091d14324b0781304acd85534_Cube_1_Cubemap:
+        m_Texture: {fileID: 8900000, guid: 7c16950b4084b2b43baa5e956c726f81, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _SampleReflectedCubemap_ff93b7938d7a443db08764bfc520306f_Cube_1_Cubemap:
+        m_Texture: {fileID: 8900000, guid: 6a843b4e332a2754b96114937832242d, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _SampleTexture2D_3b0816657770458081a9badbf1eda8e7_Texture_1_Texture2D:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _SampleTexture2D_ddf1607405a248aba0818181fca79ed3_Texture_1_Texture2D:
+        m_Texture: {fileID: 0}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _SpecGlossMap:
@@ -89,7 +121,7 @@ Material:
         m_Offset: {x: 0, y: 0}
     m_Ints: []
     m_Floats:
-    - Weight_: 0.95099527
+    - Weight_: 0
     - _AlphaClip: 0
     - _AlphaToMask: 0
     - _Blend: 0

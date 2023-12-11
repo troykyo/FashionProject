@@ -25,7 +25,9 @@ public class environmontScr : MonoBehaviour
     // Timers voor soepele overgangen
     public float timeRemaining = 1;
     public float timeNext = 0.15f;
-    public float stateOfSky = 1;
+    float maxSky = 0.5f;
+    public float stateOfSky = 0.5f;
+    public float changeSpeed = 0.002f;
 
     void Start()
     {
@@ -62,7 +64,7 @@ public class environmontScr : MonoBehaviour
         {
             mode = !mode;
         }
-        Mathf.Clamp(skybox.GetFloat("Weight_"), 0, 1);
+        Mathf.Clamp(skybox.GetFloat("Weight_"), 0, maxSky);
     }
 
     public void Swap()
@@ -97,7 +99,7 @@ public class environmontScr : MonoBehaviour
             directionalLight.intensity = Mathf.Lerp(directionalLight.intensity, 1f, 0.5f * Time.deltaTime);
             
             if (stateOfSky > 0)
-                stateOfSky -= 0.005f;
+                stateOfSky -= changeSpeed;
             if (stateOfSky < 0)
                 stateOfSky = 0;
         }
@@ -129,10 +131,9 @@ public class environmontScr : MonoBehaviour
             // Pas de intensiteit van het directionele licht aan met een vloeiende overgang
             directionalLight.intensity = Mathf.Lerp(directionalLight.intensity, 0.1f, 0.5f * Time.deltaTime);
 
-            if (stateOfSky < 0.5)
-                stateOfSky += 0.005f;
+            if (stateOfSky < maxSky)
+                stateOfSky += changeSpeed;
         }
         skybox.SetFloat("Weight_", stateOfSky);
-
     }
 }

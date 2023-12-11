@@ -9171,6 +9171,7 @@ MonoBehaviour:
   currentItem: 0
   timeRemaining: 1
   timeNext: 0.15
+  stateOfSky: 0
 --- !u!4 &1312711019
 Transform:
   m_ObjectHideFlags: 0

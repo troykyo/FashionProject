@@ -9172,6 +9172,7 @@ MonoBehaviour:
   timeRemaining: 1
   timeNext: 0.15
   stateOfSky: 0
+  changeSpeed: 0.002
 --- !u!4 &1312711019
 Transform:
   m_ObjectHideFlags: 0
@@ -9206,7 +9207,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &1323819944
 Transform:
   m_ObjectHideFlags: 0

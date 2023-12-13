@@ -8,8 +8,13 @@ public class environmontScr : MonoBehaviour
     [SerializeField] private List<GameObject> parents = new List<GameObject>();
     [SerializeField] private List<GameObject> evils = new List<GameObject>();
     [SerializeField] private List<GameObject> happys = new List<GameObject>();
+    [SerializeField] private List<GameObject> sads = new List<GameObject>();
 
-    public bool mode;
+    public int mode;
+    public bool happy;
+    public bool angry;
+    public bool sad;
+
 
     public GameObject directionalLightObject;
     public GameObject bloons;
@@ -19,7 +24,6 @@ public class environmontScr : MonoBehaviour
     public Material happySkyBox;
     public Material evilSkyBox;
     [SerializeField] private Material skybox;
-
     [SerializeField] private int currentItem;
 
     // Timers voor soepele overgangen
@@ -47,6 +51,8 @@ public class environmontScr : MonoBehaviour
                         evils.Add(kid.gameObject);
                     else if (kid.tag == "happy")
                         happys.Add(kid.gameObject);
+                    else if (kid.tag == "sad")
+                        sads.Add(kid.gameObject);
                 }
             }
         }
@@ -62,28 +68,38 @@ public class environmontScr : MonoBehaviour
         }
         if (Input.GetKeyUp("space"))
         {
-            mode = !mode;
+            mode++;
+            if (mode == 4)
+                mode = 1;
         }
         Mathf.Clamp(skybox.GetFloat("Weight_"), 0, maxSky);
     }
-
+    
     public void Swap()
     {
-        // Controleer of de 'mode' is ingeschakeld
-        if (mode)
+        // Controleer of de 'happy' is ingeschakeld
+        if (mode == 3)
         {
+            if (!happy)
+            {
+                happy = true;
+                angry = false;
+                sad = false;
+                currentItem = evils.Count;
+            }
             // Verminder de resterende tijd als deze groter is dan 0
             if (timeRemaining > 0)
             {
                 timeRemaining -= Time.deltaTime;
             }
             // Als er nog items in de lijst zijn en currentItem binnen de grenzen is
-            else if ((currentItem + 1) < evils.Count && currentItem >= 0)
+            else if (currentItem <= evils.Count && currentItem > 0)
             {
                 // Zet de huidige 'evil' uit en de bijbehorende 'happy' aan
+                currentItem--;
                 evils[currentItem].SetActive(false);
+                sads[currentItem].SetActive(false);
                 happys[currentItem].SetActive(true);
-                currentItem++;
                 // Reset de timer naar de ingestelde tijd voor de volgende wissel
                 timeRemaining = timeNext;
             }
@@ -103,8 +119,15 @@ public class environmontScr : MonoBehaviour
             if (stateOfSky < 0)
                 stateOfSky = 0;
         }
-        else
+        else if (mode == 1) //angry
         {
+            if (!angry)
+            {
+                happy = false;
+                angry = true;
+                sad = false;
+                currentItem = evils.Count;
+            }
             // Verminder de resterende tijd als deze groter is dan 0
             if (timeRemaining > 0)
             {
@@ -116,7 +139,47 @@ public class environmontScr : MonoBehaviour
                 // Verminder currentItem en zet de bijbehorende 'evil' aan en 'happy' uit
                 currentItem--;
                 evils[currentItem].SetActive(true);
+                sads[currentItem].SetActive(false);
                 happys[currentItem].SetActive(false);
+                // Reset de timer naar de ingestelde tijd voor de volgende wissel
+                timeRemaining = timeNext;
+            }
+
+            // Als het huidige item minder is dan de helft van de 'evils', pas effecten aan
+            if (currentItem < (evils.Count * 0.5))
+            {
+                bloons.GetComponent<ParticleSystem>().enableEmission = false;
+                fog.GetComponent<ParticleSystem>().enableEmission = true;
+            }
+
+            // Pas de intensiteit van het directionele licht aan met een vloeiende overgang
+            directionalLight.intensity = Mathf.Lerp(directionalLight.intensity, 0.1f, 0.5f * Time.deltaTime);
+
+            if (stateOfSky < maxSky)
+                stateOfSky += changeSpeed;
+        }
+        else if (mode == 2) //sad
+        {
+            if (!sad)
+            {
+                happy = false;
+                angry = false;
+                sad = true;
+                currentItem = evils.Count;
+            }
+            // Verminder de resterende tijd als deze groter is dan 0
+            if (timeRemaining > 0)
+            {
+                timeRemaining -= Time.deltaTime;
+            }
+            // Als currentItem binnen de grenzen is
+            else if (currentItem <= evils.Count && currentItem > 0)
+            {
+                // Verminder currentItem en zet de bijbehorende 'evil' aan en 'happy' uit
+                currentItem--;
+                evils[currentItem].SetActive(false);
+                happys[currentItem].SetActive(false);
+                sads[currentItem].SetActive(true);
                 // Reset de timer naar de ingestelde tijd voor de volgende wissel
                 timeRemaining = timeNext;
             }

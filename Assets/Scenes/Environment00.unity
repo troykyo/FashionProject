@@ -191,7 +191,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7978146737094428464, guid: c8e50776963d0c84e8a04bd6901ce45d, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -17
+      value: -15.88
       objectReference: {fileID: 0}
     - target: {fileID: 7978146737094428464, guid: c8e50776963d0c84e8a04bd6901ce45d, type: 3}
       propertyPath: m_LocalPosition.y
@@ -9554,6 +9554,7 @@ MonoBehaviour:
   parents: []
   evils: []
   happys: []
+  sads: []
   mode: 1
   directionalLightObject: {fileID: 1141113284}
   bloons: {fileID: 734252855}
@@ -9600,7 +9601,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &1323819944
 Transform:
   m_ObjectHideFlags: 0

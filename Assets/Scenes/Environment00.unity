@@ -163,6 +163,20 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   vRMBlendShapeProxy: {fileID: 23898416}
   enviorment: {fileID: 1312711017}
+--- !u!114 &23898421
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 23898411}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d2ff565993190a24887db7487f7f997d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  isRotatable: 1
+  isMovable: 0
 --- !u!1001 &24834392
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1121,6 +1135,14 @@ PrefabInstance:
       propertyPath: Model
       value: 
       objectReference: {fileID: 23898411}
+    - target: {fileID: 4740143680597435056, guid: 86b1e8192cb57cd47890882526664df1, type: 3}
+      propertyPath: Model1
+      value: 
+      objectReference: {fileID: 23898411}
+    - target: {fileID: 4740143680597435056, guid: 86b1e8192cb57cd47890882526664df1, type: 3}
+      propertyPath: Model2
+      value: 
+      objectReference: {fileID: 1561611809}
     - target: {fileID: 4740143680597435056, guid: 86b1e8192cb57cd47890882526664df1, type: 3}
       propertyPath: RootPositionTransform
       value: 
@@ -2409,7 +2431,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6323400805694296666, guid: b4fef958f0d3ff04a95bf90ac94b3493, type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 8426901526827008832, guid: b4fef958f0d3ff04a95bf90ac94b3493, type: 3}
       propertyPath: m_DirtyAABB
@@ -2446,6 +2468,9 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 6323400805694296666, guid: b4fef958f0d3ff04a95bf90ac94b3493, type: 3}
       insertIndex: -1
       addedObject: {fileID: 23898420}
+    - targetCorrespondingSourceObject: {fileID: 6323400805694296666, guid: b4fef958f0d3ff04a95bf90ac94b3493, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 23898421}
   m_SourcePrefab: {fileID: 100100000, guid: b4fef958f0d3ff04a95bf90ac94b3493, type: 3}
 --- !u!1001 &628730305
 PrefabInstance:
@@ -9185,7 +9210,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6890826999909709128, guid: 6c9785a973bd82b428481aefa300609d, type: 3}
       propertyPath: m_IsActive
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -9194,6 +9219,9 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 6890826999909709128, guid: 6c9785a973bd82b428481aefa300609d, type: 3}
       insertIndex: -1
       addedObject: {fileID: 1561611811}
+    - targetCorrespondingSourceObject: {fileID: 6890826999909709128, guid: 6c9785a973bd82b428481aefa300609d, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1561611819}
   m_SourcePrefab: {fileID: 100100000, guid: 6c9785a973bd82b428481aefa300609d, type: 3}
 --- !u!1001 &1228068465
 PrefabInstance:
@@ -14929,6 +14957,20 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5b678c1df50cfb547990db24a32856da, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &1561611819
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1561611809}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d2ff565993190a24887db7487f7f997d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  isRotatable: 1
+  isMovable: 0
 --- !u!4 &1594341903 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 513012067652810750, guid: b6bd27f8e0cc15a478cd2a6070180f06, type: 3}

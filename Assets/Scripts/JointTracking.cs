@@ -39,7 +39,6 @@ public class JointTracking : MonoBehaviour
     public GameObject pinPrefab;
     private GameObject pinL, pinR;
     private Rigidbody pinLrb, pinRrb;
-    private vertexSnapping pinLScript, pinRScript;
 
     public GameObject leftLightsaber;
     public GameObject rightLightsaber;
@@ -131,9 +130,6 @@ public class JointTracking : MonoBehaviour
 
         if (m_HandSubsystem != null)
             m_HandSubsystem.updatedHands += OnUpdatedHands;
-
-        pinRScript = null;
-        pinLScript = null;
     }
 
 
@@ -627,9 +623,6 @@ public class JointTracking : MonoBehaviour
 
                 pinR = Instantiate(pinPrefab);
                 pinRrb = pinR.GetComponent<Rigidbody>();
-                Debug.Log("Rigidbody get");
-                pinRScript = pinR.GetComponent<vertexSnapping>();
-                Debug.Log("vertexSnapping script get");
             }
 
             pinR.transform.position = new Vector3(rightJointPositions[2].x, rightJointPositions[2].y, rightJointPositions[2].z + .2f);
@@ -639,7 +632,6 @@ public class JointTracking : MonoBehaviour
         }
         else
         {
-            pinRScript.SetPin();
             rightFistConfirmed = false;
         }
 
@@ -656,7 +648,6 @@ public class JointTracking : MonoBehaviour
 
                 pinL = Instantiate(pinPrefab);
                 pinLrb = pinL.GetComponent<Rigidbody>();
-                pinLScript = pinL.GetComponent<vertexSnapping>();
 
             }
 
@@ -666,12 +657,8 @@ public class JointTracking : MonoBehaviour
         }
         else
         {
-            pinLScript.SetPin();
             leftFistConfirmed = false;
         }
-
-
-
     }
 
     //We want all fingers to be straight for this one. make a seperate thing for deselecting cutting tool.

@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Rendering;
+using UnityEngine.XR.Interaction.Toolkit;
 
 namespace Assets.Scripts
 {
@@ -34,10 +35,14 @@ namespace Assets.Scripts
             GameObject positiveObject = CreateMeshGameObject(objectToCut);
             positiveObject.name = string.Format("{0}_positive", objectToCut.name);
             positiveObject.AddComponent<AddClothComponent>();
+            positiveObject.AddComponent<XRGrabInteractable>();
+            positiveObject.tag = "cloth";
 
             GameObject negativeObject = CreateMeshGameObject(objectToCut);
             negativeObject.name = string.Format("{0}_negative", objectToCut.name);
             negativeObject.AddComponent<AddClothComponent>();
+            negativeObject.AddComponent<XRGrabInteractable>();
+            negativeObject.tag = "cloth";
 
             var positiveSideMeshData = slicesMeta.PositiveSideMesh;
             var negativeSideMeshData = slicesMeta.NegativeSideMesh;
@@ -90,6 +95,7 @@ namespace Assets.Scripts
         private static void SetupCollidersAndRigidBodys(ref GameObject gameObject, Mesh mesh, bool useGravity)
         {                     
             MeshCollider meshCollider = gameObject.AddComponent<MeshCollider>();
+            BoxCollider boxCollider = gameObject.AddComponent<BoxCollider>();
             meshCollider.sharedMesh = mesh;
             meshCollider.convex = true;
 

@@ -100,6 +100,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b63879071e5b3b140a0f22ce1cad3fa1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  mat: {fileID: 2100000, guid: d6516fa7304162b45a878da4cc6ac225, type: 2}
 --- !u!54 &4138002557330874466
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -126,7 +127,7 @@ Rigidbody:
   m_IsKinematic: 0
   m_Interpolate: 0
   m_Constraints: 0
-  m_CollisionDetection: 0
+  m_CollisionDetection: 2
 --- !u!135 &7275759921819301006
 SphereCollider:
   m_ObjectHideFlags: 0
@@ -237,7 +238,19 @@ MonoBehaviour:
       m_Calls: []
   m_Activated:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 8838426998651391542}
+        m_TargetAssemblyTypeName: vertexSnapping, Assembly-CSharp
+        m_MethodName: ClearPin
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
   m_Deactivated:
     m_PersistentCalls:
       m_Calls: []

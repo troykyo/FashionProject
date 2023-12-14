@@ -27,17 +27,12 @@
 #pragma warning disable 0414,0219
 
 using System;
-using System.Reflection;
+using System.Collections.Generic;
 using System.IO;
 using System.Threading;
-using System.Threading.Tasks;
-using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
-using UnityEngine.Events;
-using UnityEngine.Profiling;
-using VRM;
 using UniGLTF;
+using UnityEngine;
+using VRM;
 
 namespace EVMC4U
 {
@@ -47,6 +42,8 @@ namespace EVMC4U
         [Header("ExternalReceiver v4.0")]
         [SerializeField, Label("VRMモデルのGameObject")]
         public GameObject Model = null;
+        public GameObject Model1 = null;
+        public GameObject Model2 = null;
         [SerializeField, Label("一時停止")]
         public bool Freeze = false; //すべての同期を止める(撮影向け)
         [SerializeField, Label("パケットリミッター")]
@@ -411,7 +408,8 @@ namespace EVMC4U
             }
 
             //初期状態で読み込み済みのモデルが有る場合はVRMの自動読み込みは禁止する
-            if (Model != null) {
+            if (Model != null)
+            {
                 enableAutoLoadVRM = false;
             }
         }
@@ -441,6 +439,22 @@ namespace EVMC4U
 
         public void Update()
         {
+            if (Input.GetKeyUp(KeyCode.M))
+            {
+                if (Model == Model2)
+                {
+                    Model1.SetActive(true);
+                    Model = Model1;
+                    Model2.SetActive(false);
+                }
+                else if (Model == Model1)
+                {
+                    Model2.SetActive(true);
+                    Model = Model2;
+                    Model1.SetActive(false);
+                }
+            }
+
             //エラー・無限ループ時は処理をしない
             if (shutdown) { return; }
 
@@ -499,16 +513,19 @@ namespace EVMC4U
                 StringToBlendShapeKeyDictionary.Clear();
 
                 //全Clipsを取り出す
-                foreach (var c in blendShapeProxy.BlendShapeAvatar.Clips) {
+                foreach (var c in blendShapeProxy.BlendShapeAvatar.Clips)
+                {
                     string key = "";
                     bool unknown = false;
                     //プリセットかどうかを調べる
-                    if (c.Preset == BlendShapePreset.Unknown) {
+                    if (c.Preset == BlendShapePreset.Unknown)
+                    {
                         //非プリセット(Unknown)であれば、Unknown用の名前変数を参照する
                         key = c.BlendShapeName;
                         unknown = true;
                     }
-                    else {
+                    else
+                    {
                         //プリセットであればENUM値をToStringした値を利用する
                         key = c.Preset.ToString();
                         unknown = false;
@@ -554,24 +571,28 @@ namespace EVMC4U
             }
 
             //エラー・無限ループ時は処理をしない
-            if (shutdown) {
+            if (shutdown)
+            {
                 return;
             }
 
             //パケットリミッターが有効な場合、一定以上のパケットフレーム/フレーム数を観測した場合、次のフレームまでパケットを捨てる
-            if (PacktLimiter && (LastPacketframeCounterInFrame > PACKET_LIMIT_MAX)) {
+            if (PacktLimiter && (LastPacketframeCounterInFrame > PACKET_LIMIT_MAX))
+            {
                 DropPackets++;
                 return;
             }
 
             //メッセージを処理
-            if (!Freeze) {
+            if (!Freeze)
+            {
                 //異常を検出して動作停止
                 try
                 {
                     ProcessMessage(ref message);
                 }
-                catch (Exception e) {
+                catch (Exception e)
+                {
                     StatusMessage = "Error: Exception";
                     Debug.LogError(" --- Communication Error ---");
                     Debug.LogError(e.ToString());
@@ -626,7 +647,8 @@ namespace EVMC4U
                 }
 
                 //V2.5 キャリブレーション状態(長さ3以上)
-                if (message.values.Length >= 3) {
+                if (message.values.Length >= 3)
+                {
                     if ((message.values[1] is int) && (message.values[2] is int))
                     {
                         int calibrationState = (int)message.values[1];
@@ -747,7 +769,8 @@ namespace EVMC4U
                         RootPositionTransform.localPosition -= offset;
                     }
                 }
-                else {
+                else
+                {
                     Model.transform.localScale = Vector3.one;
                 }
             }
@@ -817,7 +840,8 @@ namespace EVMC4U
                         blendShapeFilterDictionaly[key] = (blendShapeFilterDictionaly[key] * BlendShapeFilter) + value * (1.0f - BlendShapeFilter);
                         value = blendShapeFilterDictionaly[key];
                     }
-                    else {
+                    else
+                    {
                         //存在しない場合はフィルタに登録する。値はそのまま
                         blendShapeFilterDictionaly.Add(key, value);
                     }
@@ -833,13 +857,15 @@ namespace EVMC4U
 
                     //キーに該当するBSKeyが存在するかチェックする
                     BlendShapeKey bskey;
-                    if (StringToBlendShapeKeyDictionary.TryGetValue(lowerKey, out bskey)){
+                    if (StringToBlendShapeKeyDictionary.TryGetValue(lowerKey, out bskey))
+                    {
                         //キーに対して値を登録する
                         BlendShapeToValueDictionary[bskey] = value;
 
                         //Debug.Log("[lowerKey]->"+ lowerKey+" [bskey]->"+bskey.ToString()+" [value]->"+value);
                     }
-                    else {
+                    else
+                    {
                         //そんなキーは無い
                         //Debug.LogError("[lowerKey]->" + lowerKey + " is not found");
                     }
@@ -883,7 +909,8 @@ namespace EVMC4U
                 byte[] VRMdata = File.ReadAllBytes(path);
                 LoadVRMFromData(VRMdata);
             }
-            else {
+            else
+            {
                 Debug.LogError("VRM load failed.");
             }
         }
@@ -891,7 +918,8 @@ namespace EVMC4U
         //ファイルからモデルを読み込む
         public void LoadVRMFromData(byte[] VRMdata)
         {
-            if (isLoading) {
+            if (isLoading)
+            {
                 Debug.LogError("Now Loading! load request is rejected.");
                 return;
             }
@@ -905,7 +933,8 @@ namespace EVMC4U
 
             isLoading = true;
 
-            synchronizationContext.Post(async (arg) => {
+            synchronizationContext.Post(async (arg) =>
+            {
                 RuntimeGltfInstance instance = await vrmImporter.LoadAsync(new VRMShaders.ImmediateCaller());
                 isLoading = false;
 

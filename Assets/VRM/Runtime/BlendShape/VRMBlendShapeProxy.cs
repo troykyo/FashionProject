@@ -16,7 +16,7 @@ namespace VRM
             throw new NotImplementedException();
         }
 
-        BlendShapeMerger m_merger;
+        public BlendShapeMerger m_merger;
 
         private void OnDestroy()
         {
@@ -60,6 +60,7 @@ namespace VRM
             if (m_merger != null)
             {
                 m_merger.AccumulateValue(key, value);
+                Debug.Log("Accumulate Value " + value + " for " + key);
             }
         }
 

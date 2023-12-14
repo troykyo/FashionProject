@@ -57,6 +57,7 @@ public class environmontScr : MonoBehaviour
             }
         }
         currentItem = evils.Count;
+        timeNext = 0.15f * Mathf.Pow(0.5f, evils.Count / 15f);
     }
 
     // Update is called once per frame
@@ -86,6 +87,8 @@ public class environmontScr : MonoBehaviour
                 angry = false;
                 sad = false;
                 currentItem = evils.Count;
+                bloons.GetComponent<ParticleSystem>().enableEmission = true;
+                fog.GetComponent<ParticleSystem>().enableEmission = false;
             }
             // Verminder de resterende tijd als deze groter is dan 0
             if (timeRemaining > 0)
@@ -104,13 +107,6 @@ public class environmontScr : MonoBehaviour
                 timeRemaining = timeNext;
             }
 
-            // Als het huidige item de helft van de 'evils' overschrijdt, pas effecten aan
-            if (currentItem > (evils.Count * 0.5))
-            {
-                bloons.GetComponent<ParticleSystem>().enableEmission = true;
-                fog.GetComponent<ParticleSystem>().enableEmission = false;
-            }
-
             // Pas de intensiteit van het directionele licht aan met een vloeiende overgang
             directionalLight.intensity = Mathf.Lerp(directionalLight.intensity, 1f, 0.5f * Time.deltaTime);
             
@@ -127,6 +123,8 @@ public class environmontScr : MonoBehaviour
                 angry = true;
                 sad = false;
                 currentItem = evils.Count;
+                bloons.GetComponent<ParticleSystem>().enableEmission = false;
+                fog.GetComponent<ParticleSystem>().enableEmission = true;
             }
             // Verminder de resterende tijd als deze groter is dan 0
             if (timeRemaining > 0)
@@ -145,15 +143,8 @@ public class environmontScr : MonoBehaviour
                 timeRemaining = timeNext;
             }
 
-            // Als het huidige item minder is dan de helft van de 'evils', pas effecten aan
-            if (currentItem < (evils.Count * 0.5))
-            {
-                bloons.GetComponent<ParticleSystem>().enableEmission = false;
-                fog.GetComponent<ParticleSystem>().enableEmission = true;
-            }
-
             // Pas de intensiteit van het directionele licht aan met een vloeiende overgang
-            directionalLight.intensity = Mathf.Lerp(directionalLight.intensity, 0.1f, 0.5f * Time.deltaTime);
+            directionalLight.intensity = Mathf.Lerp(directionalLight.intensity, 0.2f, 0.5f * Time.deltaTime);
 
             if (stateOfSky < maxSky)
                 stateOfSky += changeSpeed;
@@ -166,6 +157,8 @@ public class environmontScr : MonoBehaviour
                 angry = false;
                 sad = true;
                 currentItem = evils.Count;
+                bloons.GetComponent<ParticleSystem>().enableEmission = false;
+                fog.GetComponent<ParticleSystem>().enableEmission = true;
             }
             // Verminder de resterende tijd als deze groter is dan 0
             if (timeRemaining > 0)
@@ -184,15 +177,8 @@ public class environmontScr : MonoBehaviour
                 timeRemaining = timeNext;
             }
 
-            // Als het huidige item minder is dan de helft van de 'evils', pas effecten aan
-            if (currentItem < (evils.Count * 0.5))
-            {
-                bloons.GetComponent<ParticleSystem>().enableEmission = false;
-                fog.GetComponent<ParticleSystem>().enableEmission = true;
-            }
-
             // Pas de intensiteit van het directionele licht aan met een vloeiende overgang
-            directionalLight.intensity = Mathf.Lerp(directionalLight.intensity, 0.1f, 0.5f * Time.deltaTime);
+            directionalLight.intensity = Mathf.Lerp(directionalLight.intensity, 0.2f, 0.5f * Time.deltaTime);
 
             if (stateOfSky < maxSky)
                 stateOfSky += changeSpeed;

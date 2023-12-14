@@ -40,6 +40,7 @@ MonoBehaviour:
     serializedVersion: 2
     x: 0
 <<<<<<< HEAD
+<<<<<<< HEAD
     y: 42.666668
     width: 1280
     height: 677.3334
@@ -58,6 +59,18 @@ MonoBehaviour:
   m_MaxSize: {x: 10000, y: 10000}
   m_Maximized: 1
 --- !u!114 &3
+=======
+    y: 53
+    width: 1440
+    height: 757
+  m_ShowMode: 4
+  m_Title: Scene
+  m_RootView: {fileID: 2}
+  m_MinSize: {x: 875, y: 300}
+  m_MaxSize: {x: 10000, y: 10000}
+  m_Maximized: 0
+--- !u!114 &2
+>>>>>>> Bird
 MonoBehaviour:
   m_ObjectHideFlags: 52
   m_CorrespondingSourceObject: {fileID: 0}
@@ -65,6 +78,7 @@ MonoBehaviour:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 0}
   m_Enabled: 1
+<<<<<<< HEAD
   m_EditorHideFlags: 0
   m_Script: {fileID: 12006, guid: 0000000000000000e000000000000000, type: 0}
   m_Name: AnimationWindow
@@ -115,18 +129,27 @@ MonoBehaviour:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 0}
   m_Enabled: 1
+=======
+>>>>>>> Bird
   m_EditorHideFlags: 1
   m_Script: {fileID: 12008, guid: 0000000000000000e000000000000000, type: 0}
   m_Name: 
   m_EditorClassIdentifier: 
   m_Children:
+<<<<<<< HEAD
   - {fileID: 6}
   - {fileID: 8}
   - {fileID: 7}
+=======
+  - {fileID: 3}
+  - {fileID: 5}
+  - {fileID: 4}
+>>>>>>> Bird
   m_Position:
     serializedVersion: 2
     x: 0
     y: 0
+<<<<<<< HEAD
 <<<<<<< HEAD
     width: 1280
     height: 677.3334
@@ -134,13 +157,21 @@ MonoBehaviour:
     width: 1440
     height: 777
 >>>>>>> models&animations
+=======
+    width: 1440
+    height: 757
+>>>>>>> Bird
   m_MinSize: {x: 875, y: 300}
   m_MaxSize: {x: 10000, y: 10000}
   m_UseTopView: 1
   m_TopViewHeight: 30
   m_UseBottomView: 1
   m_BottomViewHeight: 20
+<<<<<<< HEAD
 --- !u!114 &6
+=======
+--- !u!114 &3
+>>>>>>> Bird
 MonoBehaviour:
   m_ObjectHideFlags: 52
   m_CorrespondingSourceObject: {fileID: 0}
@@ -157,12 +188,20 @@ MonoBehaviour:
     serializedVersion: 2
     x: 0
     y: 0
+<<<<<<< HEAD
     width: 1280
+=======
+    width: 1440
+>>>>>>> Bird
     height: 30
   m_MinSize: {x: 0, y: 0}
   m_MaxSize: {x: 0, y: 0}
   m_LastLoadedLayoutName: 
+<<<<<<< HEAD
 --- !u!114 &7
+=======
+--- !u!114 &4
+>>>>>>> Bird
 MonoBehaviour:
   m_ObjectHideFlags: 52
   m_CorrespondingSourceObject: {fileID: 0}
@@ -179,6 +218,7 @@ MonoBehaviour:
     serializedVersion: 2
     x: 0
 <<<<<<< HEAD
+<<<<<<< HEAD
     y: 657.3334
     width: 1280
 =======
@@ -189,6 +229,14 @@ MonoBehaviour:
   m_MinSize: {x: 0, y: 0}
   m_MaxSize: {x: 0, y: 0}
 --- !u!114 &8
+=======
+    y: 737
+    width: 1440
+    height: 20
+  m_MinSize: {x: 0, y: 0}
+  m_MaxSize: {x: 0, y: 0}
+--- !u!114 &5
+>>>>>>> Bird
 MonoBehaviour:
   m_ObjectHideFlags: 52
   m_CorrespondingSourceObject: {fileID: 0}
@@ -201,12 +249,18 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Children:
+<<<<<<< HEAD
   - {fileID: 9}
   - {fileID: 14}
+=======
+  - {fileID: 6}
+  - {fileID: 11}
+>>>>>>> Bird
   m_Position:
     serializedVersion: 2
     x: 0
     y: 30
+<<<<<<< HEAD
 <<<<<<< HEAD
     width: 1280
     height: 627.3334
@@ -224,6 +278,15 @@ MonoBehaviour:
   controlID: 2499
 --- !u!114 &9
 >>>>>>> models&animations
+=======
+    width: 1440
+    height: 707
+  m_MinSize: {x: 300, y: 100}
+  m_MaxSize: {x: 24288, y: 16192}
+  vertical: 0
+  controlID: 17
+--- !u!114 &6
+>>>>>>> Bird
 MonoBehaviour:
   m_ObjectHideFlags: 52
   m_CorrespondingSourceObject: {fileID: 0}
@@ -236,12 +299,18 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Children:
+<<<<<<< HEAD
   - {fileID: 10}
   - {fileID: 13}
+=======
+  - {fileID: 7}
+  - {fileID: 10}
+>>>>>>> Bird
   m_Position:
     serializedVersion: 2
     x: 0
     y: 0
+<<<<<<< HEAD
 <<<<<<< HEAD
     width: 1004.6667
     height: 627.3334
@@ -259,6 +328,15 @@ MonoBehaviour:
   controlID: 2500
 --- !u!114 &10
 >>>>>>> models&animations
+=======
+    width: 1218.5
+    height: 707
+  m_MinSize: {x: 200, y: 100}
+  m_MaxSize: {x: 16192, y: 16192}
+  vertical: 1
+  controlID: 18
+--- !u!114 &7
+>>>>>>> Bird
 MonoBehaviour:
   m_ObjectHideFlags: 52
   m_CorrespondingSourceObject: {fileID: 0}
@@ -271,12 +349,18 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Children:
+<<<<<<< HEAD
   - {fileID: 11}
   - {fileID: 12}
+=======
+  - {fileID: 8}
+  - {fileID: 9}
+>>>>>>> Bird
   m_Position:
     serializedVersion: 2
     x: 0
     y: 0
+<<<<<<< HEAD
 <<<<<<< HEAD
     width: 1004.6667
     height: 422.66666
@@ -294,6 +378,15 @@ MonoBehaviour:
   controlID: 2501
 --- !u!114 &11
 >>>>>>> models&animations
+=======
+    width: 1218.5
+    height: 437.5
+  m_MinSize: {x: 200, y: 50}
+  m_MaxSize: {x: 16192, y: 8096}
+  vertical: 0
+  controlID: 19
+--- !u!114 &8
+>>>>>>> Bird
 MonoBehaviour:
   m_ObjectHideFlags: 52
   m_CorrespondingSourceObject: {fileID: 0}
@@ -310,6 +403,7 @@ MonoBehaviour:
     serializedVersion: 2
     x: 0
     y: 0
+<<<<<<< HEAD
 <<<<<<< HEAD
     width: 212
     height: 422.66666
@@ -330,6 +424,18 @@ MonoBehaviour:
   m_Selected: 0
   m_LastSelected: 0
 --- !u!114 &12
+=======
+    width: 313.5
+    height: 437.5
+  m_MinSize: {x: 201, y: 221}
+  m_MaxSize: {x: 4001, y: 4021}
+  m_ActualView: {fileID: 13}
+  m_Panes:
+  - {fileID: 13}
+  m_Selected: 0
+  m_LastSelected: 0
+--- !u!114 &9
+>>>>>>> Bird
 MonoBehaviour:
   m_ObjectHideFlags: 52
   m_CorrespondingSourceObject: {fileID: 0}
@@ -345,14 +451,22 @@ MonoBehaviour:
   m_Position:
     serializedVersion: 2
 <<<<<<< HEAD
+<<<<<<< HEAD
     x: 212
     y: 0
     width: 792.6667
     height: 422.66666
+=======
+    x: 313.5
+    y: 0
+    width: 905
+    height: 437.5
+>>>>>>> Bird
   m_MinSize: {x: 202, y: 221}
   m_MaxSize: {x: 4002, y: 4021}
   m_ActualView: {fileID: 14}
   m_Panes:
+<<<<<<< HEAD
   - {fileID: 14}
   - {fileID: 16}
   - {fileID: 13}
@@ -376,6 +490,13 @@ MonoBehaviour:
   m_LastSelected: 1
 --- !u!114 &13
 >>>>>>> models&animations
+=======
+  - {fileID: 12}
+  - {fileID: 14}
+  m_Selected: 1
+  m_LastSelected: 0
+--- !u!114 &10
+>>>>>>> Bird
 MonoBehaviour:
   m_ObjectHideFlags: 52
   m_CorrespondingSourceObject: {fileID: 0}
@@ -385,12 +506,13 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 1
   m_Script: {fileID: 12006, guid: 0000000000000000e000000000000000, type: 0}
-  m_Name: ConsoleWindow
+  m_Name: ProjectBrowser
   m_EditorClassIdentifier: 
   m_Children: []
   m_Position:
     serializedVersion: 2
     x: 0
+<<<<<<< HEAD
 <<<<<<< HEAD
     y: 422.66666
     width: 1004.6667
@@ -419,6 +541,20 @@ MonoBehaviour:
   m_LastSelected: 1
 --- !u!114 &14
 >>>>>>> models&animations
+=======
+    y: 437.5
+    width: 1218.5
+    height: 269.5
+  m_MinSize: {x: 231, y: 271}
+  m_MaxSize: {x: 10001, y: 10021}
+  m_ActualView: {fileID: 15}
+  m_Panes:
+  - {fileID: 15}
+  - {fileID: 16}
+  m_Selected: 0
+  m_LastSelected: 1
+--- !u!114 &11
+>>>>>>> Bird
 MonoBehaviour:
   m_ObjectHideFlags: 52
   m_CorrespondingSourceObject: {fileID: 0}
@@ -433,6 +569,7 @@ MonoBehaviour:
   m_Children: []
   m_Position:
     serializedVersion: 2
+<<<<<<< HEAD
 <<<<<<< HEAD
     x: 1004.6667
     y: 0
@@ -461,6 +598,20 @@ MonoBehaviour:
   m_LastSelected: 1
 --- !u!114 &15
 >>>>>>> models&animations
+=======
+    x: 1218.5
+    y: 0
+    width: 221.5
+    height: 707
+  m_MinSize: {x: 276, y: 71}
+  m_MaxSize: {x: 4001, y: 4021}
+  m_ActualView: {fileID: 17}
+  m_Panes:
+  - {fileID: 17}
+  m_Selected: 0
+  m_LastSelected: 1
+--- !u!114 &12
+>>>>>>> Bird
 MonoBehaviour:
   m_ObjectHideFlags: 52
   m_CorrespondingSourceObject: {fileID: 0}
@@ -497,11 +648,18 @@ MonoBehaviour:
     m_Tooltip: 
   m_Pos:
     serializedVersion: 2
+<<<<<<< HEAD
     x: 286
     y: 83
     width: 874
     height: 432.5
 >>>>>>> models&animations
+=======
+    x: 164.5
+    y: 30
+    width: 1052
+    height: 505.5
+>>>>>>> Bird
   m_SerializedDataModeController:
     m_DataMode: 0
     m_PreferredDataMode: 0
@@ -512,6 +670,7 @@ MonoBehaviour:
     m_LastAppliedPresetName: Default
     m_SaveData: []
     m_OverlaysVisible: 1
+<<<<<<< HEAD
 <<<<<<< HEAD
   m_SearchFilter:
     m_NameFilter: 
@@ -632,6 +791,73 @@ MonoBehaviour:
   m_LastSelectedObjectID: -30058
 --- !u!114 &16
 >>>>>>> models&animations
+=======
+  m_SerializedViewNames: []
+  m_SerializedViewValues: []
+  m_PlayModeViewName: GameView
+  m_ShowGizmos: 1
+  m_TargetDisplay: 0
+  m_ClearColor: {r: 0, g: 0, b: 0, a: 0}
+  m_TargetSize: {x: 2104, y: 969}
+  m_TextureFilterMode: 0
+  m_TextureHideFlags: 61
+  m_RenderIMGUI: 1
+  m_EnterPlayModeBehavior: 0
+  m_UseMipMap: 0
+  m_VSyncEnabled: 0
+  m_Gizmos: 1
+  m_Stats: 0
+  m_SelectedSizes: 00000000000000000000000000000000000000000000000000000000000000000000000000000000
+  m_ZoomArea:
+    m_HRangeLocked: 0
+    m_VRangeLocked: 0
+    hZoomLockedByDefault: 0
+    vZoomLockedByDefault: 0
+    m_HBaseRangeMin: -526
+    m_HBaseRangeMax: 526
+    m_VBaseRangeMin: -242.25
+    m_VBaseRangeMax: 242.25
+    m_HAllowExceedBaseRangeMin: 1
+    m_HAllowExceedBaseRangeMax: 1
+    m_VAllowExceedBaseRangeMin: 1
+    m_VAllowExceedBaseRangeMax: 1
+    m_ScaleWithWindow: 0
+    m_HSlider: 0
+    m_VSlider: 0
+    m_IgnoreScrollWheelUntilClicked: 0
+    m_EnableMouseInput: 1
+    m_EnableSliderZoomHorizontal: 0
+    m_EnableSliderZoomVertical: 0
+    m_UniformScale: 1
+    m_UpDirection: 1
+    m_DrawArea:
+      serializedVersion: 2
+      x: 0
+      y: 21
+      width: 1052
+      height: 484.5
+    m_Scale: {x: 1, y: 1}
+    m_Translation: {x: 526, y: 242.25}
+    m_MarginLeft: 0
+    m_MarginRight: 0
+    m_MarginTop: 0
+    m_MarginBottom: 0
+    m_LastShownAreaInsideMargins:
+      serializedVersion: 2
+      x: -526
+      y: -242.25
+      width: 1052
+      height: 484.5
+    m_MinimalGUI: 1
+  m_defaultScale: 1
+  m_LastWindowPixelSize: {x: 2104, y: 1011}
+  m_ClearInEditMode: 1
+  m_NoCameraWarning: 1
+  m_LowResolutionForAspectRatios: 00000000000000000000
+  m_XRRenderMode: -1
+  m_RenderTexture: {fileID: 0}
+--- !u!114 &13
+>>>>>>> Bird
 MonoBehaviour:
   m_ObjectHideFlags: 52
   m_CorrespondingSourceObject: {fileID: 0}
@@ -656,6 +882,7 @@ MonoBehaviour:
     m_Tooltip: 
   m_Pos:
     serializedVersion: 2
+<<<<<<< HEAD
     x: 238
     y: 72.66667
     width: 890
@@ -671,6 +898,12 @@ MonoBehaviour:
     width: 321
     height: 552
 >>>>>>> models&animations
+=======
+    x: 0
+    y: 83
+    width: 312.5
+    height: 416.5
+>>>>>>> Bird
   m_SerializedDataModeController:
     m_DataMode: 0
     m_PreferredDataMode: 0
@@ -681,6 +914,7 @@ MonoBehaviour:
     m_LastAppliedPresetName: Default
     m_SaveData: []
     m_OverlaysVisible: 1
+<<<<<<< HEAD
 <<<<<<< HEAD
   m_Selected: 7e4768bab450d0d4a82975973c87207d
   m_GraphObject: {fileID: 0}
@@ -4195,6 +4429,38 @@ MonoBehaviour:
   m_LastSelectedObjectID: -31088
 --- !u!114 &17
 >>>>>>> models&animations
+=======
+  m_SceneHierarchy:
+    m_TreeViewState:
+      scrollPos: {x: 0, y: 0}
+      m_SelectedIDs: 0ad5ffff
+      m_LastClickedID: -10998
+      m_ExpandedIDs: c4f8ffff
+      m_RenameOverlay:
+        m_UserAcceptedRename: 0
+        m_Name: 
+        m_OriginalName: 
+        m_EditFieldRect:
+          serializedVersion: 2
+          x: 0
+          y: 0
+          width: 0
+          height: 0
+        m_UserData: 0
+        m_IsWaitingForDelay: 0
+        m_IsRenaming: 0
+        m_OriginalEventType: 11
+        m_IsRenamingFilename: 0
+        m_ClientGUIView: {fileID: 0}
+      m_SearchString: 
+    m_ExpandedScenes: []
+    m_CurrenRootInstanceID: 0
+    m_LockTracker:
+      m_IsLocked: 0
+    m_CurrentSortingName: TransformSorting
+  m_WindowGUID: cca11bef0792b674980b291401341b09
+--- !u!114 &14
+>>>>>>> Bird
 MonoBehaviour:
   m_ObjectHideFlags: 52
   m_CorrespondingSourceObject: {fileID: 0}
@@ -4215,6 +4481,7 @@ MonoBehaviour:
   m_Pos:
     serializedVersion: 2
 <<<<<<< HEAD
+<<<<<<< HEAD
     x: 212
     y: 72.66667
     width: 790.6667
@@ -4225,6 +4492,12 @@ MonoBehaviour:
     width: 874
     height: 432.5
 >>>>>>> models&animations
+=======
+    x: 313.5
+    y: 83
+    width: 903
+    height: 416.5
+>>>>>>> Bird
   m_SerializedDataModeController:
     m_DataMode: 0
     m_PreferredDataMode: 0
@@ -4614,6 +4887,7 @@ MonoBehaviour:
   m_AudioPlay: 0
   m_Position:
 <<<<<<< HEAD
+<<<<<<< HEAD
     m_Target: {x: -9.861204, y: -9.513061, z: -4.849012}
     speed: 2
     m_Value: {x: -9.861204, y: -9.513061, z: -4.849012}
@@ -4622,6 +4896,11 @@ MonoBehaviour:
     speed: 2
     m_Value: {x: 1.4762692, y: -0.7479043, z: -0.9527964}
 >>>>>>> models&animations
+=======
+    m_Target: {x: -3.677967, y: -21.794693, z: -40.142757}
+    speed: 2
+    m_Value: {x: -3.677967, y: -21.794693, z: -40.142757}
+>>>>>>> Bird
   m_RenderMode: 0
   m_CameraMode:
     drawMode: 0
@@ -4667,6 +4946,7 @@ MonoBehaviour:
     m_GridAxis: 1
     m_gridOpacity: 0.5
   m_Rotation:
+<<<<<<< HEAD
     m_Target: {x: 0.07552555, y: -0.9092935, z: 0.19044973, w: 0.36266142}
     speed: 2
     m_Value: {x: 0.075513735, y: -0.9091512, z: 0.19041993, w: 0.36260468}
@@ -4680,6 +4960,15 @@ MonoBehaviour:
     speed: 2
     m_Value: 3.4172466
 >>>>>>> models&animations
+=======
+    m_Target: {x: 0.007473477, y: -0.98098147, z: 0.19008507, w: 0.03856862}
+    speed: 2
+    m_Value: {x: -0.007473477, y: 0.9809815, z: -0.19008507, w: -0.03856862}
+  m_Size:
+    m_Target: 34.255573
+    speed: 2
+    m_Value: 34.204266
+>>>>>>> Bird
   m_Ortho:
     m_Target: 0
     speed: 2
@@ -4704,6 +4993,7 @@ MonoBehaviour:
   m_SceneVisActive: 1
   m_LastLockedObject: {fileID: 0}
   m_ViewIsLockedToObject: 0
+<<<<<<< HEAD
 <<<<<<< HEAD
 --- !u!114 &15
 =======
@@ -4925,6 +5215,9 @@ MonoBehaviour:
 --- !u!114 &17
 =======
 --- !u!114 &20
+=======
+--- !u!114 &15
+>>>>>>> Bird
 MonoBehaviour:
   m_ObjectHideFlags: 52
   m_CorrespondingSourceObject: {fileID: 0}
@@ -5102,6 +5395,7 @@ MonoBehaviour:
     serializedVersion: 2
     x: 0
 <<<<<<< HEAD
+<<<<<<< HEAD
     y: 495.33334
     width: 1129
     height: 183.66672
@@ -5110,6 +5404,11 @@ MonoBehaviour:
     width: 1161
     height: 252.5
 >>>>>>> models&animations
+=======
+    y: 520.5
+    width: 1217.5
+    height: 248.5
+>>>>>>> Bird
   m_SerializedDataModeController:
     m_DataMode: 0
     m_PreferredDataMode: 0
@@ -5132,10 +5431,14 @@ MonoBehaviour:
     m_SearchArea: 1
     m_Folders:
 <<<<<<< HEAD
+<<<<<<< HEAD
     - Assets/Models/vrm models/female/VRoid_V110_Female_v1.1.3.Textures
 =======
     - Assets/Models/assets/materials
 >>>>>>> models&animations
+=======
+    - Assets/Models/blend
+>>>>>>> Bird
     m_Globs: []
     m_OriginalText: 
     m_ImportLogFlags: 0
@@ -5143,6 +5446,7 @@ MonoBehaviour:
   m_ViewMode: 1
   m_StartGridSize: 89
   m_LastFolders:
+<<<<<<< HEAD
 <<<<<<< HEAD
   - Assets/Models/vrm models/female/VRoid_V110_Female_v1.1.3.Textures
   m_LastFoldersGridSize: 89
@@ -5166,6 +5470,18 @@ MonoBehaviour:
     m_LastClickedID: 30716
     m_ExpandedIDs: 00000000cc730000807500006e760000fc77000000ca9a3bffffff7f
 >>>>>>> models&animations
+=======
+  - Assets/Models/blend
+  m_LastFoldersGridSize: 81
+  m_LastProjectPath: /Users/cherlynfare/Desktop/VR Minor/FashionProject
+  m_LockTracker:
+    m_IsLocked: 0
+  m_FolderTreeState:
+    scrollPos: {x: 0, y: 61.478638}
+    m_SelectedIDs: 2e8a0000
+    m_LastClickedID: 35374
+    m_ExpandedIDs: 0000000034870000368700008e89000000ca9a3bffffff7f
+>>>>>>> Bird
     m_RenameOverlay:
       m_UserAcceptedRename: 0
       m_Name: 
@@ -5194,10 +5510,14 @@ MonoBehaviour:
     m_SelectedIDs: 
     m_LastClickedID: 0
 <<<<<<< HEAD
+<<<<<<< HEAD
     m_ExpandedIDs: 00000000f0880000f2880000
 =======
     m_ExpandedIDs: 00000000cc730000807500006e760000fc77000000ca9a3bffffff7f
 >>>>>>> models&animations
+=======
+    m_ExpandedIDs: 000000003487000036870000
+>>>>>>> Bird
     m_RenameOverlay:
       m_UserAcceptedRename: 0
       m_Name: 
@@ -5223,6 +5543,7 @@ MonoBehaviour:
       m_ResourceFile: 
   m_ListAreaState:
 <<<<<<< HEAD
+<<<<<<< HEAD
     m_SelectedInstanceIDs: 04f4ffff
     m_LastClickedInstanceID: -3068
     m_HadKeyboardFocusLastEvent: 0
@@ -5233,6 +5554,12 @@ MonoBehaviour:
     m_HadKeyboardFocusLastEvent: 0
     m_ExpandedInstanceIDs: c6230000167f00002e7700003a3800002e760000363800003e7600002e380000fe750000ce750000e4750000dc750000f27500000a760000
 >>>>>>> models&animations
+=======
+    m_SelectedInstanceIDs: 
+    m_LastClickedInstanceID: 0
+    m_HadKeyboardFocusLastEvent: 1
+    m_ExpandedInstanceIDs: be8800008a7b0000
+>>>>>>> Bird
     m_RenameOverlay:
       m_UserAcceptedRename: 0
       m_Name: 
@@ -5257,6 +5584,7 @@ MonoBehaviour:
       m_ResourceFile: 
     m_NewAssetIndexInList: -1
 <<<<<<< HEAD
+<<<<<<< HEAD
     m_ScrollPosition: {x: 0, y: 65.16664}
     m_GridSize: 89
   m_SkipHiddenPackages: 0
@@ -5269,6 +5597,13 @@ MonoBehaviour:
   m_DirectoriesAreaWidth: 193
 --- !u!114 &22
 >>>>>>> models&animations
+=======
+    m_ScrollPosition: {x: 0, y: 175.05493}
+    m_GridSize: 81
+  m_SkipHiddenPackages: 0
+  m_DirectoriesAreaWidth: 200
+--- !u!114 &16
+>>>>>>> Bird
 MonoBehaviour:
   m_ObjectHideFlags: 52
   m_CorrespondingSourceObject: {fileID: 0}
@@ -5290,6 +5625,7 @@ MonoBehaviour:
     serializedVersion: 2
     x: 0
 <<<<<<< HEAD
+<<<<<<< HEAD
     y: 495.33334
     width: 1003.6667
     height: 183.66672
@@ -5298,6 +5634,11 @@ MonoBehaviour:
     width: 1161
     height: 252.5
 >>>>>>> models&animations
+=======
+    y: 556.5
+    width: 1217.5
+    height: 302.5
+>>>>>>> Bird
   m_SerializedDataModeController:
     m_DataMode: 0
     m_PreferredDataMode: 0
@@ -5309,10 +5650,14 @@ MonoBehaviour:
     m_SaveData: []
     m_OverlaysVisible: 1
 <<<<<<< HEAD
+<<<<<<< HEAD
 --- !u!114 &19
 =======
 --- !u!114 &23
 >>>>>>> models&animations
+=======
+--- !u!114 &17
+>>>>>>> Bird
 MonoBehaviour:
   m_ObjectHideFlags: 52
   m_CorrespondingSourceObject: {fileID: 0}
@@ -5333,6 +5678,7 @@ MonoBehaviour:
   m_Pos:
     serializedVersion: 2
 <<<<<<< HEAD
+<<<<<<< HEAD
     x: 1004.6667
     y: 72.66667
     width: 274.3333
@@ -5343,6 +5689,12 @@ MonoBehaviour:
     width: 277
     height: 706
 >>>>>>> models&animations
+=======
+    x: 1218.5
+    y: 83
+    width: 220.5
+    height: 686
+>>>>>>> Bird
   m_SerializedDataModeController:
     m_DataMode: 0
     m_PreferredDataMode: 0

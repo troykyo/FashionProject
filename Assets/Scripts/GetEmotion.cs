@@ -18,20 +18,28 @@ public class GetEmotion : MonoBehaviour
         {
             float value = vRMBlendShapeProxy.m_merger.GetValue(key.Key);
 
-            if (key.BlendShapeName == "Angry" && value > 0.85f ||
-                key.BlendShapeName == "Sorrow" && value > 0.95f)
+            if (key.BlendShapeName == "Angry" && value > 0.85f)
             {
-                SetEnvironmentMode(false);
+                SetEnvironmentMode(1);
+            } 
+            else if (key.BlendShapeName == "Sorrow" && value > 0.95f)
+            {
+                SetEnvironmentMode(2);
             }
             else if (key.BlendShapeName == "Fun" && value > 0.60f ||
                      key.BlendShapeName == "Joy" && value > 0.95f)
             {
-                SetEnvironmentMode(true);
+                SetEnvironmentMode(3);
             }
+            else if (key.BlendShapeName == "Suprised" && value > 0.95f)
+            {
+                SetEnvironmentMode(4);
+            }
+
         }
     }
     // Methode om de omgevingsmodus in te stellen en te wisselen
-    private void SetEnvironmentMode(bool newMode)
+    private void SetEnvironmentMode(int newMode)
     {
         environmontScr.mode = newMode;
         environmontScr.Swap();

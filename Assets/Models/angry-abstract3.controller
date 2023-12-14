@@ -32,8 +32,8 @@ AnimatorStateMachine:
   m_Name: Base Layer
   m_ChildStates:
   - serializedVersion: 1
-    m_State: {fileID: 7230166952158614605}
-    m_Position: {x: 250, y: 110, z: 0}
+    m_State: {fileID: 2918774586037185639}
+    m_Position: {x: 203.11957, y: 339.935, z: 0}
   m_ChildStateMachines: []
   m_AnyStateTransitions: []
   m_EntryTransitions: []
@@ -43,15 +43,15 @@ AnimatorStateMachine:
   m_EntryPosition: {x: 50, y: 120, z: 0}
   m_ExitPosition: {x: 800, y: 120, z: 0}
   m_ParentStateMachinePosition: {x: 800, y: 20, z: 0}
-  m_DefaultState: {fileID: 7230166952158614605}
---- !u!1102 &7230166952158614605
+  m_DefaultState: {fileID: 2918774586037185639}
+--- !u!1102 &2918774586037185639
 AnimatorState:
   serializedVersion: 6
   m_ObjectHideFlags: 1
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: Scene
+  m_Name: Animatie1
   m_Speed: 1
   m_CycleOffset: 0
   m_Transitions: []

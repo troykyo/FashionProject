@@ -6,6 +6,7 @@ public class MannquinTranslationController : MonoBehaviour
 {
     public Vector2 input;
 
+  
 
     public Transform mannequin;
 
@@ -13,6 +14,9 @@ public class MannquinTranslationController : MonoBehaviour
     private float mannequinRotationSpeed, mannequinMovementSpeed;
     [SerializeField]
     private Vector2 mannequinZLimits;
+
+
+  
 
     public void Update()
     {
@@ -29,4 +33,6 @@ public class MannquinTranslationController : MonoBehaviour
     {
         mannequin.position = new Vector3(mannequin.position.x, mannequin.position.y,Mathf.Clamp(mannequin.position.z + direction * mannequinMovementSpeed * Time.deltaTime, mannequinZLimits.x, mannequinZLimits.y));
     }
+
+   
 }

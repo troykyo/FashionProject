@@ -1,10 +1,8 @@
-using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
-using UnityEngine.XR.Management;
 using UnityEngine.XR.Hands;
 using UnityEngine.XR.Hands.Samples.VisualizerSample;
-using TMPro;
 
 public class JointTracking : MonoBehaviour
 {
@@ -38,10 +36,10 @@ public class JointTracking : MonoBehaviour
     public Material green;
     public Material orange;
 
-    [Tooltip("for debugging. Put in any object. Used to signify things like booleans being active, by making the thing active (or inactive)")]
-    public GameObject DebugCube1;
-    public GameObject DebugCube2;
-    public GameObject DebugCube3;
+    public GameObject pinPrefab;
+    private GameObject pinL, pinR;
+    private Rigidbody pinLrb, pinRrb;
+    private vertexSnapping pinLScript, pinRScript;
 
     public GameObject leftLightsaber;
     public GameObject rightLightsaber;
@@ -55,7 +53,7 @@ public class JointTracking : MonoBehaviour
     public Vector3[] leftJointRotations;
     public Vector3[] rightJointRotations;
 
-    
+
     [Tooltip("these thresholds are here to, for example, determine the rough orientation your hand needs to be in to recognize a gesture. When active, theshold becomes bigger to make it easier to stay in the gesture.")]
     public float grabRotationHoldThreshold;
     public float grabRotationHoldThresholdBase;
@@ -133,6 +131,9 @@ public class JointTracking : MonoBehaviour
 
         if (m_HandSubsystem != null)
             m_HandSubsystem.updatedHands += OnUpdatedHands;
+
+        pinRScript = null;
+        pinLScript = null;
     }
 
 
@@ -204,9 +205,7 @@ public class JointTracking : MonoBehaviour
         XRHandSubsystem.UpdateSuccessFlags updateSuccessFlags,
         XRHandSubsystem.UpdateType updateType)
     {
-        DebugCube1.SetActive(false);
-        DebugCube2.SetActive(false);
-        DebugCube3.SetActive(false);
+
         if (updateType == XRHandSubsystem.UpdateType.Dynamic)
             return;
 
@@ -346,7 +345,7 @@ public class JointTracking : MonoBehaviour
             gestureconfirmed = false;
         }
 
-        if (!gestureconfirmed && gestureHoldTimer>0 && !holdup)
+        if (!gestureconfirmed && gestureHoldTimer > 0 && !holdup)
         {
             gestureHoldTimer--;
         }
@@ -531,7 +530,7 @@ public class JointTracking : MonoBehaviour
         float ringDistance = Vector3.Distance(rightJointPositions[21], rightJointPositions[2]);
 
         if (
-               ((rightJointRotations[2].z <= 0 + headPatThreshold) || (rightJointRotations[2].z >= 360 - headPatThreshold)) 
+               ((rightJointRotations[2].z <= 0 + headPatThreshold) || (rightJointRotations[2].z >= 360 - headPatThreshold))
             && ((rightJointRotations[2].x <= 0 + headPatThreshold) || (rightJointRotations[2].x >= 360 - headPatThreshold))
             && (indexDistance > straightFingerThreshold)
             && (middleDistance > straightFingerThreshold)
@@ -574,7 +573,7 @@ public class JointTracking : MonoBehaviour
             && (rightRingDistance < straightFingerThreshold)
             && (rightLittleDistance > straightFingerThreshold))
 
-            ||((leftIndexDistance > straightFingerThreshold)
+            || ((leftIndexDistance > straightFingerThreshold)
             && (leftMiddleDistance < straightFingerThreshold)
             && (leftRingDistance < straightFingerThreshold)
             && (leftLittleDistance > straightFingerThreshold)))
@@ -622,13 +621,25 @@ public class JointTracking : MonoBehaviour
             && (rightLittleDistance < straightFingerThreshold)
             )
         {
-            rightFistConfirmed = true;
-            DebugCube1.SetActive(true);
-            DebugCube1.transform.position = rightJointPositions[2];
-            DebugCube1.transform.rotation = Quaternion.Euler(rightJointRotations[2].x, rightJointRotations[2].y, rightJointRotations[2].z);
+            if (!rightFistConfirmed)
+            {
+                rightFistConfirmed = true;
+
+                pinR = Instantiate(pinPrefab);
+                pinRrb = pinR.GetComponent<Rigidbody>();
+                Debug.Log("Rigidbody get");
+                pinRScript = pinR.GetComponent<vertexSnapping>();
+                Debug.Log("vertexSnapping script get");
+            }
+
+            pinR.transform.position = new Vector3(rightJointPositions[2].x, rightJointPositions[2].y, rightJointPositions[2].z + .2f);
+            pinR.transform.rotation = Quaternion.Euler(rightJointRotations[2].x, rightJointRotations[2].y + 180, rightJointRotations[2].z);
+            pinRrb.velocity = Vector3.zero;
+
         }
         else
         {
+            pinRScript.SetPin();
             rightFistConfirmed = false;
         }
 
@@ -638,15 +649,29 @@ public class JointTracking : MonoBehaviour
             && (leftRingDistance < straightFingerThreshold)
             && (leftLittleDistance < straightFingerThreshold))
         {
-            leftFistConfirmed = true;
-            DebugCube2.SetActive(true);
-            DebugCube2.transform.position = leftJointPositions[2];
-            DebugCube2.transform.rotation = Quaternion.Euler(leftJointRotations[2].x, leftJointRotations[2].y, leftJointRotations[2].z);
+
+            if (!leftFistConfirmed)
+            {
+                leftFistConfirmed = true;
+
+                pinL = Instantiate(pinPrefab);
+                pinLrb = pinL.GetComponent<Rigidbody>();
+                pinLScript = pinL.GetComponent<vertexSnapping>();
+
+            }
+
+            pinL.transform.position = new Vector3(leftJointPositions[2].x, leftJointPositions[2].y, leftJointPositions[2].z + .2f);
+            pinL.transform.rotation = Quaternion.Euler(leftJointRotations[2].x, leftJointRotations[2].y + 180, leftJointRotations[2].z);
+            pinLrb.velocity = Vector3.zero;
         }
         else
         {
+            pinLScript.SetPin();
             leftFistConfirmed = false;
         }
+
+
+
     }
 
     //We want all fingers to be straight for this one. make a seperate thing for deselecting cutting tool.

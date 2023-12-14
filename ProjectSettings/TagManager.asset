@@ -8,6 +8,8 @@ TagManager:
   - evil
   - happy
   - parent
+  - cloth
+  - mannequin
   layers:
   - Default
   - TransparentFX

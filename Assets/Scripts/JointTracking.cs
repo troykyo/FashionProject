@@ -356,7 +356,8 @@ public class JointTracking : MonoBehaviour
 
     void SetDebugText()
     {
-        //only one a at time pls
+        //only one of these at a time pls
+
         //HandRotationText.text = "Right palm rotation in quaternions: " + Quaternion.Euler(rightJointRotations[2]).ToString();
         HandRotationText.text = "Tooltimer: " + toolTimer;
     }
@@ -706,12 +707,14 @@ public class JointTracking : MonoBehaviour
     }
 
     //for this one, one palm facing face, and other hand pointing at target. keep active while at least one of these gestures is recognized
+    //currently empty!
     void ColorPoseCheck()
     {
 
     }
 
     //Very simple complete open hand gesture. similar to the chop. so this shouldn't affect chop
+    //currently empty and unused
     void ToolResetPose()
     {
 

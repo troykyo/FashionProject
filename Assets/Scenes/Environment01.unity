@@ -1390,6 +1390,7 @@ Transform:
   - {fileID: 248468795}
   - {fileID: 693437163}
   - {fileID: 712535773}
+  - {fileID: 1338872597}
   - {fileID: 893101344}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -2253,7 +2254,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7759491797850329672, guid: 9dbe922e6ec39ab43bd7b7e4c4ca7f36, type: 3}
       propertyPath: m_Name
-      value: galaxy (1)
+      value: galaxy (5)
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -8395,7 +8396,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7759491797850329672, guid: 9dbe922e6ec39ab43bd7b7e4c4ca7f36, type: 3}
       propertyPath: m_Name
-      value: galaxy
+      value: galaxy (4)
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -9148,7 +9149,6 @@ Transform:
   - {fileID: 699033240}
   - {fileID: 1358481422}
   - {fileID: 1927239583}
-  - {fileID: 1338872597}
   m_Father: {fileID: 693437163}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &1338872596
@@ -9157,7 +9157,7 @@ PrefabInstance:
   serializedVersion: 2
   m_Modification:
     serializedVersion: 3
-    m_TransformParent: {fileID: 1312711019}
+    m_TransformParent: {fileID: 354543763}
     m_Modifications:
     - target: {fileID: 2141784297234320652, guid: 3d5ba8211ae4e5f48bf250eebfd03d9a, type: 3}
       propertyPath: m_LocalPosition.x
@@ -9193,11 +9193,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7728286015520030043, guid: 3d5ba8211ae4e5f48bf250eebfd03d9a, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -1.099
+      value: 0.811
       objectReference: {fileID: 0}
     - target: {fileID: 7728286015520030043, guid: 3d5ba8211ae4e5f48bf250eebfd03d9a, type: 3}
       propertyPath: m_LocalPosition.z
-      value: -10.11
+      value: -2.8899999
       objectReference: {fileID: 0}
     - target: {fileID: 7728286015520030043, guid: 3d5ba8211ae4e5f48bf250eebfd03d9a, type: 3}
       propertyPath: m_LocalRotation.w
@@ -9734,7 +9734,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &1551206945
 Transform:
   m_ObjectHideFlags: 0
@@ -9905,7 +9905,7 @@ ParticleSystem:
     startLifetime:
       serializedVersion: 2
       minMaxState: 0
-      scalar: 10
+      scalar: 5
       minScalar: 5
       maxCurve:
         serializedVersion: 2
@@ -10659,7 +10659,7 @@ ParticleSystem:
     rateOverTime:
       serializedVersion: 2
       minMaxState: 0
-      scalar: 5
+      scalar: 10
       minScalar: 10
       maxCurve:
         serializedVersion: 2

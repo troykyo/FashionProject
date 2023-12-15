@@ -48,10 +48,10 @@ public class RotateTarget : MonoBehaviour
         }*/
 
         //pinch scale
-        if (true)
+        /*if (true)
         {
             //wheeeeeeeeeeee
-        }
+        }*/
 
 
         gameObject.transform.rotation = Quaternion.Euler(currentRotation.x, currentRotation.y, currentRotation.z);

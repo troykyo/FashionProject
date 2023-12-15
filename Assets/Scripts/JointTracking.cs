@@ -417,9 +417,9 @@ public class JointTracking : MonoBehaviour
 
         //Sorry for the magic numbers here. can't be bothered making variables right now. these numbers work well.
         if (
-               (rightJointRotations[2].x <= 300)
-            && (rightJointRotations[2].x >= 260)
-            && ((rightJointRotations[2].z <= 20) || (rightJointRotations[2].z >= 340))
+               (rightJointRotations[2].x <= 310)
+            && (rightJointRotations[2].x >= 250)
+            && ((rightJointRotations[2].z <= 30) || (rightJointRotations[2].z >= 330))
             && (indexDistance > straightFingerThreshold)
             && (middleDistance > straightFingerThreshold)
             && (ringDistance > straightFingerThreshold))

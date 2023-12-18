@@ -8,7 +8,12 @@ TagManager:
   - evil
   - happy
   - parent
+<<<<<<< HEAD
   - sad
+=======
+  - cloth
+  - mannequin
+>>>>>>> ClothStuff
   layers:
   - Default
   - TransparentFX

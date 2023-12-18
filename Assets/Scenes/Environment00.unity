@@ -1271,6 +1271,7 @@ GameObject:
   - component: {fileID: 361452993}
   - component: {fileID: 361452992}
   - component: {fileID: 361452991}
+  - component: {fileID: 361452995}
   m_Layer: 0
   m_Name: Plane
   m_TagString: Untagged
@@ -1363,7 +1364,7 @@ Transform:
   m_LocalScale: {x: 16.519896, y: 16.519896, z: 16.519896}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 354543763}
+  m_Father: {fileID: 1560527710}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!4 &392930458 stripped
 Transform:
@@ -2391,13 +2392,15 @@ GameObject:
   - component: {fileID: 931298331}
   - component: {fileID: 931298330}
   - component: {fileID: 931298334}
+  - component: {fileID: 931298336}
+  - component: {fileID: 931298335}
   m_Layer: 0
   m_Name: Cube
-  m_TagString: Untagged
+  m_TagString: cloth
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!65 &931298330
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -3034,6 +3037,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 172169520}
     m_Modifications:
+    - target: {fileID: 1880384705447305813, guid: 324063b69034016489bf0547ae622623, type: 3}
+      propertyPath: m_TagString
+      value: mannequin
+      objectReference: {fileID: 0}
     - target: {fileID: 2661983389608802441, guid: 324063b69034016489bf0547ae622623, type: 3}
       propertyPath: m_DirtyAABB
       value: 0
@@ -3097,6 +3104,10 @@ PrefabInstance:
     - target: {fileID: 5254056194692907044, guid: 324063b69034016489bf0547ae622623, type: 3}
       propertyPath: m_IsActive
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5254056194692907044, guid: 324063b69034016489bf0547ae622623, type: 3}
+      propertyPath: m_TagString
+      value: mannequin
       objectReference: {fileID: 0}
     - target: {fileID: 6997972494675647892, guid: 324063b69034016489bf0547ae622623, type: 3}
       propertyPath: m_DirtyAABB
@@ -3176,6 +3187,12 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 5254056194692907044, guid: 324063b69034016489bf0547ae622623, type: 3}
       insertIndex: -1
       addedObject: {fileID: 1194283355}
+    - targetCorrespondingSourceObject: {fileID: 1880384705447305813, guid: 324063b69034016489bf0547ae622623, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1216524931}
+    - targetCorrespondingSourceObject: {fileID: 1880384705447305813, guid: 324063b69034016489bf0547ae622623, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1216524932}
   m_SourcePrefab: {fileID: 100100000, guid: 324063b69034016489bf0547ae622623, type: 3}
 --- !u!1001 &1217791507
 PrefabInstance:
@@ -3565,9 +3582,7 @@ MonoBehaviour:
   XROrigin: {fileID: 1468820693}
   green: {fileID: 2100000, guid: bd2937b239eb7fd4e8a7bd21649e8c36, type: 2}
   orange: {fileID: 2100000, guid: c5f06de065bff66488edd6f3f9247dec, type: 2}
-  DebugCube1: {fileID: 1010376573}
-  DebugCube2: {fileID: 135477841}
-  DebugCube3: {fileID: 1176212217}
+  pinPrefab: {fileID: 6939498333540754732, guid: fe2a85d0e17661f4dbd1aac6c45d5c34, type: 3}
   leftLightsaber: {fileID: 919132147628422450}
   rightLightsaber: {fileID: 137146716}
   HandRotationText: {fileID: 698276005}

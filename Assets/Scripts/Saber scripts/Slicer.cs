@@ -34,14 +34,12 @@ namespace Assets.Scripts
 
             GameObject positiveObject = CreateMeshGameObject(objectToCut);
             positiveObject.name = string.Format("{0}_positive", objectToCut.name);
-            positiveObject.AddComponent<AddClothComponent>();
-            positiveObject.AddComponent<XRGrabInteractable>();
+
             positiveObject.tag = "cloth";
 
             GameObject negativeObject = CreateMeshGameObject(objectToCut);
             negativeObject.name = string.Format("{0}_negative", objectToCut.name);
-            negativeObject.AddComponent<AddClothComponent>();
-            negativeObject.AddComponent<XRGrabInteractable>();
+
             negativeObject.tag = "cloth";
 
             var positiveSideMeshData = slicesMeta.PositiveSideMesh;

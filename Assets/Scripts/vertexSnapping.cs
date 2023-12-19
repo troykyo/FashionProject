@@ -54,9 +54,9 @@ public class vertexSnapping : MonoBehaviour
                 {
                     Rigidbody objRb = obj.GetComponent<Rigidbody>();
 
+                    objRb.useGravity = false;
                     objRb.velocity = Vector3.zero;
                     objRb.angularVelocity = Vector3.zero;
-                    objRb.useGravity = false;
                 }
             }
         }

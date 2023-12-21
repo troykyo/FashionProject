@@ -30,7 +30,8 @@ public class environmontScr : MonoBehaviour
     public float timeRemaining = 1;
     public float timeNext = 0.15f;
     float maxSky = 0.5f;
-    public float stateOfSky = 0.5f;
+    public float stateOfSkyAngry = 0.5f;
+    public float stateOfSkySad = 0.5f;
     public float changeSpeed = 0.002f;
 
     void Start()
@@ -57,6 +58,7 @@ public class environmontScr : MonoBehaviour
             }
         }
         currentItem = evils.Count;
+        timeNext = 0.10f * Mathf.Pow(0.5f, evils.Count / 10f);
     }
 
     // Update is called once per frame
@@ -72,7 +74,8 @@ public class environmontScr : MonoBehaviour
             if (mode == 4)
                 mode = 1;
         }
-        Mathf.Clamp(skybox.GetFloat("Weight_"), 0, maxSky);
+        Mathf.Clamp(skybox.GetFloat("_Angry"), 0, maxSky);
+        Mathf.Clamp(skybox.GetFloat("_Sad"), 0, maxSky);
     }
     
     public void Swap()
@@ -86,6 +89,8 @@ public class environmontScr : MonoBehaviour
                 angry = false;
                 sad = false;
                 currentItem = evils.Count;
+                bloons.GetComponent<ParticleSystem>().enableEmission = true;
+                fog.GetComponent<ParticleSystem>().enableEmission = false;
             }
             // Verminder de resterende tijd als deze groter is dan 0
             if (timeRemaining > 0)
@@ -104,20 +109,18 @@ public class environmontScr : MonoBehaviour
                 timeRemaining = timeNext;
             }
 
-            // Als het huidige item de helft van de 'evils' overschrijdt, pas effecten aan
-            if (currentItem > (evils.Count * 0.5))
-            {
-                bloons.GetComponent<ParticleSystem>().enableEmission = true;
-                fog.GetComponent<ParticleSystem>().enableEmission = false;
-            }
-
             // Pas de intensiteit van het directionele licht aan met een vloeiende overgang
             directionalLight.intensity = Mathf.Lerp(directionalLight.intensity, 1f, 0.5f * Time.deltaTime);
             
-            if (stateOfSky > 0)
-                stateOfSky -= changeSpeed;
-            if (stateOfSky < 0)
-                stateOfSky = 0;
+            if (stateOfSkyAngry > 0)
+                stateOfSkyAngry -= changeSpeed;
+            if (stateOfSkyAngry < 0)
+                stateOfSkyAngry = 0;
+            
+            if (stateOfSkySad > 0)
+                stateOfSkySad -= changeSpeed;
+            if (stateOfSkySad < 0)
+                stateOfSkySad = 0;
         }
         else if (mode == 1) //angry
         {
@@ -127,6 +130,8 @@ public class environmontScr : MonoBehaviour
                 angry = true;
                 sad = false;
                 currentItem = evils.Count;
+                bloons.GetComponent<ParticleSystem>().enableEmission = false;
+                fog.GetComponent<ParticleSystem>().enableEmission = true;
             }
             // Verminder de resterende tijd als deze groter is dan 0
             if (timeRemaining > 0)
@@ -145,18 +150,16 @@ public class environmontScr : MonoBehaviour
                 timeRemaining = timeNext;
             }
 
-            // Als het huidige item minder is dan de helft van de 'evils', pas effecten aan
-            if (currentItem < (evils.Count * 0.5))
-            {
-                bloons.GetComponent<ParticleSystem>().enableEmission = false;
-                fog.GetComponent<ParticleSystem>().enableEmission = true;
-            }
-
             // Pas de intensiteit van het directionele licht aan met een vloeiende overgang
-            directionalLight.intensity = Mathf.Lerp(directionalLight.intensity, 0.1f, 0.5f * Time.deltaTime);
+            directionalLight.intensity = Mathf.Lerp(directionalLight.intensity, 0.2f, 0.5f * Time.deltaTime);
 
-            if (stateOfSky < maxSky)
-                stateOfSky += changeSpeed;
+            if (stateOfSkyAngry < maxSky)
+                stateOfSkyAngry += changeSpeed;
+
+            if (stateOfSkySad > 0)
+                stateOfSkySad -= changeSpeed;
+            if (stateOfSkySad < 0)
+                stateOfSkySad = 0;
         }
         else if (mode == 2) //sad
         {
@@ -166,6 +169,8 @@ public class environmontScr : MonoBehaviour
                 angry = false;
                 sad = true;
                 currentItem = evils.Count;
+                bloons.GetComponent<ParticleSystem>().enableEmission = false;
+                fog.GetComponent<ParticleSystem>().enableEmission = true;
             }
             // Verminder de resterende tijd als deze groter is dan 0
             if (timeRemaining > 0)
@@ -184,19 +189,18 @@ public class environmontScr : MonoBehaviour
                 timeRemaining = timeNext;
             }
 
-            // Als het huidige item minder is dan de helft van de 'evils', pas effecten aan
-            if (currentItem < (evils.Count * 0.5))
-            {
-                bloons.GetComponent<ParticleSystem>().enableEmission = false;
-                fog.GetComponent<ParticleSystem>().enableEmission = true;
-            }
-
             // Pas de intensiteit van het directionele licht aan met een vloeiende overgang
-            directionalLight.intensity = Mathf.Lerp(directionalLight.intensity, 0.1f, 0.5f * Time.deltaTime);
+            directionalLight.intensity = Mathf.Lerp(directionalLight.intensity, 0.2f, 0.5f * Time.deltaTime);
 
-            if (stateOfSky < maxSky)
-                stateOfSky += changeSpeed;
+            if (stateOfSkySad < maxSky)
+                stateOfSkySad += changeSpeed;
+
+            if (stateOfSkyAngry > 0)
+                stateOfSkyAngry -= changeSpeed;
+            if (stateOfSkyAngry < 0)
+                stateOfSkyAngry = 0;
         }
-        skybox.SetFloat("Weight_", stateOfSky);
+        skybox.SetFloat("_Angry", stateOfSkyAngry);
+        skybox.SetFloat("_Sad", stateOfSkySad);
     }
 }

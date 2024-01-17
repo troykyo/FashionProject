@@ -59,6 +59,9 @@ public class environmontScr : MonoBehaviour
         }
         currentItem = evils.Count;
         timeNext = 0.10f * Mathf.Pow(0.5f, evils.Count / 10f);
+        stateOfSkyAngry = 0;
+        stateOfSkySad = 0;
+        Swap();
     }
 
     // Update is called once per frame

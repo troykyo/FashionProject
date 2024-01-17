@@ -8480,6 +8480,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   isRotatable: 0
   isMovable: 0
+--- !u!1 &896269962 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 5930906410704644442, guid: 81026325250b85a49af695dd7260d485, type: 3}
+  m_PrefabInstance: {fileID: 7544160211398405380}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &915685717
 GameObject:
   m_ObjectHideFlags: 0
@@ -10667,6 +10672,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7f666eafd61f05e45afbdd7b88c264f9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  VrPlayer: {fileID: 896269962}
 --- !u!4 &1510687757
 Transform:
   m_ObjectHideFlags: 0

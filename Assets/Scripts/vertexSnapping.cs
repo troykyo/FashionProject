@@ -57,6 +57,7 @@ public class vertexSnapping : MonoBehaviour
                     objRb.useGravity = false;
                     objRb.velocity = Vector3.zero;
                     objRb.angularVelocity = Vector3.zero;
+                    obj.GetComponent<BoxCollider>().enabled = false;
                 }
             }
         }

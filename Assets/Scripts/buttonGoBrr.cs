@@ -68,7 +68,7 @@ public class ButtonFollowVisual : MonoBehaviour
         {
             freeze = true;
             Scene scene = SceneManager.GetActiveScene();
-            SceneManager.LoadScene(scene.name);
+            //SceneManager.LoadScene(scene.name);
         }
     }
 

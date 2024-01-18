@@ -10,15 +10,15 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: -8679921383154817045, guid: 0acd32e25c49576459db2bcb362e0c59, type: 3}
       propertyPath: m_LocalScale.x
-      value: 1.4861
+      value: 1.4861001
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 0acd32e25c49576459db2bcb362e0c59, type: 3}
       propertyPath: m_LocalScale.y
-      value: 1.4861
+      value: 1.4861001
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 0acd32e25c49576459db2bcb362e0c59, type: 3}
       propertyPath: m_LocalScale.z
-      value: 1.4861
+      value: 1.4861001
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 0acd32e25c49576459db2bcb362e0c59, type: 3}
       propertyPath: m_LocalPosition.x
@@ -67,6 +67,10 @@ PrefabInstance:
     - target: {fileID: 919132149155446097, guid: 0acd32e25c49576459db2bcb362e0c59, type: 3}
       propertyPath: m_Name
       value: scissorblade
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 0acd32e25c49576459db2bcb362e0c59, type: 3}
+      propertyPath: m_TagString
+      value: cloth
       objectReference: {fileID: 0}
     - target: {fileID: 6961647211019461824, guid: 0acd32e25c49576459db2bcb362e0c59, type: 3}
       propertyPath: m_Materials.Array.data[0]

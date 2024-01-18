@@ -5,8 +5,11 @@ using UnityEngine.SceneManagement;
 
 public class ResetScr : MonoBehaviour
 {
-    [SerializeField] private GameObject VrPlayer;
     // Update is called once per frame
+    private void Awake()
+    {
+       // DontDestroyOnLoad(gameObject);
+    }
     void Update()
     {
         if (Input.GetKey(KeyCode.LeftControl) && Input.GetKeyUp(KeyCode.R))

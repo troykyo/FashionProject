@@ -67,7 +67,8 @@ public class ButtonFollowVisual : MonoBehaviour
         if (hover.interactorObject is XRPokeInteractor)
         {
             freeze = true;
-            SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+            Scene scene = SceneManager.GetActiveScene();
+            SceneManager.LoadScene(scene.name);
         }
     }
 

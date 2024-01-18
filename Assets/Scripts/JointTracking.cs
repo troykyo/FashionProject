@@ -112,6 +112,15 @@ public class JointTracking : MonoBehaviour
 
     private bool isFingerGun = false;
 
+    private void Awake()
+    {
+        DontDestroyOnLoad(gameObject);
+    }
+
+    private void OnDestroy()
+    {
+        Debug.Log("reeeee");
+    }
 
     void Start()
     {

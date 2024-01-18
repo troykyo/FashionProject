@@ -13,8 +13,6 @@ public class ResetScr : MonoBehaviour
         {
             Debug.Log("restet");
             SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
-
-            VrPlayer.transform.position = new Vector3(0, 0.074f, -1);
         }
     }
 }

@@ -107,8 +107,8 @@ public class JointTracking : MonoBehaviour
     private int toolTimer;
     public int toolTimerMax;
 
-    private int gestureHoldTimer;
-    public int gestureHoldMax;
+    private float gestureHoldTimer;
+    public float gestureHoldMax;
 
     //this bool to make the timer not go down while a gesture is still being recognized
     private bool holdup;
@@ -151,22 +151,14 @@ public class JointTracking : MonoBehaviour
     //do not put anything related to joints into update, but rather into "OnUpdatedHands"
     void Update()
     {
-        if (leftHand = null)
+        /*if (leftHand = null)
         {
             leftHand = GameObject.Find("LeftHand");
         }
         if (rightHand = null)
         {
             rightHand = GameObject.Find("RightHand");
-        }
-
-        Color bruh = Color.white;
-
-        bruh = Color.Lerp(Color.white, Color.green, (gestureHoldTimer / gestureHoldMax));
-
-
-        leftHand.GetComponent<Renderer>().material.color = bruh;
-        rightHand.GetComponent<Renderer>().material.color = bruh;
+        }*/
 
 
         //HandVisualizer code below
@@ -221,6 +213,22 @@ public class JointTracking : MonoBehaviour
         XRHandSubsystem.UpdateSuccessFlags updateSuccessFlags,
         XRHandSubsystem.UpdateType updateType)
     {
+        Color bruh = Color.white;
+        float lerpNumber = (gestureHoldTimer / gestureHoldMax)/3;
+
+        if (gestureHoldTimer / gestureHoldMax >0.9f)
+        {
+            lerpNumber = 1;
+        }
+
+        bruh = Color.Lerp(Color.white, Color.green, (lerpNumber));
+
+        GameObject.Find("LeftHand").GetComponent<Renderer>().material = green;
+        GameObject.Find("RightHand").GetComponent<Renderer>().material = green;
+        GameObject.Find("LeftHand").GetComponent<Renderer>().material.color = bruh;
+        GameObject.Find("RightHand").GetComponent<Renderer>().material.color = bruh;
+        Debug.Log(lerpNumber);
+
 
         if (updateType == XRHandSubsystem.UpdateType.Dynamic)
             return;
@@ -365,6 +373,7 @@ public class JointTracking : MonoBehaviour
         {
             gestureHoldTimer--;
         }
+
         holdup = false;
         SetDebugText();
     }
@@ -441,6 +450,7 @@ public class JointTracking : MonoBehaviour
         {
             //GameObject.Find("LeftHand").GetComponent<Renderer>().material = green;
             //GameObject.Find("RightHand").GetComponent<Renderer>().material = green;
+            holdup = true;
             if (gestureHoldTimer > gestureHoldMax)
             {
                 translateTimer = translateTimerMax;
@@ -449,7 +459,6 @@ public class JointTracking : MonoBehaviour
             else
             {
                 //Debug.Log("timer++ yoo");
-                holdup = true;
                 gestureHoldTimer++;
                 return;
             }
@@ -595,6 +604,7 @@ public class JointTracking : MonoBehaviour
             && (leftRingDistance < straightFingerThreshold)
             && (leftLittleDistance > straightFingerThreshold)))
         {
+            holdup = true;
             //GameObject.Find("LeftHand").GetComponent<Renderer>().material = green;
             //GameObject.Find("RightHand").GetComponent<Renderer>().material = green;
             //DebugCube3.SetActive(true);
@@ -606,7 +616,6 @@ public class JointTracking : MonoBehaviour
             else
             {
                 //Debug.Log("timer++ yoo");
-                holdup = true;
                 gestureHoldTimer++;
                 return;
             }

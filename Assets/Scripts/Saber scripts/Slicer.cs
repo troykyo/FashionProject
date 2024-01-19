@@ -69,6 +69,7 @@ namespace Assets.Scripts
             meshGameObject.AddComponent<MeshFilter>();
             meshGameObject.AddComponent<MeshRenderer>();
             Sliceable sliceable = meshGameObject.AddComponent<Sliceable>();
+            //XRGrabInteractable grabInteractable = meshGameObject.AddComponent<XRGrabInteractable>();
 
             sliceable.IsSolid = originalSliceable.IsSolid;
             sliceable.ReverseWireTriangles = originalSliceable.ReverseWireTriangles;
@@ -99,6 +100,9 @@ namespace Assets.Scripts
 
             var rb = gameObject.AddComponent<Rigidbody>();
             rb.useGravity = useGravity;
+
+            XRGrabInteractable grabInteractable = gameObject.AddComponent<XRGrabInteractable>();
+
         }
     }
 }

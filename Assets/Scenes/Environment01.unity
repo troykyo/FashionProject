@@ -8477,7 +8477,7 @@ BoxCollider:
   m_LayerOverridePriority: 0
   m_IsTrigger: 0
   m_ProvidesContacts: 0
-  m_Enabled: 1
+  m_Enabled: 0
   serializedVersion: 3
   m_Size: {x: 10, y: 0.39698568, z: 9.999999}
   m_Center: {x: 0, y: 0.0074704764, z: -6.552592e-12}
@@ -9261,7 +9261,7 @@ GameObject:
   - component: {fileID: 1311540344}
   - component: {fileID: 1311540343}
   - component: {fileID: 1311540342}
-  m_Layer: 0
+  m_Layer: 4
   m_Name: Ground (2)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -10073,7 +10073,7 @@ GameObject:
   - component: {fileID: 1503166875}
   - component: {fileID: 1503166874}
   - component: {fileID: 1503166873}
-  m_Layer: 0
+  m_Layer: 4
   m_Name: Ground (1)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -15836,7 +15836,7 @@ GameObject:
   - component: {fileID: 1958107591}
   - component: {fileID: 1958107590}
   - component: {fileID: 1958107592}
-  m_Layer: 0
+  m_Layer: 4
   m_Name: Ground
   m_TagString: Untagged
   m_Icon: {fileID: 0}

@@ -33,6 +33,9 @@ public class JointTracking : MonoBehaviour
 
     public GameObject XROrigin;
 
+    private GameObject leftHand;
+    private GameObject rightHand;
+
     public Material green;
     public Material orange;
 
@@ -148,6 +151,24 @@ public class JointTracking : MonoBehaviour
     //do not put anything related to joints into update, but rather into "OnUpdatedHands"
     void Update()
     {
+        if (leftHand = null)
+        {
+            leftHand = GameObject.Find("LeftHand");
+        }
+        if (rightHand = null)
+        {
+            rightHand = GameObject.Find("RightHand");
+        }
+
+        Color bruh = Color.white;
+
+        bruh = Color.Lerp(Color.white, Color.green, (gestureHoldTimer / gestureHoldMax));
+
+
+        leftHand.GetComponent<Renderer>().material.color = bruh;
+        rightHand.GetComponent<Renderer>().material.color = bruh;
+
+
         //HandVisualizer code below
         if (m_HandSubsystem != null && m_HandSubsystem.running)
             return;
@@ -418,8 +439,8 @@ public class JointTracking : MonoBehaviour
             && (middleDistance > straightFingerThreshold)
             && (ringDistance > straightFingerThreshold))
         {
-            GameObject.Find("LeftHand").GetComponent<Renderer>().material = green;
-            GameObject.Find("RightHand").GetComponent<Renderer>().material = green;
+            //GameObject.Find("LeftHand").GetComponent<Renderer>().material = green;
+            //GameObject.Find("RightHand").GetComponent<Renderer>().material = green;
             if (gestureHoldTimer > gestureHoldMax)
             {
                 translateTimer = translateTimerMax;
@@ -435,8 +456,8 @@ public class JointTracking : MonoBehaviour
         }
         else
         {
-            GameObject.Find("LeftHand").GetComponent<Renderer>().material = orange;
-            GameObject.Find("RightHand").GetComponent<Renderer>().material = orange;
+            //GameObject.Find("LeftHand").GetComponent<Renderer>().material = orange;
+            //GameObject.Find("RightHand").GetComponent<Renderer>().material = orange;
         }
     }
 
@@ -574,8 +595,8 @@ public class JointTracking : MonoBehaviour
             && (leftRingDistance < straightFingerThreshold)
             && (leftLittleDistance > straightFingerThreshold)))
         {
-            GameObject.Find("LeftHand").GetComponent<Renderer>().material = green;
-            GameObject.Find("RightHand").GetComponent<Renderer>().material = green;
+            //GameObject.Find("LeftHand").GetComponent<Renderer>().material = green;
+            //GameObject.Find("RightHand").GetComponent<Renderer>().material = green;
             //DebugCube3.SetActive(true);
             if (gestureHoldTimer > gestureHoldMax)
             {
@@ -592,8 +613,8 @@ public class JointTracking : MonoBehaviour
         }
         else
         {
-            GameObject.Find("LeftHand").GetComponent<Renderer>().material = orange;
-            GameObject.Find("RightHand").GetComponent<Renderer>().material = orange;
+            //GameObject.Find("LeftHand").GetComponent<Renderer>().material = orange;
+            //GameObject.Find("RightHand").GetComponent<Renderer>().material = orange;
         }
     }
 

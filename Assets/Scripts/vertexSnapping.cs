@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.XR.Interaction.Toolkit;
 
 public class vertexSnapping : MonoBehaviour
 {
@@ -86,6 +87,7 @@ public class vertexSnapping : MonoBehaviour
 
     private void OnCollisionEnter(Collision collision)
     {
+        gameObject.GetComponent<XRGrabInteractable>().enabled = false;
         GameObject obj = collision.gameObject;
 
         if (obj.CompareTag("mannequin"))
@@ -100,7 +102,7 @@ public class vertexSnapping : MonoBehaviour
         }
     }
 
-    private void OnCollisionExit(Collision collision)
+    /*private void OnCollisionExit(Collision collision)
     {
         GameObject obj = collision.gameObject;
         if (obj.CompareTag("cloth"))
@@ -110,5 +112,5 @@ public class vertexSnapping : MonoBehaviour
                 clothObjects.Remove(obj);
             }
         }
-    }
+    }*/
 }

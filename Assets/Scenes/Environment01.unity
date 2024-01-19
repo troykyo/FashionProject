@@ -452,6 +452,7 @@ Transform:
   - {fileID: 1194283360}
   - {fileID: 23898412}
   - {fileID: 1561611810}
+  - {fileID: 1958134319}
   m_Father: {fileID: 1484403587}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &179251001
@@ -8140,7 +8141,7 @@ GameObject:
   - component: {fileID: 1069642132}
   - component: {fileID: 1069642133}
   m_Layer: 0
-  m_Name: bort
+  m_Name: Bort
   m_TagString: cloth
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -8166,7 +8167,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 79866805d5183fe4f8948d0074ca5845, type: 2}
+  - {fileID: 2100000, guid: 571f85a3a24319245824de722df5df5d, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -8205,8 +8206,8 @@ Transform:
   m_GameObject: {fileID: 1069642125}
   serializedVersion: 2
   m_LocalRotation: {x: 0.3997263, y: -0.5832828, z: 0.3997263, w: 0.5832828}
-  m_LocalPosition: {x: 0.885, y: 0.538, z: -1.262}
-  m_LocalScale: {x: 0.0646744, y: 0.053752027, z: 0.0868068}
+  m_LocalPosition: {x: 0.885, y: 0.686, z: -1.262}
+  m_LocalScale: {x: 0.096112624, y: 0.079880886, z: 0.12900357}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 354543763}
@@ -8409,8 +8410,8 @@ BoxCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 10, y: 0.0000011920929, z: 9.999999}
-  m_Center: {x: 0, y: 0, z: 0}
+  m_Size: {x: 10, y: 0.39698568, z: 9.999999}
+  m_Center: {x: 0, y: 0.0074704764, z: -6.552592e-12}
 --- !u!114 &1069642133
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -8426,7 +8427,7 @@ MonoBehaviour:
   returnPos: {x: 0, y: 0, z: 0}
   boem: {fileID: 0}
   hit: 0
-  resettimer: 4
+  resettimer: 1
 --- !u!4 &1128047637 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 4740143680597435062, guid: 86b1e8192cb57cd47890882526664df1, type: 3}
@@ -9140,7 +9141,7 @@ GameObject:
   - component: {fileID: 1311540342}
   m_Layer: 0
   m_Name: Ground (2)
-  m_TagString: Respawn
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -9861,7 +9862,6 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 172169520}
-  - {fileID: 1958134319}
   - {fileID: 931298333}
   - {fileID: 1767237667}
   m_Father: {fileID: 354543763}
@@ -9953,7 +9953,7 @@ GameObject:
   - component: {fileID: 1503166873}
   m_Layer: 0
   m_Name: Ground (1)
-  m_TagString: Respawn
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -15713,10 +15713,10 @@ GameObject:
   - component: {fileID: 1958107588}
   - component: {fileID: 1958107591}
   - component: {fileID: 1958107590}
-  - component: {fileID: 1958107589}
+  - component: {fileID: 1958107592}
   m_Layer: 0
   m_Name: Ground
-  m_TagString: Respawn
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -15738,28 +15738,6 @@ Transform:
   - {fileID: 1311540341}
   m_Father: {fileID: 893101344}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!64 &1958107589
-MeshCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1958107587}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 0
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 5
-  m_Convex: 0
-  m_CookingOptions: 30
-  m_Mesh: {fileID: 10209, guid: 0000000000000000e000000000000000, type: 0}
 --- !u!23 &1958107590
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -15810,6 +15788,27 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1958107587}
   m_Mesh: {fileID: 10209, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!65 &1958107592
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1958107587}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 9.999999, y: 0.037326198, z: 10}
+  m_Center: {x: 0, y: -0.018663099, z: 0}
 --- !u!4 &1958134319 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 7642554590590576754, guid: 50185b39e8a7a6241b54bf19b296340d, type: 3}
@@ -15880,7 +15879,7 @@ PrefabInstance:
   serializedVersion: 2
   m_Modification:
     serializedVersion: 3
-    m_TransformParent: {fileID: 1484403587}
+    m_TransformParent: {fileID: 172169520}
     m_Modifications:
     - target: {fileID: 3031235720849918993, guid: 50185b39e8a7a6241b54bf19b296340d, type: 3}
       propertyPath: m_Name

@@ -20,7 +20,7 @@ public class BallScr : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if(this.transform.position.y <= 0)
+        if(this.transform.position.y <= -5)
         {
             Return();
         }

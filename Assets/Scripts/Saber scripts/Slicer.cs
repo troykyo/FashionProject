@@ -92,7 +92,7 @@ namespace Assets.Scripts
         /// <param name="gameObject"></param>
         /// <param name="mesh"></param>
         private static void SetupCollidersAndRigidBodys(ref GameObject gameObject, Mesh mesh, bool useGravity)
-        {                     
+        {
             MeshCollider meshCollider = gameObject.AddComponent<MeshCollider>();
             BoxCollider boxCollider = gameObject.AddComponent<BoxCollider>();
             meshCollider.sharedMesh = mesh;
@@ -100,8 +100,16 @@ namespace Assets.Scripts
 
             var rb = gameObject.AddComponent<Rigidbody>();
             rb.useGravity = useGravity;
+            rb.drag = 10;
+            rb.angularDrag = 10;
 
             XRGrabInteractable grabInteractable = gameObject.AddComponent<XRGrabInteractable>();
+
+            for (int i = 0; i < gameObject.GetComponent<MeshFilter>().mesh.vertices.Length; i++)
+            {
+                gameObject.GetComponent<MeshFilter>().mesh.vertices[i] = new Vector3(0,0,0);
+
+            }
 
         }
     }

@@ -48,7 +48,7 @@ public class vertexSnapping : MonoBehaviour
 
             rb.velocity = Vector3.zero;
             rb.angularVelocity = Vector3.zero;
-            //rb.isKinematic = true;
+            rb.isKinematic = true;
             rb.useGravity = false;
             if (boxCol != null)
             {
@@ -65,9 +65,11 @@ public class vertexSnapping : MonoBehaviour
 
             foreach (GameObject obj in clothObjects)
             {
-                obj.transform.parent = this.transform;
+                //obj.transform.parent = this.transform;
+                obj.transform.SetParent(this.transform.parent);
+                //this.transform.SetParent(obj.transform.parent);
 
-                if(obj.GetComponent<Rigidbody>() != null)
+                if (obj.GetComponent<Rigidbody>() != null)
                 {
                     Rigidbody objRb = obj.GetComponent<Rigidbody>();
 

@@ -1439,7 +1439,7 @@ BoxCollider:
     serializedVersion: 2
     m_Bits: 0
   m_LayerOverridePriority: 0
-  m_IsTrigger: 1
+  m_IsTrigger: 0
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
@@ -1683,7 +1683,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3340547109620242569, guid: b4fef958f0d3ff04a95bf90ac94b3493, type: 3}
       propertyPath: m_TagString
-      value: mannequin
+      value: Untagged
       objectReference: {fileID: 0}
     - target: {fileID: 3542320317210383411, guid: b4fef958f0d3ff04a95bf90ac94b3493, type: 3}
       propertyPath: m_DirtyAABB
@@ -8656,7 +8656,7 @@ SphereCollider:
     serializedVersion: 2
     m_Bits: 0
   m_LayerOverridePriority: 0
-  m_IsTrigger: 1
+  m_IsTrigger: 0
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
@@ -9005,7 +9005,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3603967884216462820, guid: 6c9785a973bd82b428481aefa300609d, type: 3}
       propertyPath: m_TagString
-      value: mannequin
+      value: Untagged
       objectReference: {fileID: 0}
     - target: {fileID: 3639356234746708735, guid: 6c9785a973bd82b428481aefa300609d, type: 3}
       propertyPath: m_DirtyAABB

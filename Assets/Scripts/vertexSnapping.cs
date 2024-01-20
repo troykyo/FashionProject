@@ -84,6 +84,7 @@ public class vertexSnapping : MonoBehaviour
                     }
                 }
             }
+            this.GetComponent<MeshRenderer>().enabled = false;
             this.GetComponent<vertexSnapping>().enabled = false;
         }
 

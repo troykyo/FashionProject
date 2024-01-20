@@ -94,7 +94,7 @@ namespace Assets.Scripts
         private static void SetupCollidersAndRigidBodys(ref GameObject gameObject, Mesh mesh, bool useGravity)
         {
             MeshCollider meshCollider = gameObject.AddComponent<MeshCollider>();
-            BoxCollider boxCollider = gameObject.AddComponent<BoxCollider>();
+            //BoxCollider boxCollider = gameObject.AddComponent<BoxCollider>();
             meshCollider.sharedMesh = mesh;
             meshCollider.convex = true;
 

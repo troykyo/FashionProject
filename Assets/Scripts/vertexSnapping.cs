@@ -13,13 +13,22 @@ public class vertexSnapping : MonoBehaviour
     private Rigidbody rb;
 
     private BoxCollider boxCol;
+    private MeshCollider meshCol;
 
     public void Start()
     {
         clothObjects = new List<GameObject>();
         rb = this.GetComponent<Rigidbody>();
         mat = this.GetComponent<Material>();
-        boxCol = this.GetComponent<BoxCollider>();
+        
+        if (this.GetComponent<MeshCollider>() != null)
+        {
+            meshCol = this.GetComponent<MeshCollider>();
+        }
+        if (this.GetComponent<BoxCollider>() != null)
+        {
+            boxCol = this.GetComponent<BoxCollider>();
+        }
     }
 
     public void Update()
@@ -41,8 +50,15 @@ public class vertexSnapping : MonoBehaviour
             rb.angularVelocity = Vector3.zero;
             //rb.isKinematic = true;
             rb.useGravity = false;
-
-            boxCol.enabled = false;
+            if (boxCol != null)
+            {
+                boxCol.enabled = false;
+            }
+            if (meshCol != null)
+            {
+                meshCol.enabled = false;
+            }
+            
 
             if (mat != null)
                 mat.SetFloat("Alpha", 0.5f);
@@ -58,9 +74,17 @@ public class vertexSnapping : MonoBehaviour
                     objRb.useGravity = false;
                     objRb.velocity = Vector3.zero;
                     objRb.angularVelocity = Vector3.zero;
-                    obj.GetComponent<BoxCollider>().enabled = false;
+                    if (obj.GetComponent<BoxCollider>() != null)
+                    {
+                        obj.GetComponent<BoxCollider>().enabled = false;
+                    }
+                    if (obj.GetComponent<MeshCollider>() != null)
+                    {
+                        obj.GetComponent<MeshCollider>().enabled = false;
+                    }
                 }
             }
+            this.GetComponent<vertexSnapping>().enabled = false;
         }
 
     }
@@ -82,12 +106,19 @@ public class vertexSnapping : MonoBehaviour
 
         rb.useGravity = true;
 
-        boxCol.enabled = true;
+        if (boxCol != null)
+        {
+            boxCol.enabled = true;
+        }
+        if (meshCol != null)
+        {
+            meshCol.enabled = true;
+        }
     }
 
     private void OnCollisionEnter(Collision collision)
     {
-        gameObject.GetComponent<XRGrabInteractable>().enabled = false;
+        //gameObject.GetComponent<XRGrabInteractable>().enabled = false;
         GameObject obj = collision.gameObject;
 
         if (obj.CompareTag("mannequin"))
@@ -102,7 +133,7 @@ public class vertexSnapping : MonoBehaviour
         }
     }
 
-    /*private void OnCollisionExit(Collision collision)
+    private void OnCollisionExit(Collision collision)
     {
         GameObject obj = collision.gameObject;
         if (obj.CompareTag("cloth"))
@@ -112,5 +143,5 @@ public class vertexSnapping : MonoBehaviour
                 clothObjects.Remove(obj);
             }
         }
-    }*/
+    }
 }

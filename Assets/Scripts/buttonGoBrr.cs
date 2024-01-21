@@ -10,6 +10,7 @@ public class ButtonFollowVisual : MonoBehaviour
     public Vector3 localAxis;
     public float resetSpeed = 5;
     public float followAngleThreshold = 45;
+    public GameObject restobject;
 
     private bool freeze = false;
 
@@ -67,8 +68,7 @@ public class ButtonFollowVisual : MonoBehaviour
         if (hover.interactorObject is XRPokeInteractor)
         {
             freeze = true;
-            Scene scene = SceneManager.GetActiveScene();
-            //SceneManager.LoadScene(scene.name);
+            restobject.GetComponent<ResetScr>().rest();
         }
     }
 

@@ -33,11 +33,11 @@ public class RotateTarget : MonoBehaviour
 
         if (jointScript.headPatConfirmed && isMovable)
         {
+            //THIS is where you'd want the reset position thing
             //Debug.Log("It's gonna be adorable if this works!");
             currentPosition.x = jointScript.rightJointPositions[2].x;
             currentPosition.z = jointScript.rightJointPositions[2].z;
             currentPosition.y = gameObject.transform.position.y; //we want to keep the target at the same elevation as they were
-
         }
 
         //swipe turn

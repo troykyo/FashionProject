@@ -44,30 +44,37 @@ public class vertexSnapping : MonoBehaviour
     {
         if (mannequin != null)
         {
-            this.transform.parent = mannequin.transform;
+            //Vector3 thisLocation = transform.position;
+            transform.SetParent(mannequin.transform, true);
+
+            //Debug.Log("i am a child of: " + transform.parent.name);
 
             rb.velocity = Vector3.zero;
             rb.angularVelocity = Vector3.zero;
             rb.isKinematic = true;
-            rb.useGravity = false;
+            //rb.useGravity = false;
             if (boxCol != null)
             {
                 boxCol.enabled = false;
             }
+
             if (meshCol != null)
             {
                 meshCol.enabled = false;
             }
-            
 
-            if (mat != null)
+            /*if (mat != null)
+            {
                 mat.SetFloat("Alpha", 0.5f);
+            }*/
 
             foreach (GameObject obj in clothObjects)
             {
                 //obj.transform.parent = this.transform;
-                obj.transform.SetParent(this.transform.parent);
+                obj.transform.SetParent(this.transform, true);
                 //this.transform.SetParent(obj.transform.parent);
+                //obj.transform.localScale = new Vector3(1,1,1);
+                //obj.GetComponent<Renderer>().material.color = Color.green;
 
                 if (obj.GetComponent<Rigidbody>() != null)
                 {
@@ -86,10 +93,15 @@ public class vertexSnapping : MonoBehaviour
                     }
                 }
             }
-            this.GetComponent<MeshRenderer>().enabled = false;
-            this.GetComponent<vertexSnapping>().enabled = false;
+            //this.GetComponent<MeshRenderer>().enabled = false;
+            //this.GetComponent<vertexSnapping>().enabled = false;
         }
 
+    }
+
+    private void OnCollisionStay(Collision collision)
+    {
+        Debug.Log("I am colliding with: " + collision.gameObject.name);
     }
 
     public void ClearPin()

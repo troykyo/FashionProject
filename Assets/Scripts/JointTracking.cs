@@ -227,7 +227,7 @@ public class JointTracking : MonoBehaviour
         GameObject.Find("RightHand").GetComponent<Renderer>().material = green;
         GameObject.Find("LeftHand").GetComponent<Renderer>().material.color = bruh;
         GameObject.Find("RightHand").GetComponent<Renderer>().material.color = bruh;
-        Debug.Log(lerpNumber);
+        //Debug.Log(lerpNumber);
 
 
         if (updateType == XRHandSubsystem.UpdateType.Dynamic)
@@ -657,7 +657,7 @@ public class JointTracking : MonoBehaviour
 
             pinR.transform.position = new Vector3(rightJointPositions[2].x - .1f, rightJointPositions[2].y, rightJointPositions[2].z + .1f);
             pinR.transform.rotation = Quaternion.Euler(rightJointRotations[2].x, rightJointRotations[2].y, rightJointRotations[2].z);
-            pinRrb.velocity = Vector3.zero;
+            //pinRrb.velocity = Vector3.zero;
 
         }
         else
@@ -683,7 +683,7 @@ public class JointTracking : MonoBehaviour
 
             pinL.transform.position = new Vector3(leftJointPositions[2].x + .1f, leftJointPositions[2].y, leftJointPositions[2].z + .1f);
             pinL.transform.rotation = Quaternion.Euler(leftJointRotations[2].x, leftJointRotations[2].y, leftJointRotations[2].z);
-            pinLrb.velocity = Vector3.zero;
+            //pinLrb.velocity = Vector3.zero;
         }
         else
         {

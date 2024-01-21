@@ -48,8 +48,8 @@ namespace Assets.Scripts
             positiveObject.GetComponent<MeshFilter>().mesh = positiveSideMeshData;
             negativeObject.GetComponent<MeshFilter>().mesh = negativeSideMeshData;
 
-            SetupCollidersAndRigidBodys(ref positiveObject, positiveSideMeshData, sliceable.UseGravity);
-            SetupCollidersAndRigidBodys(ref negativeObject, negativeSideMeshData, sliceable.UseGravity);
+            SetupCollidersAndRigidBodys(ref positiveObject, positiveSideMeshData, sliceable.UseGravity, objectToCut.transform.parent.gameObject);
+            SetupCollidersAndRigidBodys(ref negativeObject, negativeSideMeshData, sliceable.UseGravity, objectToCut.transform.parent.gameObject);
 
             return new GameObject[] { positiveObject, negativeObject};
         }        
@@ -91,7 +91,7 @@ namespace Assets.Scripts
         /// </summary>
         /// <param name="gameObject"></param>
         /// <param name="mesh"></param>
-        private static void SetupCollidersAndRigidBodys(ref GameObject gameObject, Mesh mesh, bool useGravity)
+        private static void SetupCollidersAndRigidBodys(ref GameObject gameObject, Mesh mesh, bool useGravity, GameObject parent)
         {
             MeshCollider meshCollider = gameObject.AddComponent<MeshCollider>();
             //BoxCollider boxCollider = gameObject.AddComponent<BoxCollider>();
@@ -105,11 +105,14 @@ namespace Assets.Scripts
 
             XRGrabInteractable grabInteractable = gameObject.AddComponent<XRGrabInteractable>();
 
-            for (int i = 0; i < gameObject.GetComponent<MeshFilter>().mesh.vertices.Length; i++)
+            Debug.Log("The original parent should be: " + parent.transform);
+            gameObject.transform.SetParent(parent.transform);
+
+            /*for (int i = 0; i < gameObject.GetComponent<MeshFilter>().mesh.vertices.Length; i++)
             {
                 gameObject.GetComponent<MeshFilter>().mesh.vertices[i] = new Vector3(0,0,0);
 
-            }
+            }*/
 
         }
     }

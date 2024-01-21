@@ -657,11 +657,14 @@ public class JointTracking : MonoBehaviour
 
             pinR.transform.position = new Vector3(rightJointPositions[2].x - .1f, rightJointPositions[2].y, rightJointPositions[2].z + .1f);
             pinR.transform.rotation = Quaternion.Euler(rightJointRotations[2].x, rightJointRotations[2].y, rightJointRotations[2].z);
-            //pinRrb.velocity = Vector3.zero;
-
+            pinRrb.velocity = Vector3.zero;
         }
         else
         {
+            if (pinR != null && !pinR.GetComponent<vertexSnapping>().colliding)
+            {
+                pinR.GetComponent<vertexSnapping>().ClearPin();
+            }
             rightFistConfirmed = false;
         }
 
@@ -683,10 +686,14 @@ public class JointTracking : MonoBehaviour
 
             pinL.transform.position = new Vector3(leftJointPositions[2].x + .1f, leftJointPositions[2].y, leftJointPositions[2].z + .1f);
             pinL.transform.rotation = Quaternion.Euler(leftJointRotations[2].x, leftJointRotations[2].y, leftJointRotations[2].z);
-            //pinLrb.velocity = Vector3.zero;
+            pinLrb.velocity = Vector3.zero;
         }
         else
         {
+            if (pinL != null && !pinL.GetComponent<vertexSnapping>().colliding)
+            {
+                pinL.GetComponent<vertexSnapping>().ClearPin();
+            }
             leftFistConfirmed = false;
         }
     }

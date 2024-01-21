@@ -7,6 +7,7 @@ public class ResetScr : MonoBehaviour
     public GameObject parent;
     private List<GameObject> initialClothsPrefabs = new List<GameObject>();
     private List<GameObject> clothsToDestroy = new List<GameObject>();
+    private List<GameObject> pinsToDestroy = new List<GameObject>();
     private Vector3 parentPositionBeforeReset;
 
     void Start()
@@ -44,6 +45,11 @@ public class ResetScr : MonoBehaviour
             {
                 // Add all the objects with this tag to a list so we can destroy them later
                 Clothsnew.Add(child.gameObject);
+            }
+            if (child.GetComponent<vertexSnapping>() != null)
+            {
+                // Add all the objects with this script destroy
+                child.GetComponent<vertexSnapping>().ClearPin();
             }
         }
 

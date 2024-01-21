@@ -10,6 +10,7 @@ public class vertexSnapping : MonoBehaviour
     private List<GameObject> clothObjects;
 
     public Material mat;
+    public bool colliding;
     private Rigidbody rb;
 
     private BoxCollider boxCol;
@@ -29,6 +30,7 @@ public class vertexSnapping : MonoBehaviour
         {
             boxCol = this.GetComponent<BoxCollider>();
         }
+        colliding = false;
     }
 
     public void Update()
@@ -44,6 +46,7 @@ public class vertexSnapping : MonoBehaviour
     {
         if (mannequin != null)
         {
+            colliding = true;
             //Vector3 thisLocation = transform.position;
             transform.SetParent(mannequin.transform, true);
 
@@ -96,39 +99,16 @@ public class vertexSnapping : MonoBehaviour
             //this.GetComponent<MeshRenderer>().enabled = false;
             //this.GetComponent<vertexSnapping>().enabled = false;
         }
-
     }
 
     private void OnCollisionStay(Collision collision)
     {
-        Debug.Log("I am colliding with: " + collision.gameObject.name);
+        //Debug.Log("I am colliding with: " + collision.gameObject.name);
     }
 
     public void ClearPin()
     {
-        Debug.Log("Clear Pin");
-        foreach (GameObject obj in clothObjects)
-        {
-            obj.transform.parent = null;
-        }
-
-        clothObjects.Clear();
-
-        this.transform.parent = null;
-        this.gameObject.GetComponent<Material>().SetFloat("Alpha", 1f);
-
-        mannequin = null;
-
-        rb.useGravity = true;
-
-        if (boxCol != null)
-        {
-            boxCol.enabled = true;
-        }
-        if (meshCol != null)
-        {
-            meshCol.enabled = true;
-        }
+        Destroy(this.gameObject);
     }
 
     private void OnCollisionEnter(Collision collision)

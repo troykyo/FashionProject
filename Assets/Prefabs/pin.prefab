@@ -101,6 +101,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   mat: {fileID: 2100000, guid: d6516fa7304162b45a878da4cc6ac225, type: 2}
+  colliding: 0
 --- !u!54 &4138002557330874466
 Rigidbody:
   m_ObjectHideFlags: 0

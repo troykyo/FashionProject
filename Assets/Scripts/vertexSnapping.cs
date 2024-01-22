@@ -125,6 +125,7 @@ public class vertexSnapping : MonoBehaviour
         if (obj.CompareTag("cloth"))
         {
             clothObjects.Add(obj);
+            Debug.Log("Item 1 in list:" + clothObjects[0].name);
         }
     }
 
@@ -135,6 +136,7 @@ public class vertexSnapping : MonoBehaviour
         {
             if (clothObjects.Contains(obj))
             {
+                Debug.Log("reeeeeeemove");
                 clothObjects.Remove(obj);
             }
         }

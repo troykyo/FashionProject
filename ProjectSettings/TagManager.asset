@@ -18,9 +18,9 @@ TagManager:
   - cloth
   - Water
   - UI
-  - 
-  - 
-  - 
+  - player
+  - UIObserver
+  - Mannequin
   - 
   - 
   - 

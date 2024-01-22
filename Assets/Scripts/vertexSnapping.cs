@@ -38,6 +38,7 @@ public class vertexSnapping : MonoBehaviour
         if (rb.velocity.magnitude > 0)
         {
             SetPin();
+            Debug.Log("rb.velocity.magnitude > 0");
         }
     }
 
@@ -46,9 +47,10 @@ public class vertexSnapping : MonoBehaviour
     {
         if (mannequin != null)
         {
+            Debug.Log("set pin");
             colliding = true;
             //Vector3 thisLocation = transform.position;
-            transform.SetParent(mannequin.transform, true);
+            transform.SetParent(mannequin.transform);
 
             //Debug.Log("i am a child of: " + transform.parent.name);
 
@@ -73,8 +75,9 @@ public class vertexSnapping : MonoBehaviour
 
             foreach (GameObject obj in clothObjects)
             {
+                Debug.Log(obj);
                 //obj.transform.parent = this.transform;
-                obj.transform.SetParent(this.transform, true);
+                obj.transform.SetParent(this.transform);
                 //this.transform.SetParent(obj.transform.parent);
                 //obj.transform.localScale = new Vector3(1,1,1);
                 //obj.GetComponent<Renderer>().material.color = Color.green;
@@ -96,8 +99,6 @@ public class vertexSnapping : MonoBehaviour
                     }
                 }
             }
-            //this.GetComponent<MeshRenderer>().enabled = false;
-            //this.GetComponent<vertexSnapping>().enabled = false;
         }
     }
 
@@ -111,7 +112,7 @@ public class vertexSnapping : MonoBehaviour
         Destroy(this.gameObject);
     }
 
-    private void OnCollisionEnter(Collision collision)
+    /*private void OnCollisionEnter(Collision collision)
     {
         //gameObject.GetComponent<XRGrabInteractable>().enabled = false;
         GameObject obj = collision.gameObject;
@@ -125,13 +126,43 @@ public class vertexSnapping : MonoBehaviour
         if (obj.CompareTag("cloth"))
         {
             clothObjects.Add(obj);
-            Debug.Log("Item 1 in list:" + clothObjects[0].name);
+            Debug.Log("Item 1 in list:" + clothObjects);
+        }
+    }*/
+
+    private void OnTriggerEnter(Collider other)
+    {
+        GameObject obj = other.gameObject;
+
+        if (obj.CompareTag("mannequin"))
+        {
+            mannequin = obj;
+            Debug.Log(obj);
+        }
+
+        if (obj.CompareTag("cloth"))
+        {
+            clothObjects.Add(obj);
+            Debug.Log("Item 1 in list:" + clothObjects);
         }
     }
 
-    private void OnCollisionExit(Collision collision)
+    /*private void OnCollisionExit(Collision collision)
     {
         GameObject obj = collision.gameObject;
+        if (obj.CompareTag("cloth"))
+        {
+            if (clothObjects.Contains(obj))
+            {
+                Debug.Log("reeeeeeemove");
+                clothObjects.Remove(obj);
+            }
+        }
+    }*/
+
+    private void OnTriggerExit(Collider other)
+    {
+        GameObject obj = other.gameObject;
         if (obj.CompareTag("cloth"))
         {
             if (clothObjects.Contains(obj))

@@ -97,13 +97,14 @@ namespace Assets.Scripts
             //BoxCollider boxCollider = gameObject.AddComponent<BoxCollider>();
             meshCollider.sharedMesh = mesh;
             meshCollider.convex = true;
-
+            gameObject.layer = 3;
             var rb = gameObject.AddComponent<Rigidbody>();
             rb.useGravity = useGravity;
             rb.drag = 10;
             rb.angularDrag = 10;
 
             XRGrabInteractable grabInteractable = gameObject.AddComponent<XRGrabInteractable>();
+            gameObject.GetComponent<XRGrabInteractable>().useDynamicAttach = true;
 
             Debug.Log("The original parent should be: " + parent.transform);
             gameObject.transform.SetParent(parent.transform);

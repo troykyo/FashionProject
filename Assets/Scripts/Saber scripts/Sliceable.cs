@@ -80,4 +80,21 @@ public class Sliceable : MonoBehaviour
         }
     }
 
+    public void Update()
+    {
+        if (gameObject.transform.parent != null)
+        {
+            if (gameObject.transform.parent.name == "Interactables")
+            {
+                if (this.GetComponent<BoxCollider>() != null)
+                {
+                    this.GetComponent<BoxCollider>().enabled = true;
+                }
+                if (this.GetComponent<MeshCollider>() != null)
+                {
+                    this.GetComponent<MeshCollider>().enabled = true;
+                }
+            }
+        }
+    }
 }

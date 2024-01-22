@@ -140,7 +140,7 @@ Material:
     - Weight_: 0
     - _AlphaClip: 0
     - _AlphaToMask: 0
-    - _Angry: 0.002
+    - _Angry: 0
     - _Blend: 0
     - _BlendModePreserveSpecular: 1
     - _BumpScale: 1

@@ -645,6 +645,7 @@ public class JointTracking : MonoBehaviour
             && (rightMiddleDistance < straightFingerThreshold)
             && (rightRingDistance < straightFingerThreshold)
             && (rightLittleDistance < straightFingerThreshold)
+            && !leftFistConfirmed
             )
         {
             if (!rightFistConfirmed)
@@ -661,6 +662,10 @@ public class JointTracking : MonoBehaviour
         }
         else
         {
+            if (pinR != null)
+            {
+                pinR.GetComponent<vertexSnapping>().SetPin();
+            }
             if (pinR != null && !pinR.GetComponent<vertexSnapping>().colliding)
             {
                 pinR.GetComponent<vertexSnapping>().ClearPin();
@@ -672,7 +677,8 @@ public class JointTracking : MonoBehaviour
         if ((leftIndexDistance < straightFingerThreshold)
             && (leftMiddleDistance < straightFingerThreshold)
             && (leftRingDistance < straightFingerThreshold)
-            && (leftLittleDistance < straightFingerThreshold))
+            && (leftLittleDistance < straightFingerThreshold) 
+            && !rightFistConfirmed)
         {
 
             if (!leftFistConfirmed)
@@ -690,6 +696,10 @@ public class JointTracking : MonoBehaviour
         }
         else
         {
+            if (pinL != null)
+            {
+                pinL.GetComponent<vertexSnapping>().SetPin();
+            }
             if (pinL != null && !pinL.GetComponent<vertexSnapping>().colliding)
             {
                 pinL.GetComponent<vertexSnapping>().ClearPin();

@@ -95,6 +95,7 @@ public class Sliceable : MonoBehaviour
                     this.GetComponent<MeshCollider>().enabled = true;
                 }
             }
-        }
+        } else
+            this.gameObject.transform.SetParent(GameObject.Find("Interactables").transform);
     }
 }

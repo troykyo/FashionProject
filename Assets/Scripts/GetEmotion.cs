@@ -22,7 +22,7 @@ public class GetEmotion : MonoBehaviour
             {
                 SetEnvironmentMode(1);
             } 
-            else if (key.BlendShapeName == "Sorrow" && value > 0.95f)
+            else if (key.BlendShapeName == "Sorrow" && value > 0.85f)
             {
                 SetEnvironmentMode(2);
             }
